@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="276dp"
+            android:layout_marginTop="292dp"
             android:layout_marginEnd="24dp"
             android:hint="@string/prompt_email"
             android:drawableLeft="@drawable/ic_email_black_24dp"
@@ -37,31 +37,10 @@
             android:drawableLeft="@drawable/ic_pass_black_24dp"
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionDone"
             android:inputType="textPassword"
-            android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username"/>
-
-    <Button
-            android:id="@+id/login"
-            android:enabled="false"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_gravity="start"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="48dp"
-            android:background="#FFFFFF"
-            android:textColor="@color/Black"
-            android:layout_marginBottom="64dp"
-            android:text="@string/action_sign_in"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password"
-            app:layout_constraintVertical_bias="0.316"/>
 
     <ProgressBar
             android:id="@+id/loading"
@@ -103,6 +82,17 @@
             android:layout_width="match_parent"
             android:textSize="16dip"
             android:layout_marginBottom="104dp" app:layout_constraintHorizontal_bias="1.0"/>
+    <Button
+            android:text="Login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/loginbtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.492"
+            android:layout_marginBottom="200dp"/>
 
 
 </android.support.constraint.ConstraintLayout>

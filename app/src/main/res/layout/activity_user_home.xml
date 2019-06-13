@@ -10,9 +10,10 @@
     <Button
             android:id="@+id/action_logout"
             android:title="Logout"
-           android:textColor="#000000"
+            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" tools:layout_editor_absoluteY="27dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp" />
+            android:layout_marginStart="16dp"
+            android:text="Logout" tools:ignore="MissingConstraints"/>
 </android.support.constraint.ConstraintLayout>
