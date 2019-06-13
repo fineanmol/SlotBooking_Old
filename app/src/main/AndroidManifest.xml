@@ -9,13 +9,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".mentorHomeActivity">
+        </activity>
+        <activity android:name=".studentHomeActivity">
+        </activity>
         <activity android:name=".UserHome">
         </activity>
         <activity
                 android:name=".UserSignup"
                 android:label="@string/title_activity_user_signup"
                 android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>

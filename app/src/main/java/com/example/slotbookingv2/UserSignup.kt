@@ -27,9 +27,9 @@ class UserSignup : AppCompatActivity() {
             val name= numberupdate.text.toString().trim()
             val number =mobile.text.toString().trim()
             val studentid = studentid.text.toString().trim()
-            val status = (" ").toString().trim()
-            val flag1 = (" ").toString().trim()
-            val flag2 = (" ").toString().trim()
+            val status = ("NB")
+            val user_type = ("S")
+            //val flag2 = (" ").toString().trim()
 
             if (email.isEmpty()) {
                 u_r_email.error = "Email Required"
@@ -63,12 +63,12 @@ class UserSignup : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            registerUser(email, password, name, number, studentid, status, flag1, flag2)
+            registerUser(email, password, name, number, studentid, status, user_type)
 
         }
 
         u_r_login.setOnClickListener {
-            startActivity(Intent(this@UserSignup, UserHome::class.java))
+            startActivity(Intent(this@UserSignup, MainActivity::class.java))
         }
     }
 
@@ -79,15 +79,14 @@ class UserSignup : AppCompatActivity() {
         number: String,
         dob: String,
         status: String,
-        flag1: String,
-        flag2: String
+        user_type: String
     ) {
         progressbar.visibility = View.VISIBLE
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 progressbar.visibility = View.GONE
                 if (task.isSuccessful) {
-                    addUser(email, password, name, number, dob, status, flag1, flag2)
+                    addUser(email, password, name, number, dob, status, user_type)
                     login()
                 } else {
                     task.exception?.message?.let {
@@ -112,14 +111,13 @@ class UserSignup : AppCompatActivity() {
         number: String,
         studentId: String,
         status: String,
-        flag1: String,
-        flag2: String
+        user_type: String
     ) {
 
 
         ref = FirebaseDatabase.getInstance().reference
         val userId= (ref.push().key).toString()
-        val addUser = Data(userId, email, password, name, number, studentId, status, flag1, flag2)
+        val addUser = Data(userId, email, password, name, number, studentId, status, user_type)
 
 
         ref.child("users").child(userId).setValue(addUser)
