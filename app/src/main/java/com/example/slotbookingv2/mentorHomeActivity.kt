@@ -42,4 +42,3 @@ class mentorHomeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-

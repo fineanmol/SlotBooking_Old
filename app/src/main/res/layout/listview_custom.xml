@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/mentor_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/dateslot"
+            android:layout_toRightOf="@+id/dateslot"
+            android:paddingBottom="10dp"
+            android:text="Mentor Name"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/dateslot"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:textSize="90dp"
+            android:gravity="center"
+            android:text="27"/>
+
+    <TextView
+            android:id="@+id/slot_timing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mentor_Name"
+            android:layout_toEndOf="@+id/dateslot"
+            android:layout_toRightOf="@+id/dateslot"
+            android:paddingTop="10dp"
+            android:text="Slot Timing"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+    <Button
+            android:id="@+id/bookbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/dateslot"
+            android:layout_toEndOf="@+id/dateslot"
+            android:layout_toRightOf="@+id/dateslot"
+            android:background="#FF0000"
+            android:text="Book"/>
+
+
+</RelativeLayout>

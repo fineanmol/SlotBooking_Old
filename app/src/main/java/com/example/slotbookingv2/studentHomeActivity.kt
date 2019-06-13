@@ -42,4 +42,3 @@ class studentHomeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-
