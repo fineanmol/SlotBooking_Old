@@ -1,6 +1,5 @@
 package com.example.slotbookingv2
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -25,28 +24,7 @@ class UserHome : AppCompatActivity() {
         setContentView(R.layout.activity_user_home)
 
 
-        currentUser?.let { user ->
-            val rootRef = FirebaseDatabase.getInstance().reference
-            val userNameRef = rootRef.child("users").orderByChild("email").equalTo(user.email)
-            val eventListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (e in dataSnapshot.children) {
-                        val employee = e.getValue(Data::class.java)
-                        if (employee != null) {
-                            val u_type = employee.user_type.toString()
-                            if (u_type == "S") startActivity(Intent(this@UserHome, studentHomeActivity::class.java))
-                            else startActivity(Intent(this@UserHome, mentorHomeActivity::class.java))
 
-                        }
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                }
-            }
-            userNameRef.addListenerForSingleValueEvent(eventListener)
-
-        }
         employeeList = mutableListOf()
         listview = findViewById(R.id.listview)
         ref = FirebaseDatabase.getInstance().getReference("users")

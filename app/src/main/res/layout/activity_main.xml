@@ -20,6 +20,7 @@
             android:layout_marginTop="292dp"
             android:layout_marginEnd="24dp"
             android:hint="@string/prompt_email"
+            android:textColor="#fff"
             android:drawableLeft="@drawable/ic_email_black_24dp"
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-
+            android:textColor="#fff"
             android:drawableLeft="@drawable/ic_pass_black_24dp"
             android:hint="@string/prompt_password"
             android:imeActionLabel="@string/action_sign_in_short"
