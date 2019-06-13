@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "695299467683",
+    "firebase_url": "https://slotbooking-2ca0c.firebaseio.com",
+    "project_id": "slotbooking-2ca0c",
+    "storage_bucket": "slotbooking-2ca0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695299467683:android:dfa35ae93484e94f",
+        "android_client_info": {
+          "package_name": "com.example.slotbookingv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695299467683-paukqjb5ijq58rpj8ojmjr650pkegp26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.slotbookingv2",
+            "certificate_hash": "58424372806834dae8228e459fd4dd1269a2fee2"
+          }
+        },
+        {
+          "client_id": "695299467683-75hipnmaohc509pno99dokhbqnkch14e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-FlBO0NvWtqAek9sdGHEjJ292tJR49vI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695299467683-75hipnmaohc509pno99dokhbqnkch14e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
