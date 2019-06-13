@@ -1,5 +1,6 @@
 package com.example.slotbookingv2
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -17,10 +18,13 @@ class studentHomeActivity : AppCompatActivity() {
             View.OnClickListener {
                 FirebaseAuth.getInstance().signOut()
                 logout()
-                /*var Intent = Intent(this,MainActivity::class.java)
-                startActivity(Intent)*/
+
             }
         )
+        showslotbtn.setOnClickListener(View.OnClickListener {
+            var Intent = Intent(this, UserHome::class.java)
+            startActivity(Intent)
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

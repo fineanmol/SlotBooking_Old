@@ -38,8 +38,8 @@ class UserHome : AppCompatActivity() {
 
                         employeeList.add(employee!!)
                     }
-                    /* val adapter = customAdapterc(this@UserHome, R.layout.listview_custom, employeeList)
-                     listview.adapter = adapter*/
+                    val adapter = customAdapterc(this@UserHome, R.layout.listview_custom, employeeList)
+                    listview.adapter = adapter
                 }
             }
 

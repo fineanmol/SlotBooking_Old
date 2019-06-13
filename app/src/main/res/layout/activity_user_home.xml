@@ -15,8 +15,9 @@
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteY="680dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="304dp"
-            android:layout_marginStart="304dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginStart="100dp"
             android:text="Logout" tools:ignore="MissingConstraints"/>
     <ListView
             android:layout_width="410dp"

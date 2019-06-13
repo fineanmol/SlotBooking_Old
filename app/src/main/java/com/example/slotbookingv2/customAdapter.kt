@@ -35,11 +35,12 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
         bookbtn.setOnClickListener {
 
             // status set to be booked here
-            val myDatabase = FirebaseDatabase.getInstance().getReference("users")
+            val myDatabase = FirebaseDatabase.getInstance().getReference("TimeSlots")
             val name = name.text.toString().trim()
             val status = "Booked".toString().trim()
             val timeslot = timeslot.text.toString().trim()
             val dateslot = dateslot.text.toString().trim()
+
 
             val employee = BookedData(name, status, dateslot, timeslot)
             myDatabase.child("").setValue(employee)
