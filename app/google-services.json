@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "695299467683-8kem3d3fes0e2ag8oqgfn7m06gvehkvj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.slotbookingv2",
+            "certificate_hash": "bc33aa2ded7c9da604de004707b2fb447c83f5a8"
+          }
+        },
+        {
           "client_id": "695299467683-paukqjb5ijq58rpj8ojmjr650pkegp26.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
