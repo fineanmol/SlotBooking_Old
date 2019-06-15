@@ -78,6 +78,5 @@ class addSlotActivity : AppCompatActivity() {
         timePickerDialog.show()
 
     }
-
 }
 
