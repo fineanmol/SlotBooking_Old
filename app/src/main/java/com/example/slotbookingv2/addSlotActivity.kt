@@ -116,11 +116,14 @@ class addSlotActivity : AppCompatActivity() {
                 starthour = valuesList[0].toInt()
                 startminute = valuesList[1].toInt()
                 startday = valuesList[2]
+                if(starthour>=endhour){
+                    break
+                }
 
 
             }
-            if (stimeMM + slotDurationValue > 60) {
-                if (stimeMM + slotDurationValue < 120) {
+            if ((stimeMM + slotDurationValue) > 60 && (stimeMM + slotDurationValue < 120) ) {
+
                     var newhouradd = (stimeMM + slotDurationValue).div(60)
                     var newhour = stimeHH + newhouradd
                     var newminutes = -(60 - (stimeMM + slotDurationValue))
@@ -133,7 +136,10 @@ class addSlotActivity : AppCompatActivity() {
                     starthour = valuesList[0].toInt()
                     startminute = valuesList[1].toInt()
                     startday = valuesList[2]
-                }
+                    if(starthour>=endhour){
+                        break
+                    }
+
             }
         }
     }
