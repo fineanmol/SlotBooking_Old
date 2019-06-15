@@ -20,6 +20,9 @@ class addSlotActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     lateinit var ref: DatabaseReference
     private val currentUser = FirebaseAuth.getInstance().currentUser
+    var slotList = ArrayList<String>()
+    
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,8 @@ class addSlotActivity : AppCompatActivity() {
             val interval = setBreak.text.toString()
             val sdate = slotDate.text.toString()
 
+          //  valueSplit(Stime,Etime)
+
             var StimeHH = Stime.split(":").first().toInt()
             var StimeMM = Stime.split(":").last().split(" ").first().toInt()
             val StimeHour = Stime.split(":").last().split(" ").last()
@@ -56,6 +61,7 @@ class addSlotActivity : AppCompatActivity() {
                 timeFlagE = 1
             }
             var slots = "Slots are:"
+            SlotGenerator(Stime, StimeHH, StimeMM, StimeHour, Etime, EtimeHH, EtimeMM, EtimeHour,interval,slotDuration)
             while (EtimeHH > StimeHH) {
                 var startH = StimeHH
                 var startM = StimeMM
@@ -75,9 +81,94 @@ class addSlotActivity : AppCompatActivity() {
                 StimeMM = calendar1.get(Calendar.MINUTE)
                 timeFlagS = calendar1.get(Calendar.AM_PM)
             }
+
+
+
+
             timeDiff.text = slots
         }
     }
+
+    /*Test Slot Generation*/
+
+    private fun SlotGenerator(stime: String, stimeHH: Int, stimeMM: Int, stimeHour: String, etime: String, etimeHH: Int, etimeMM: Int, etimeHour: String, interval: String, slotDuration: String) {
+        var valuesList = ArrayList<String>()
+        var slotDurationValue= interval.toInt() + slotDuration.toInt()
+        var slots = stime + ("-").toString()
+        var startime=stime
+        var starthour= stimeHH
+        var startminute= stimeMM
+        var startday = stimeHour
+        var endtime = etime
+        var endhour= etimeHH
+        var endminute= etimeMM
+        var endday=etimeHour
+
+        for(i in 1..5) {
+            if (startminute + slotDurationValue <= 60) {
+                var newminutes = startminute + slotDurationValue
+                var nextslotvalue =
+                    starthour.toString() + (":").toString() + newminutes.toString() + (":").toString() + startday
+                slots += nextslotvalue
+                slotList.add((slots))
+                startime = nextslotvalue
+                valuesList = valueSplit(startime, etime)
+                starthour = valuesList[0].toInt()
+                startminute = valuesList[1].toInt()
+                startday = valuesList[2]
+
+
+            }
+            if (stimeMM + slotDurationValue > 60) {
+                if (stimeMM + slotDurationValue < 120) {
+                    var newhouradd = (stimeMM + slotDurationValue).div(60)
+                    var newhour = stimeHH + newhouradd
+                    var newminutes = -(60 - (stimeMM + slotDurationValue))
+                    var nextslotvalue =
+                        newhour.toString() + (":").toString() + newminutes.toString() + (":").toString() + stimeHour
+                    slots += nextslotvalue
+                    slotList.add((slots))
+                    startime = nextslotvalue
+                    valuesList = valueSplit(startime, etime)
+                    starthour = valuesList[0].toInt()
+                    startminute = valuesList[1].toInt()
+                    startday = valuesList[2]
+                }
+            }
+        }
+    }
+    /*Test Slot Generation ENds*/
+
+    
+    /*Values Split Starts*/
+    private fun valueSplit(stime: String, etime: String): ArrayList<String> {
+        var returnList = ArrayList<String>()
+        var timeFlagS = 0
+        var timeFlagE = 0
+        var StimeHH = stime.split(":").first().toInt()
+        var StimeMM = stime.split(":").last().split(" ").first().toInt()
+        val StimeHour = stime.split(":").last().split(" ").last()
+        if (StimeHour == "PM") {
+            StimeHH = StimeHH + 12
+            timeFlagS = 1
+        }
+        var EtimeHH = etime.split(":").first().toInt()
+        val EtimeMM = etime.split(":").last().split(" ").first().toInt()
+        val EtimeHour = etime.split(":").last().split(" ").last()
+        if (EtimeHour == "PM") {
+            EtimeHH = EtimeHH + 12
+            timeFlagE = 1
+        }
+        returnList.add(StimeHH.toString())
+        returnList.add(StimeMM.toString())
+        returnList.add(StimeHour)
+        returnList.add(EtimeHH.toString())
+        returnList.add(EtimeMM.toString())
+        returnList.add(EtimeHour)
+
+        return (returnList)
+    }
+    /*Values Split End*/
 
     private fun handleDateButton() {
         val calendar = Calendar.getInstance()
