@@ -7,4 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".MentorSlotList">
 
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="715dp"
+            tools:layout_editor_absoluteY="8dp" tools:layout_editor_absoluteX="8dp" android:id="@+id/mentorslotlist"/>
 </android.support.constraint.ConstraintLayout>
