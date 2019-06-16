@@ -56,7 +56,7 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
                                 ref.child(slot.generated_by).child(id).child("reserved_by").setValue(studentName)
                                 ref.child(slot.generated_by).child(id).child("studentId").setValue(studentId)
                                 ref.child(slot.generated_by).child(id).child("status").setValue("B")
-                                Toast.makeText(mCtx, "Booked!" + id, Toast.LENGTH_LONG).show()
+                                Toast.makeText(mCtx, studentName +" You Booked! an appointment for: "+time.text , Toast.LENGTH_LONG).show()
                             }
                         }
                     }
