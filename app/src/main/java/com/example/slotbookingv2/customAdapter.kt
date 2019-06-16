@@ -51,36 +51,28 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
     }
 
     /*private fun updateInfo(employee: List<slotsData>) {
-
         val builder = AlertDialog.Builder(mCtx)
         builder.setTitle("Update Info")
         val inflater = LayoutInflater.from(mCtx)
         val view = inflater.inflate(R.layout.user_update, null)
-
         val email = view.findViewById<EditText>(R.id.editemail)
         val pass = view.findViewById<EditText>(R.id.editpass)
         val name = view.findViewById<EditText>(R.id.nameupdate)
         val number = view.findViewById<EditText>(R.id.numberupdate)
         val dob = view.findViewById<EditText>(R.id.numberupdate)
-
         email.setText(employee.email)
         pass.setText(employee.pass)
         name.setText(employee.name)
         dob.setText(employee.dob)
-
         builder.setView(view)
-
         builder.setPositiveButton("Update", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
-
                 val myDatabase = FirebaseDatabase.getInstance().getReference("users")
-
                 val email1 = email.text.toString().trim()
                 val pass2 = pass.text.toString().trim()
                 val name= name.text.toString().trim()
                 val number =number.text.toString().trim()
                 val dob = dob.text.toString().trim()
-
                 if (email1.isEmpty()) {
                     email.error = "Please enter your email"
                     return
@@ -89,25 +81,17 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
                     pass.error = "Please enter your pass"
                     return
                 }
-
                 val employee = Data(employee.id, email1, pass2,name,number,dob)
                 myDatabase.child(employee.id).setValue(employee)
                 Toast.makeText(mCtx, "Updated :) ", Toast.LENGTH_LONG).show()
-
-
             }
         })
-
         builder.setNegativeButton("cancel", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
-
             }
-
         })
-
         val alert = builder.create()
         alert.show()
-
     }*/
 
 
@@ -115,4 +99,3 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
 
     }
 }
-

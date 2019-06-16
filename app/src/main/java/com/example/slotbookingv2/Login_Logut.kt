@@ -22,9 +22,9 @@ fun Context.login() {
                 for (e in dataSnapshot.children) {
                     val employee = e.getValue(Data::class.java)
                     if (employee != null) {
-                        val u_type = employee.user_type.toString()
+                        val u_type = employee.user_type
                         if (u_type == "S") startActivity(Intent(this@login, studentHomeActivity::class.java))
-                        else startActivity(Intent(this@login, mentorHomeActivity::class.java))
+                        else if(u_type == "M") startActivity(Intent(this@login, mentorHomeActivity::class.java))
 
                     }
                 }
@@ -36,10 +36,10 @@ fun Context.login() {
         userNameRef.addListenerForSingleValueEvent(eventListener)
 
     }
-    val intent = Intent(this, UserHome::class.java).apply {
+   /* val intent = Intent(this, UserHome::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
-    startActivity(intent)
+    startActivity(intent)*/
 }
 
 

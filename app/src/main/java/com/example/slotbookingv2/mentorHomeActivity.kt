@@ -27,17 +27,21 @@ class mentorHomeActivity : AppCompatActivity() {
 
         if (id == R.id.action_one) {
             startActivity(Intent(this, addSlotActivity::class.java))
-            Toast.makeText(this, "Item One Clicked", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
             return true
         }
         if (id == R.id.action_two) {
             FirebaseAuth.getInstance().signOut()
             logout()
-            Toast.makeText(this, "Item Two Clicked", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "You have been logout Successfully", Toast.LENGTH_LONG).show()
             return true
         }
         if (id == R.id.action_three) {
             Toast.makeText(this, "Item Three Clicked", Toast.LENGTH_LONG).show()
+            return true
+        }
+        if (id == R.id.contactUs) {
+            Toast.makeText(this, "You click contact us", Toast.LENGTH_LONG).show()
             return true
         }
 
