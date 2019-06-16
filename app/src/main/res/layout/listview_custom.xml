@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:padding="15dp"
-                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="12dp"
+                android:layout_marginRight="3dp"
                 android:orientation="vertical">
 
     <TextView
             android:id="@+id/mentor_Name"
-            android:layout_width="250dp"
+            android:layout_width="195dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/dateslot"
@@ -16,20 +17,20 @@
             android:paddingBottom="10dp"
             android:text="Mentor Name"
             android:textAlignment="center"
-            android:textSize="25dp"
+            android:textSize="12dp"
             android:textStyle="bold"/>
 
     <TextView
             android:id="@+id/dateslot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="80dp"
+            android:textSize="20dp"
             android:gravity="center"
             android:text="22"/>
 
     <TextView
             android:id="@+id/slot_timing"
-            android:layout_width="250dp"
+            android:layout_width="193dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/mentor_Name"
             android:layout_toEndOf="@+id/dateslot"
@@ -37,19 +38,20 @@
             android:paddingTop="10dp"
             android:text="Slot Timing"
             android:textAlignment="center"
-            android:textSize="20dp"
+            android:textSize="10dp"
             android:textStyle="bold"/>
 
     <Button
             android:id="@+id/bookbtn"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
+            android:layout_width="105dp"
+            android:layout_height="53dp"
             android:layout_alignBottom="@+id/dateslot"
             android:layout_toEndOf="@+id/dateslot"
             android:layout_toRightOf="@+id/dateslot"
             android:background="#FF0000"
-            android:text="Book" android:layout_marginLeft="27dp" android:layout_marginStart="27dp"
-            android:layout_marginBottom="0dp"/>
+            android:text="Book" android:layout_marginLeft="194dp"
+            android:layout_marginStart="194dp"
+            android:layout_marginBottom="-26dp"/>
 
 
 </RelativeLayout>

@@ -15,7 +15,7 @@ class UserHome : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var firebaseAuth: FirebaseUser
     lateinit var ref: DatabaseReference
-    lateinit var employeeList: MutableList<Data>
+    lateinit var employeeList: MutableList<slotsData>
     lateinit var listview: ListView
     private val currentUser = FirebaseAuth.getInstance().currentUser
 
@@ -23,18 +23,16 @@ class UserHome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home)
 
-
-
         employeeList = mutableListOf()
         listview = findViewById(R.id.listview)
-        ref = FirebaseDatabase.getInstance().getReference("users")
+        ref = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
 
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
                     employeeList.clear()
                     for (e in p0.children) {
-                        val employee = e.getValue(Data::class.java)
+                        val employee = e.getValue(slotsData::class.java)
 
                         employeeList.add(employee!!)
                     }

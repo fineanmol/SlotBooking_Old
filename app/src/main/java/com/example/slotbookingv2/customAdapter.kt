@@ -15,8 +15,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: List<Data>) :
-    ArrayAdapter<Data>(mCtx, layoutId, employeeList) {
+class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: List<slotsData>) :
+    ArrayAdapter<slotsData>(mCtx, layoutId, employeeList) {
     val currentUser = FirebaseAuth.getInstance().currentUser
     lateinit var name: TextView
     lateinit var dateslot: TextView
@@ -31,9 +31,12 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
         timeslot = view.findViewById<TextView>(R.id.slot_timing)
         dateslot = view.findViewById<TextView>(R.id.dateslot)
         bookbtn = view.findViewById<Button>(R.id.bookbtn)
-
+      //  var newlist= employeeList
 
         val employee = employeeList[position]
+        name.text= employee.generated_by
+        timeslot.text = (employee.begins_At +("-").toString()+ employee.stop_At)
+        dateslot.text= employee.date.split("/").first().toString()
 
 
         currentUser?.let { user ->
@@ -49,7 +52,7 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
                                 bookbtn.setOnClickListener {
 
                                     // status set to be booked here
-                                    val myDatabase = FirebaseDatabase.getInstance().getReference("TimeSlots")
+                                    val myDatabase = FirebaseDatabase.getInstance().getReference("Timeslots")
                                     val name = name.text.toString().trim()
                                     val status = "Booked".toString().trim()
                                     val timeslot = timeslot.text.toString().trim()
