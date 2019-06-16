@@ -203,16 +203,22 @@ class addSlotActivity : AppCompatActivity() {
                 val sdf2 = SimpleDateFormat("hh:mm a, dd/MM/yy")
                 Log.d("TAG", "Hour slot = " + sdf1.format(slot1) + " - " + sdf2.format(slot2))
                 val Fdate = sdf2.format(slot2).split(",").last()
-                addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
-                var listvalue = sdf1.format(slot1) + "-" + sdf2.format(slot2).split(",").first() + Fdate
+                //addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
+                var listvalue = sdf1.format(slot1) + "-" + sdf2.format(slot2).split(",").first() + "$" + Fdate
                 slotList.add(listvalue)
-                intent.putExtra("slotList", slotList)
+
+
             }
+
             var intent = Intent(this, MentorSlotList::class.java)
+            intent.putExtra("slotList", slotList.toString())
+            intent.putExtra("slotLists", slotList)
             startActivity(intent)
         } catch (ex: ParseException) {
             ex.printStackTrace()
 
         }
     }
+
+
 }

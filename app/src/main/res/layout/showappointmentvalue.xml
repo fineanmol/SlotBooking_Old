@@ -41,17 +41,5 @@
             android:textSize="10dp"
             android:textStyle="bold"/>
 
-    <Button
-            android:id="@+id/bookbtn"
-            android:layout_width="105dp"
-            android:layout_height="53dp"
-            android:layout_alignBottom="@+id/dateslot"
-            android:layout_toEndOf="@+id/dateslot"
-            android:layout_toRightOf="@+id/dateslot"
-            android:background="#FF0000"
-            android:text="Book" android:layout_marginLeft="194dp"
-            android:layout_marginStart="194dp"
-            android:layout_marginBottom="-26dp"/>
-
 
 </RelativeLayout>

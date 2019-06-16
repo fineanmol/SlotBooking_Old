@@ -24,7 +24,7 @@ fun Context.login() {
                     if (employee != null) {
                         val u_type = employee.user_type
                         if (u_type == "S") startActivity(Intent(this@login, studentHomeActivity::class.java))
-                        else if(u_type == "M") startActivity(Intent(this@login, mentorHomeActivity::class.java))
+                        else if (u_type == "M") startActivity(Intent(this@login, mentorhomev2::class.java))
 
                     }
                 }

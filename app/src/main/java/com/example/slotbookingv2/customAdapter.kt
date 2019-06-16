@@ -24,7 +24,7 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
         val layoutInflater: LayoutInflater = LayoutInflater.from(mCtx)
         val view: View = layoutInflater.inflate(layoutId, null)
 
-        val mentor = view.findViewById<TextView>(R.id.mentor_Name)
+        val mentor = view.findViewById<TextView>(R.id.student_Name)
         val date = view.findViewById<TextView>(R.id.dateslot)
         val time = view.findViewById<TextView>(R.id.slot_timing)
 
