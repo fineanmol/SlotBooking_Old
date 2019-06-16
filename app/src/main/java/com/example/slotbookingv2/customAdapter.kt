@@ -17,6 +17,7 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
     ArrayAdapter<slotsData>(mCtx, layoutId, slotList) {
     val currentUser = FirebaseAuth.getInstance().currentUser
     val ref = FirebaseDatabase.getInstance().getReference("Slots")
+    val userref = FirebaseDatabase.getInstance().getReference("users")
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -52,6 +53,8 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
                                 var studentId = employee?.studentId
                                 var studentName = employee?.name
                                 var phone = employee?.number
+                                var studentkey = employee?.id
+                                userref.child(studentkey!!).child("status").setValue("B")
                                 ref.child(slot.generated_by).child(id).child("studentNumber").setValue(phone)
                                 ref.child(slot.generated_by).child(id).child("reserved_by").setValue(studentName)
                                 ref.child(slot.generated_by).child(id).child("studentId").setValue(studentId)
