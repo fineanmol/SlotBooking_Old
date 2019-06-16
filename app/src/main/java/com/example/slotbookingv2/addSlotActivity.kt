@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
+import android.widget.ListView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -23,6 +24,8 @@ class addSlotActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     lateinit var ref: DatabaseReference
     private val currentUser = FirebaseAuth.getInstance().currentUser
+    lateinit var slotList:ListView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,8 +129,11 @@ class addSlotActivity : AppCompatActivity() {
     private fun addSlot(begin: String, end: String, date: String): Boolean {
         val reserved_by = ""
         var generated = "Nikhil Nishad"
+        var studentId = "234567"
+        var studentNumber= "8765345674"
+        var status ="NB"
         val sId = (ref.push().key).toString()
-        val addSlot = slotsData(begin, end, date, generated, reserved_by)
+        val addSlot = slotsData(begin, end, date, generated, reserved_by,studentId,studentNumber,status)
 
         ref.child(generated).child(sId).setValue(addSlot)
         Toast.makeText(this, "Slots Added", Toast.LENGTH_LONG).show()
@@ -192,6 +198,8 @@ class addSlotActivity : AppCompatActivity() {
                 Log.d("TAG", "Hour slot = " + sdf1.format(slot1) + " - " + sdf2.format(slot2))
                 val Fdate = sdf2.format(slot2).split(",").last()
                 addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
+                var listvalue=sdf1.format(slot1) + sdf2.format(slot2).split(",").first()+ Fdate
+
             }
         } catch (ex: ParseException) {
             ex.printStackTrace()

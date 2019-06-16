@@ -57,11 +57,12 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
 
 
                                     val employee = BookedData(name, status, dateslot, timeslot)
-                                    myDatabase.child("").setValue(employee)
+                                   // myDatabase.child("").setValue(employee)  //To save value in database
                                     Toast.makeText(mCtx, "Updated :) ", Toast.LENGTH_LONG).show()
                                 }
 
-                            } else if (status == "B") {
+                            }
+                            if (status == "Booked") {
                                 bookbtn.isClickable = false
                                 bookbtn.setBackgroundColor(ContextCompat.getColor(context, R.color.Black))
 
