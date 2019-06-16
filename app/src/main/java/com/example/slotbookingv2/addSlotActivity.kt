@@ -137,7 +137,9 @@ class addSlotActivity : AppCompatActivity() {
         var studentNumber = "8765345674"
         var status = "NB"
         val sId = (ref.push().key).toString()
-        val addSlot = slotsData(begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+
+        val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+
 
         ref.child(generated).child(sId).setValue(addSlot)
         Toast.makeText(this, "Slots Added", Toast.LENGTH_LONG).show()
@@ -201,12 +203,12 @@ class addSlotActivity : AppCompatActivity() {
                 val sdf2 = SimpleDateFormat("hh:mm a, dd/MM/yy")
                 Log.d("TAG", "Hour slot = " + sdf1.format(slot1) + " - " + sdf2.format(slot2))
                 val Fdate = sdf2.format(slot2).split(",").last()
-               // addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
+                addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
                 var listvalue = sdf1.format(slot1) + "-" + sdf2.format(slot2).split(",").first() + Fdate
                 slotList.add(listvalue)
                 intent.putExtra("slotList", slotList)
             }
- var intent = Intent(this, MentorSlotList::class.java)
+            var intent = Intent(this, MentorSlotList::class.java)
             startActivity(intent)
         } catch (ex: ParseException) {
             ex.printStackTrace()

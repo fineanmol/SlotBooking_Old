@@ -1,6 +1,7 @@
 package com.example.slotbookingv2
 
 class slotsData(
+    val sid: String,
     val begins_At: String,
     val stop_At: String,
     val date: String,
@@ -10,6 +11,6 @@ class slotsData(
     val studentNumber:String,
     val status:String
 ) {
-    constructor() : this("", "", "", "", "","","","")
+    constructor() : this("", "", "", "", "", "", "", "", "")
 
 }
