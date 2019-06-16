@@ -36,7 +36,7 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
         val employee = employeeList[position]
         name.text= employee.generated_by
         timeslot.text = (employee.begins_At +("-").toString()+ employee.stop_At)
-        dateslot.text= employee.date.split("/").first().toString()
+        dateslot.text= employee.date.split("/").first().toString() +"-"+employee.date.split("/")[1].toString()
 
 
         currentUser?.let { user ->
