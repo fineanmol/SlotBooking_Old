@@ -35,8 +35,10 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
 
         val employee = employeeList[position]
         name.text= employee.generated_by
+
         timeslot.text = (employee.begins_At +("-").toString()+ employee.stop_At)
         dateslot.text= employee.date.split("/").first().toString() +"-"+employee.date.split("/")[1].toString()
+
 
 
         currentUser?.let { user ->
@@ -47,9 +49,10 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
                     for (e in dataSnapshot.children) {
                         val employee = e.getValue(Data::class.java)
                         if (employee != null) {
-                            val status = employee.status.toString()
-                            if (status == "NB") {
+                            val status = employee.status
+                            if (status == "NBook") {
                                 bookbtn.setOnClickListener {
+
 
                                     // status set to be booked here
                                     val myDatabase = FirebaseDatabase.getInstance().getReference("Timeslots")
@@ -65,8 +68,9 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
                                 }
 
                             }
-                            if (status == "Booked") {
-                                bookbtn.isClickable = false
+                            if (status == "NB") {
+                                Toast.makeText(mCtx, "Button is disabled :) ", Toast.LENGTH_LONG).show()
+                                bookbtn.isClickable = true
                                 bookbtn.setBackgroundColor(ContextCompat.getColor(context, R.color.Black))
 
                             }
