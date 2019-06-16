@@ -3,12 +3,12 @@ package com.example.slotbookingv2
 //import jdk.nashorn.internal.objects.NativeDate.getTime
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
-import android.widget.ListView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -24,7 +24,8 @@ class addSlotActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     lateinit var ref: DatabaseReference
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    lateinit var slotList:ListView
+
+    var slotList = ArrayList<String>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +64,8 @@ class addSlotActivity : AppCompatActivity() {
             }
 
             displayTimeSlots(StimeHH, StimeMM, EtimeHH, EtimeMM, EtimeHour, sdate, slotDuration, interval)
-            //timeDiff.text = slots
+
+
         }
     }
 
@@ -99,6 +101,7 @@ class addSlotActivity : AppCompatActivity() {
 
         val timePickerDialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             Log.i(TAG, "onTimeSet: $hour$minute")
+
             val calendar1 = Calendar.getInstance()
             calendar1.set(Calendar.HOUR, hour)
             calendar1.set(Calendar.MINUTE, minute)
@@ -106,6 +109,7 @@ class addSlotActivity : AppCompatActivity() {
             slotSTime.text = dateText
             handleETimeButton()
         }, HOUR, MINUTE, is24HourFormat)
+
         timePickerDialog.show()
     }
 
@@ -130,10 +134,12 @@ class addSlotActivity : AppCompatActivity() {
         val reserved_by = ""
         var generated = "Nikhil Nishad"
         var studentId = "234567"
-        var studentNumber= "8765345674"
-        var status ="NB"
+        var studentNumber = "8765345674"
+        var status = "NB"
         val sId = (ref.push().key).toString()
+
         val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+
 
         ref.child(generated).child(sId).setValue(addSlot)
         Toast.makeText(this, "Slots Added", Toast.LENGTH_LONG).show()
@@ -198,11 +204,15 @@ class addSlotActivity : AppCompatActivity() {
                 Log.d("TAG", "Hour slot = " + sdf1.format(slot1) + " - " + sdf2.format(slot2))
                 val Fdate = sdf2.format(slot2).split(",").last()
                 addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
-                var listvalue=sdf1.format(slot1) + sdf2.format(slot2).split(",").first()+ Fdate
-
+                var listvalue = sdf1.format(slot1) + "-" + sdf2.format(slot2).split(",").first() + Fdate
+                slotList.add(listvalue)
+                intent.putExtra("slotList", slotList)
             }
+ var intent = Intent(this, MentorSlotList::class.java)
+            startActivity(intent)
         } catch (ex: ParseException) {
             ex.printStackTrace()
+
         }
     }
 }
