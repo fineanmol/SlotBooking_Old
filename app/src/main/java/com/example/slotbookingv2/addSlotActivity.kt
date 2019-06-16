@@ -1,5 +1,6 @@
 package com.example.slotbookingv2
 
+//import jdk.nashorn.internal.objects.NativeDate.getTime
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -12,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_add_slot.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -20,9 +23,6 @@ class addSlotActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     lateinit var ref: DatabaseReference
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    var slotList = ArrayList<String>()
-    
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,137 +44,25 @@ class addSlotActivity : AppCompatActivity() {
             val interval = setBreak.text.toString()
             val sdate = slotDate.text.toString()
 
-          //  valueSplit(Stime,Etime)
-
-            var StimeHH = Stime.split(":").first().toInt()
-            var StimeMM = Stime.split(":").last().split(" ").first().toInt()
+            var StimeHH = Stime.split(":").first().toString()
+            var StimeMM = Stime.split(":").last().split(" ").first().toString()
             val StimeHour = Stime.split(":").last().split(" ").last()
             if (StimeHour == "PM") {
                 StimeHH = StimeHH + 12
                 timeFlagS = 1
             }
-            var EtimeHH = Etime.split(":").first().toInt()
-            val EtimeMM = Etime.split(":").last().split(" ").first().toInt()
+            var EtimeHH = Etime.split(":").first().toString()
+            val EtimeMM = Etime.split(":").last().split(" ").first().toString()
             val EtimeHour = Etime.split(":").last().split(" ").last()
             if (EtimeHour == "PM") {
-                EtimeHH = EtimeHH + 12
+                // EtimeHH = EtimeHH + 12
                 timeFlagE = 1
             }
-            var slots = "Slots are:"
-            SlotGenerator(Stime, StimeHH, StimeMM, StimeHour, Etime, EtimeHH, EtimeMM, EtimeHour,interval,slotDuration)
-            while (EtimeHH > StimeHH) {
-                var startH = StimeHH
-                var startM = StimeMM
-                //var temp=slotDuration.toInt()+interval.toInt()
-                val calendar1 = Calendar.getInstance()
-                calendar1.set(Calendar.HOUR_OF_DAY, startH)
-                calendar1.set(Calendar.MINUTE, startM)
-                calendar1.set(Calendar.AM_PM, timeFlagS)
-                val begin = DateFormat.format("h:mm a", calendar1).toString()
-                calendar1.add(Calendar.MINUTE, slotDuration.toInt())
-                val end = DateFormat.format("h:mm a", calendar1).toString()
-                //addSlot(begin,end)
-                slots = slots + ":" + begin + "--" + end
-                Log.d(TAG, slots)
-                calendar1.add(Calendar.MINUTE, interval.toInt())
-                StimeHH = calendar1.get(Calendar.HOUR)
-                StimeMM = calendar1.get(Calendar.MINUTE)
-                timeFlagS = calendar1.get(Calendar.AM_PM)
-            }
 
-
-
-
-            timeDiff.text = slots
+            displayTimeSlots(StimeHH, StimeMM, EtimeHH, EtimeMM, EtimeHour, sdate, slotDuration, interval)
+            //timeDiff.text = slots
         }
     }
-
-    /*Test Slot Generation*/
-
-    private fun SlotGenerator(stime: String, stimeHH: Int, stimeMM: Int, stimeHour: String, etime: String, etimeHH: Int, etimeMM: Int, etimeHour: String, interval: String, slotDuration: String) {
-        var valuesList = ArrayList<String>()
-        var slotDurationValue= interval.toInt() + slotDuration.toInt()
-        var slots = stime + ("-").toString()
-        var startime=stime
-        var starthour= stimeHH
-        var startminute= stimeMM
-        var startday = stimeHour
-        var endtime = etime
-        var endhour= etimeHH
-        var endminute= etimeMM
-        var endday=etimeHour
-
-        for(i in 1..5) {
-            if (startminute + slotDurationValue <= 60) {
-                var newminutes = startminute + slotDurationValue
-                var nextslotvalue =
-                    starthour.toString() + (":").toString() + newminutes.toString() + (":").toString() + startday
-                slots += nextslotvalue
-                slotList.add((slots))
-                startime = nextslotvalue
-                valuesList = valueSplit(startime, etime)
-                starthour = valuesList[0].toInt()
-                startminute = valuesList[1].toInt()
-                startday = valuesList[2]
-                if(starthour>=endhour){
-                    break
-                }
-
-
-            }
-            if ((stimeMM + slotDurationValue) > 60 && (stimeMM + slotDurationValue < 120) ) {
-
-                    var newhouradd = (stimeMM + slotDurationValue).div(60)
-                    var newhour = stimeHH + newhouradd
-                    var newminutes = -(60 - (stimeMM + slotDurationValue))
-                    var nextslotvalue =
-                        newhour.toString() + (":").toString() + newminutes.toString() + (":").toString() + stimeHour
-                    slots += nextslotvalue
-                    slotList.add((slots))
-                    startime = nextslotvalue
-                    valuesList = valueSplit(startime, etime)
-                    starthour = valuesList[0].toInt()
-                    startminute = valuesList[1].toInt()
-                    startday = valuesList[2]
-                    if(starthour>=endhour){
-                        break
-                    }
-
-            }
-        }
-    }
-    /*Test Slot Generation ENds*/
-
-    
-    /*Values Split Starts*/
-    private fun valueSplit(stime: String, etime: String): ArrayList<String> {
-        var returnList = ArrayList<String>()
-        var timeFlagS = 0
-        var timeFlagE = 0
-        var StimeHH = stime.split(":").first().toInt()
-        var StimeMM = stime.split(":").last().split(" ").first().toInt()
-        val StimeHour = stime.split(":").last().split(" ").last()
-        if (StimeHour == "PM") {
-            StimeHH = StimeHH + 12
-            timeFlagS = 1
-        }
-        var EtimeHH = etime.split(":").first().toInt()
-        val EtimeMM = etime.split(":").last().split(" ").first().toInt()
-        val EtimeHour = etime.split(":").last().split(" ").last()
-        if (EtimeHour == "PM") {
-            EtimeHH = EtimeHH + 12
-            timeFlagE = 1
-        }
-        returnList.add(StimeHH.toString())
-        returnList.add(StimeMM.toString())
-        returnList.add(StimeHour)
-        returnList.add(EtimeHH.toString())
-        returnList.add(EtimeMM.toString())
-        returnList.add(EtimeHour)
-
-        return (returnList)
-    }
-    /*Values Split End*/
 
     private fun handleDateButton() {
         val calendar = Calendar.getInstance()
@@ -189,7 +77,7 @@ class addSlotActivity : AppCompatActivity() {
                 calendar1.set(Calendar.YEAR, year)
                 calendar1.set(Calendar.MONTH, month)
                 calendar1.set(Calendar.DATE, date)
-                val dateText = DateFormat.format("EEEE, MMM d, yyyy", calendar1).toString()
+                val dateText = DateFormat.format("EEEE,MM d,yyyy", calendar1).toString()
                 slotDate.text = dateText
                 handleSTimeButton()
             }, YEAR, MONTH, DATE
@@ -235,9 +123,8 @@ class addSlotActivity : AppCompatActivity() {
         timePickerDialog.show()
     }
 
-    private fun addSlot(begin: String, end: String): Boolean {
+    private fun addSlot(begin: String, end: String, date: String): Boolean {
         val reserved_by = ""
-        val date = slotDate.text.toString()
         var generated = "Nikhil Nishad"
         val sId = (ref.push().key).toString()
         val addSlot = slotsData(begin, end, date, generated, reserved_by)
@@ -246,5 +133,68 @@ class addSlotActivity : AppCompatActivity() {
         Toast.makeText(this, "Slots Added", Toast.LENGTH_LONG).show()
 
         return true
+    }
+
+    private fun getHoursValue(hours: Int): Int {
+        return hours - 12
+    }
+
+    private fun displayTimeSlots(
+        StimeHH: String,
+        StimeMM: String,
+        EtimeHH: String,
+        EtimeMM: String,
+        EtimeHour: String,
+        sdate: String,
+        slotDuration: String,
+        interval: String
+    ) {
+        var sdateL = sdate.split(" ").last().toString().trim()
+        var sdateF = sdate.split(" ").first().toString().trim()
+        var sdateM = sdateF.split(",").last()
+        var sdateD = sdateL.split(",").first()
+        var sdateY = sdateL.split(",").last()
+
+        var dateText = sdateY + "-" + sdateM + "-" + sdateD
+        val dateValue = dateText
+        val endDateValue = dateText
+
+        var hours = StimeHH
+        var minutes = StimeMM
+
+
+        val amOrPm: String
+        if (Integer.parseInt(hours) < 12) {
+            amOrPm = "AM"
+        } else {
+            amOrPm = "PM"
+            hours = getHoursValue(Integer.parseInt(hours)).toString()
+        }
+        val time1 = "$hours:$minutes $amOrPm"
+        val time2 = EtimeHH + ":" + EtimeMM + " " + EtimeHour + " "
+        val format = "yyyy-MM-dd hh:mm a"
+
+        val sdf = SimpleDateFormat(format)
+
+        try {
+            val dateObj1 = sdf.parse("$dateValue $time1")
+            val dateObj2 = sdf.parse("$endDateValue $time2")
+            Log.d("TAG", "Date Start: $dateObj1")
+            Log.d("TAG", "Date End: $dateObj2")
+            var dif = dateObj1.time
+            while (dif < dateObj2.time) {
+                val slot1 = Date(dif)
+                dif += slotDuration.toInt() * 60 * 1000
+                val slot2 = Date(dif)
+                dif += interval.toInt() * 60 * 1000
+                val sdf1 = SimpleDateFormat("hh:mm a")
+                val sdf2 = SimpleDateFormat("hh:mm a, dd/MM/yy")
+                Log.d("TAG", "Hour slot = " + sdf1.format(slot1) + " - " + sdf2.format(slot2))
+                val Fdate = sdf2.format(slot2).split(",").last()
+                addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
+            }
+        } catch (ex: ParseException) {
+            ex.printStackTrace()
+        }
     }
 }
