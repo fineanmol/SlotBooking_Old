@@ -40,7 +40,7 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
         book.setOnClickListener {
             var id = slot.sid
             currentUser?.let { user ->
-                Toast.makeText(mCtx, user.email, Toast.LENGTH_LONG).show()
+               // Toast.makeText(mCtx, user.email, Toast.LENGTH_LONG).show()
                 val userNameRef = ref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
                 val eventListener = object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -54,12 +54,29 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
                                 var studentName = employee?.name
                                 var phone = employee?.number
                                 var studentkey = employee?.id
-                                userref.child(studentkey!!).child("status").setValue("B")
-                                ref.child(slot.generated_by).child(id).child("studentNumber").setValue(phone)
-                                ref.child(slot.generated_by).child(id).child("reserved_by").setValue(studentName)
-                                ref.child(slot.generated_by).child(id).child("studentId").setValue(studentId)
-                                ref.child(slot.generated_by).child(id).child("status").setValue("B")
-                                Toast.makeText(mCtx, studentName +" You Booked! an appointment for: "+time.text , Toast.LENGTH_LONG).show()
+                                var studentstatus = employee?.status
+
+                                if (studentstatus == "NB") {
+                                    userref.child(studentkey!!).child("status").setValue("B")
+                                    ref.child(slot.generated_by).child(id).child("studentNumber").setValue(phone)
+                                    ref.child(slot.generated_by).child(id).child("reserved_by").setValue(studentName)
+                                    ref.child(slot.generated_by).child(id).child("studentId").setValue(studentId)
+                                    ref.child(slot.generated_by).child(id).child("status").setValue("B")
+                                    Toast.makeText(
+                                        mCtx,
+                                         "$studentName You Booked! an appointment for: ${time.text}" ,
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                                if (studentstatus == "B")
+                                {
+                                    Toast.makeText(
+                                        mCtx,
+                                        "$studentName You have already booked an appointment already",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+
                             }
                         }
                     }
