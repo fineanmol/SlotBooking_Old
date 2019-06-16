@@ -53,7 +53,7 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
                             if (status == "NBook") {
                                 bookbtn.setOnClickListener {
 
-
+                                    Toast.makeText(mCtx, "Updated :) ", Toast.LENGTH_LONG).show()
                                     // status set to be booked here
                                     val myDatabase = FirebaseDatabase.getInstance().getReference("Timeslots")
                                     val name = name.text.toString().trim()
@@ -64,14 +64,15 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
 
                                     val employee = BookedData(name, status, dateslot, timeslot)
                                    // myDatabase.child("").setValue(employee)  //To save value in database
-                                    Toast.makeText(mCtx, "Updated :) ", Toast.LENGTH_LONG).show()
+
                                 }
 
                             }
                             if (status == "NB") {
-                                Toast.makeText(mCtx, "Button is disabled :) ", Toast.LENGTH_LONG).show()
-                                bookbtn.isClickable = true
+
+                                bookbtn.isClickable = false
                                 bookbtn.setBackgroundColor(ContextCompat.getColor(context, R.color.Black))
+                                Toast.makeText(mCtx, "Button is disabled :) ", Toast.LENGTH_LONG).show()
 
                             }
 
