@@ -47,13 +47,13 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
             val eventListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     for (e in dataSnapshot.children) {
-                        val employee = e.getValue(Data::class.java)
+                        val employee = e.getValue(slotsData::class.java)
                         if (employee != null) {
                             val status = employee.status
-                            if (status == "NBook") {
+                            if (status == "NB") {
                                 bookbtn.setOnClickListener {
-
-                                    Toast.makeText(mCtx, "Updated :) ", Toast.LENGTH_LONG).show()
+                                    var print= employee.begins_At
+                                    Toast.makeText(mCtx, employee.begins_At, Toast.LENGTH_LONG).show()
                                     // status set to be booked here
                                     val myDatabase = FirebaseDatabase.getInstance().getReference("Timeslots")
                                     val name = name.text.toString().trim()
@@ -68,11 +68,11 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: Lis
                                 }
 
                             }
-                            if (status == "NB") {
+                            if (status == "NBook") {
 
                                 bookbtn.isClickable = false
                                 bookbtn.setBackgroundColor(ContextCompat.getColor(context, R.color.Black))
-                                Toast.makeText(mCtx, "Button is disabled :) ", Toast.LENGTH_LONG).show()
+                              //  Toast.makeText(mCtx, "Button is disabled :) ", Toast.LENGTH_LONG).show()
 
                             }
 
