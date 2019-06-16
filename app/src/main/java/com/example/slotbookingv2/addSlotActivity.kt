@@ -208,7 +208,7 @@ class addSlotActivity : AppCompatActivity() {
                 slotList.add(listvalue)
                 intent.putExtra("slotList", slotList)
             }
- var intent = Intent(this, MentorSlotList::class.java)
+            var intent = Intent(this, MentorSlotList::class.java)
             startActivity(intent)
         } catch (ex: ParseException) {
             ex.printStackTrace()

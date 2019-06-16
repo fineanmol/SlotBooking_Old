@@ -73,4 +73,3 @@ class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<sl
         return view
     }
 }
-
