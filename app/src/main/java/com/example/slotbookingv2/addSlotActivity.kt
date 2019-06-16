@@ -133,7 +133,7 @@ class addSlotActivity : AppCompatActivity() {
         var studentNumber= "8765345674"
         var status ="NB"
         val sId = (ref.push().key).toString()
-        val addSlot = slotsData(begin, end, date, generated, reserved_by,studentId,studentNumber,status)
+        val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
 
         ref.child(generated).child(sId).setValue(addSlot)
         Toast.makeText(this, "Slots Added", Toast.LENGTH_LONG).show()

@@ -1,90 +1,118 @@
 package com.example.slotbookingv2
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
-class customAdapterc(val mCtx: Context, val layoutId: Int, val employeeList: List<slotsData>) :
-    ArrayAdapter<slotsData>(mCtx, layoutId, employeeList) {
+class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<slotsData>) :
+    ArrayAdapter<slotsData>(mCtx, layoutId, slotList) {
     val currentUser = FirebaseAuth.getInstance().currentUser
-    lateinit var name: TextView
-    lateinit var dateslot: TextView
-    lateinit var timeslot: TextView
-    lateinit var bookbtn: Button
+    val ref = FirebaseDatabase.getInstance().getReference("Slots")
+    //lateinit var name: TextView
+    //lateinit var dateslot: TextView
+    //lateinit var timeslot: TextView
+    //lateinit var bookbtn: Button
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         val layoutInflater: LayoutInflater = LayoutInflater.from(mCtx)
         val view: View = layoutInflater.inflate(layoutId, null)
 
-        name = view.findViewById<TextView>(R.id.mentor_Name)
-        timeslot = view.findViewById<TextView>(R.id.slot_timing)
-        dateslot = view.findViewById<TextView>(R.id.dateslot)
-        bookbtn = view.findViewById<Button>(R.id.bookbtn)
-      //  var newlist= employeeList
+        val mentor = view.findViewById<TextView>(R.id.mentor_Name)
+        val date = view.findViewById<TextView>(R.id.dateslot)
+        val time = view.findViewById<TextView>(R.id.slot_timing)
 
-        val employee = employeeList[position]
-        name.text= employee.generated_by
-        timeslot.text = (employee.begins_At +("-").toString()+ employee.stop_At)
-        dateslot.text= employee.date.split("/").first().toString() +"-"+employee.date.split("/")[1].toString()
+        val book = view.findViewById<TextView>(R.id.bookbtn)
+        //val deleteBtn = view.findViewById<TextView>(R.id.delete)
 
+        val slot = slotList[position]
 
-        currentUser?.let { user ->
-            val rootRef = FirebaseDatabase.getInstance().reference
-            val userNameRef = rootRef.child("users").orderByChild("email").equalTo(user.email)
-            val eventListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (e in dataSnapshot.children) {
-                        val employee = e.getValue(Data::class.java)
-                        if (employee != null) {
-                            val status = employee.status.toString()
-                            if (status == "NB") {
-                                bookbtn.setOnClickListener {
+        mentor.text = slot.generated_by
+        date.text = slot.date
+        time.text = (slot.begins_At + ("-").toString() + slot.stop_At)
 
-                                    // status set to be booked here
-                                    val myDatabase = FirebaseDatabase.getInstance().getReference("Timeslots")
-                                    val name = name.text.toString().trim()
-                                    val status = "Booked".toString().trim()
-                                    val timeslot = timeslot.text.toString().trim()
-                                    val dateslot = dateslot.text.toString().trim()
-
-
-                                    val employee = BookedData(name, status, dateslot, timeslot)
-                                   // myDatabase.child("").setValue(employee)  //To save value in database
-                                    Toast.makeText(mCtx, "Updated :) ", Toast.LENGTH_LONG).show()
-                                }
-
-                            }
-                            if (status == "Booked") {
-                                bookbtn.isClickable = false
-                                bookbtn.setBackgroundColor(ContextCompat.getColor(context, R.color.Black))
-
-                            }
-
-                        }
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                }
-            }
-            userNameRef.addListenerForSingleValueEvent(eventListener)
+        book.setOnClickListener {
+            var id = slot.sid
+            ref.child(slot.generated_by).child(id).child("status").setValue("B")
+            Toast.makeText(mCtx, "Booked!" + id, Toast.LENGTH_LONG).show()
 
         }
+
+        /*deleteBtn.setOnClickListener {
+            deleteInfo(employee)
+        }*/
 
         return view
     }
 
+    /*private fun updateInfo(employee: List<slotsData>) {
 
+        val builder = AlertDialog.Builder(mCtx)
+        builder.setTitle("Update Info")
+        val inflater = LayoutInflater.from(mCtx)
+        val view = inflater.inflate(R.layout.user_update, null)
+
+        val email = view.findViewById<EditText>(R.id.editemail)
+        val pass = view.findViewById<EditText>(R.id.editpass)
+        val name = view.findViewById<EditText>(R.id.nameupdate)
+        val number = view.findViewById<EditText>(R.id.numberupdate)
+        val dob = view.findViewById<EditText>(R.id.numberupdate)
+
+        email.setText(employee.email)
+        pass.setText(employee.pass)
+        name.setText(employee.name)
+        dob.setText(employee.dob)
+
+        builder.setView(view)
+
+        builder.setPositiveButton("Update", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+
+                val myDatabase = FirebaseDatabase.getInstance().getReference("users")
+
+                val email1 = email.text.toString().trim()
+                val pass2 = pass.text.toString().trim()
+                val name= name.text.toString().trim()
+                val number =number.text.toString().trim()
+                val dob = dob.text.toString().trim()
+
+                if (email1.isEmpty()) {
+                    email.error = "Please enter your email"
+                    return
+                }
+                if (pass2.isEmpty()) {
+                    pass.error = "Please enter your pass"
+                    return
+                }
+
+                val employee = Data(employee.id, email1, pass2,name,number,dob)
+                myDatabase.child(employee.id).setValue(employee)
+                Toast.makeText(mCtx, "Updated :) ", Toast.LENGTH_LONG).show()
+
+
+            }
+        })
+
+        builder.setNegativeButton("cancel", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+
+            }
+
+        })
+
+        val alert = builder.create()
+        alert.show()
+
+    }*/
+
+
+    private fun deleteInfo(employee: List<slotsData>) {
+
+    }
 }
 
