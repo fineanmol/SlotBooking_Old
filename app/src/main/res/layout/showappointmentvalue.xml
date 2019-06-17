@@ -43,7 +43,7 @@
             android:gravity="start"/>
     <TextView
             android:text="number"
-            android:layout_width="286dp"
+            android:layout_width="263dp"
             android:layout_height="24dp"
             android:id="@+id/studentno"
             android:gravity="center"
@@ -51,10 +51,10 @@
             android:foregroundGravity="center"
             android:layout_below="@+id/dateslot"
             android:layout_alignStart="@+id/student_Name"
-            android:layout_marginStart="97dp" android:layout_marginTop="20dp"/>
+            android:layout_marginStart="119dp" android:layout_marginTop="20dp"/>
     <TextView
             android:text="student id"
-            android:layout_width="231dp"
+            android:layout_width="169dp"
             android:layout_height="wrap_content"
 
             android:layout_alignParentRight="false"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/callbtn" android:layout_below="@+id/dateslot"
             android:gravity="center" android:layout_alignStart="@+id/slot_timing" android:layout_marginTop="20dp"
-            android:layout_marginStart="1dp"/>
+            android:layout_marginStart="22dp"/>
     <TextView
             android:text="Student Id:"
             android:layout_width="wrap_content"
