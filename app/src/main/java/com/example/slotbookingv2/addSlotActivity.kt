@@ -136,8 +136,8 @@ class addSlotActivity : AppCompatActivity() {
     private fun addSlot(begin: String, end: String, date: String): Boolean {
         val reserved_by = ""
         var generated = "Nikhil Nishad"
-        var studentId = "234567"
-        var studentNumber = "8765345674"
+        var studentId = ""
+        var studentNumber = ""
         var status = "NB"
         val sId = (ref.push().key).toString()
 

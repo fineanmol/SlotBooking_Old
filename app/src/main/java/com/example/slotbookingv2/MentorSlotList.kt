@@ -1,16 +1,15 @@
 package com.example.slotbookingv2
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.ListView
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.widget.Toast
-import android.content.Intent
-import android.content.IntentFilter
-import android.support.v4.content.LocalBroadcastManager
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_mentor_slot_list.*
@@ -47,26 +46,21 @@ class MentorSlotList : AppCompatActivity() {
 
         listView.adapter = adapter
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, IntentFilter("custom-message"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, IntentFilter("custom-message"))
 
         save.setOnClickListener {
             //Toast.makeText(this,qty,Toast.LENGTH_LONG).show()
             var parts1 = qty.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toMutableList()
 
-            parts1.forEach {
-                for (x in parts1) {
-                    Log.d("TAG1", x)
-                    date= x.split("$").last().toString().trim().replace("]]","")
-                    stime= x.split("$").first().split("-").first().toString().trim().replace("[[","")
-                    etime= x.split("$").first().split("-").last().toString().trim()
-                    addSlot(stime, etime,date)
-                    //Toast.makeText(this, stime+"-"+etime+" "+date, Toast.LENGTH_LONG).show()
-
-                }
+            for (x in parts1) {
+                Log.d("TAG1", x)
+                date = x.split("$").last().toString().trim().replace("]]", "")
+                stime = x.split("$").first().split("-").first().toString().trim().replace("[[", "")
+                etime = x.split("$").first().split("-").last().toString().trim()
+                addSlot(stime, etime, date)
+                //Toast.makeText(this, stime+"-"+etime+" "+date, Toast.LENGTH_LONG).show()
             }
-
         }
-
     }
     var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -85,8 +79,8 @@ class MentorSlotList : AppCompatActivity() {
     private fun addSlot(begin: String, end: String, date: String) {
         val reserved_by = ""
         var generated = "Nikhil Nishad"
-        var studentId = "234567"
-        var studentNumber = "8765345674"
+        var studentId = ""
+        var studentNumber = ""
         var status = "NB"
         val sId = (ref.push().key).toString()
 
