@@ -3,7 +3,6 @@ package com.example.slotbookingv2
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.ListView
 
 class MentorSlotList : AppCompatActivity() {
@@ -14,7 +13,7 @@ class MentorSlotList : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mentor_slot_list)
 
-        listView = findViewById<ListView>(R.id.mentorlistview)
+        listView = this.findViewById(R.id.listview)
 
 
         val bundle: Bundle? = intent.extras
@@ -28,7 +27,11 @@ class MentorSlotList : AppCompatActivity() {
                 Log.d("TAG1", x)
             }
         }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, parts)
+
+        val adapter = local_slot_adapter(this, R.layout.slot_local_list_view, parts)
+
         listView.adapter = adapter
+
+
     }
 }
