@@ -29,4 +29,10 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="title_section7">About Us</string>
+    <string name="default_notification_channel_id">Notification Channel ID</string>
+    <string name="NEWS_CHANNEL_ID">news</string>
+    <string name="CHANNEL_NEWS">News</string>
+    <string name="CHANNEL_DESCRIPTION">Get informed with new updates</string>
+    <string name="DEBUG_TAG">LearningPushNotification</string>
+
 </resources>

@@ -11,10 +11,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+
         <activity android:name=".AppointmentList2">
         </activity>
-        <activity android:name=".AppointmentList">
-        </activity>
+
         <activity android:name=".AboutDeveloper">
         </activity>
         <activity
@@ -26,8 +27,7 @@
         </activity>
         <activity android:name=".addSlotActivity">
         </activity>
-        <activity android:name=".mentorHomeActivity">
-        </activity>
+
         <activity android:name=".studentHomeActivity">
         </activity>
         <activity android:name=".UserHome">
