@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_student_home.*
 
@@ -21,10 +22,17 @@ class studentHomeActivity : AppCompatActivity() {
 
             }
         )
-        showslotbtn.setOnClickListener(View.OnClickListener {
+        show_showreserved_slot_btn.setOnClickListener(View.OnClickListener {
             var Intent = Intent(this, UserHome::class.java)
             startActivity(Intent)
         })
+
+        show_showreserved_slot_btn.setOnClickListener {
+            Toast.makeText(this@studentHomeActivity, "Clicked!", Toast.LENGTH_SHORT).show()
+            var Intent = Intent(this, AppointmentList2::class.java)
+            startActivity(Intent)
+
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

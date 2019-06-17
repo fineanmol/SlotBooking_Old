@@ -26,7 +26,7 @@ class UserSignup : AppCompatActivity() {
             val password = u_r_pass.text.toString().trim()
             val name= numberupdate.text.toString().trim()
             val number =mobile.text.toString().trim()
-            val studentid = studentid.text.toString().trim()
+            val studentid = mentorid.text.toString().trim()
             val status = ("NB")
             val user_type = ("S")
             //val flag2 = (" ").toString().trim()
