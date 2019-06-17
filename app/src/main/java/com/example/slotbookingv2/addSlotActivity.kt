@@ -108,7 +108,10 @@ class addSlotActivity : AppCompatActivity() {
             val dateText = DateFormat.format("h:mm a", calendar1).toString()
             slotSTime.text = dateText
             handleETimeButton()
+
         }, HOUR, MINUTE, is24HourFormat)
+
+
 
         timePickerDialog.show()
     }

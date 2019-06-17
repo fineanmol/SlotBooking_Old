@@ -11,7 +11,8 @@ import android.webkit.WebViewClient
 import kotlinx.android.synthetic.main.activity_about_developer.*
 
 class AboutDeveloper : AppCompatActivity() {
-    private val url = ""
+    private val url = "https://fineanmol.github.io/AboutDeveloper/Team.html"
+    /*"https://mobirise.com/bootstrap-template/about-us-page-template/"*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_developer)
@@ -93,9 +94,10 @@ class AboutDeveloper : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (webview.canGoBack()) {
-            // If web view have back history, then go to the web view back history
+        if (webview.canGoBack())
             webview.goBack()
-        }
+        else
+            super.onBackPressed()
+
     }
 }
