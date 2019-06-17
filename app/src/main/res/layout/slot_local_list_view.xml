@@ -42,12 +42,12 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"/>
     <Button
-            android:layout_width="28dp"
+            android:layout_width="21dp"
             android:layout_height="28dp"
             tools:layout_editor_absoluteY="42dp"
             android:id="@+id/delete"
             android:gravity="center"
-            android:background="@drawable/eraseblue"
+            android:background="@drawable/ic_delete_black_24dp"
             tools:ignore="MissingConstraints"
             app:layout_constraintStart_toEndOf="@+id/date"
             android:layout_marginStart="8dp"/>

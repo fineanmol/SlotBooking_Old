@@ -2,6 +2,7 @@ package com.example.slotbookingv2
 
 import android.content.Context
 import android.content.Intent
+import android.support.design.widget.Snackbar
 import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -38,6 +39,8 @@ class local_slot_adapter(val mCtx: Context, val layoutId: Int, var local_slotLis
                 Log.d("TAG2", x)
             }
             notifyDataSetChanged()
+            Snackbar.make(view, "Deleted Successfully", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show()
         }
 
         val intent = Intent("custom-message")

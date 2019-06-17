@@ -31,10 +31,12 @@ class addSlotActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_slot)
+
         mAuth = FirebaseAuth.getInstance()
         ref = FirebaseDatabase.getInstance().getReference("Slots")
         var timeFlagS = 0
         var timeFlagE = 0
+
 
         setDate.setOnClickListener(View.OnClickListener { handleDateButton() })
         setSTime.setOnClickListener(View.OnClickListener { handleSTimeButton() })
