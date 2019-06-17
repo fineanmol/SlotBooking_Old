@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:padding="15dp"
+                xmlns:tools="http://schemas.android.com/tools" android:padding="15dp"
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -30,17 +30,20 @@
 
     <TextView
             android:id="@+id/slot_timing"
-            android:layout_width="320dp"
-            android:layout_height="25dp"
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:text="Slot Timing"
-            android:textAlignment="center"
+            android:gravity="center"
+            android:textAlignment="viewStart"
+            android:foregroundGravity="center"
             android:textSize="11dp"
             android:textStyle="bold"
-            android:layout_toEndOf="@+id/dateslot" android:layout_marginStart="1dp"
+
             android:layout_toRightOf="@+id/dateslot"
-            android:layout_below="@+id/student_Name" android:layout_marginLeft="1dp"
-            android:gravity="start"/>
+            android:layout_below="@+id/student_Name" android:layout_marginLeft="122dp"
+            android:layout_marginTop="-4dp"
+    />
     <TextView
             android:text="number"
             android:layout_width="263dp"
@@ -51,10 +54,11 @@
             android:foregroundGravity="center"
             android:layout_below="@+id/dateslot"
             android:layout_alignStart="@+id/student_Name"
-            android:layout_marginStart="119dp" android:layout_marginTop="20dp"/>
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="20dp" tools:ignore="RtlCompat"/>
     <TextView
             android:text="student id"
-            android:layout_width="169dp"
+            android:layout_width="139dp"
             android:layout_height="wrap_content"
 
             android:layout_alignParentRight="false"
@@ -62,22 +66,37 @@
             android:layout_alignParentEnd="true"
             android:textAlignment="viewStart"
             android:id="@+id/studentid"
-            android:layout_marginEnd="3dp"
-            android:gravity="center" android:layout_below="@+id/dateslot"/>
+            android:layout_marginEnd="2dp"
+            android:gravity="center" android:layout_below="@+id/dateslot" android:layout_marginTop="1dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:background="@drawable/ic_call_black_24dp"
             android:layout_height="wrap_content"
             android:id="@+id/callbtn" android:layout_below="@+id/dateslot"
-            android:gravity="center" android:layout_alignStart="@+id/slot_timing" android:layout_marginTop="20dp"
-            android:layout_marginStart="22dp"/>
+            android:gravity="center" android:layout_alignStart="@+id/slot_timing" android:layout_marginTop="18dp"
+            android:layout_marginStart="-82dp"/>
     <TextView
             android:text="Student Id:"
-            android:layout_width="wrap_content"
+            android:layout_width="78dp"
             android:layout_height="wrap_content"
             android:id="@+id/textView2" android:layout_below="@+id/dateslot" android:layout_marginTop="0dp"
-            android:layout_toStartOf="@+id/studentid" android:layout_marginRight="9dp" android:layout_marginEnd="9dp"
+            android:layout_toStartOf="@+id/studentid" android:layout_marginRight="6dp" android:layout_marginEnd="6dp"
             android:layout_toLeftOf="@+id/studentid"/>
+    <TextView
+            android:text="Time Slot:"
+            android:layout_width="78dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:id="@+id/textView"
+            android:layout_below="@+id/student_Name" android:layout_marginTop="0dp"
+            android:layout_toStartOf="@+id/studentid" android:layout_marginEnd="17dp"/>
+    <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="26dp"
+            android:layout_marginTop="130dp" android:layout_alignParentTop="true"/>
 
 
 </RelativeLayout>

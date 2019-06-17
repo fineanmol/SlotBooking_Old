@@ -15,9 +15,11 @@
 
 
         <activity android:name=".AppointmentList2">
+            android:label="Appointment List"
         </activity>
 
         <activity android:name=".AboutDeveloper">
+            android:label="About Developer"
         </activity>
         <activity
                 android:name=".mentorhomev2"
@@ -27,6 +29,7 @@
         <activity android:name=".MentorSlotList">
         </activity>
         <activity android:name=".addSlotActivity">
+            android:label="Add Slots"
         </activity>
 
         <activity android:name=".studentHomeActivity">

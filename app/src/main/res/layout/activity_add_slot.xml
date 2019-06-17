@@ -89,12 +89,4 @@
             app:layout_constraintHorizontal_bias="0.059" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@+id/setBreak"
             app:layout_constraintVertical_bias="0.277"/>
-    <TextView
-            android:text="Time Deff"
-            android:layout_width="201dp"
-            android:layout_height="144dp"
-            android:id="@+id/timeDiff" app:layout_constraintStart_toEndOf="@+id/generateSlot"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.48"/>
 </android.support.constraint.ConstraintLayout>

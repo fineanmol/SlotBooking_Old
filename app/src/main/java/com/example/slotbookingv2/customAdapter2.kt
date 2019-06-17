@@ -1,8 +1,8 @@
 package com.example.slotbookingv2
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +18,8 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
     val currentUser = FirebaseAuth.getInstance().currentUser
     val ref = FirebaseDatabase.getInstance().getReference("Slots")
     val userref = FirebaseDatabase.getInstance().getReference("users")
+    private var myClipboard: ClipboardManager? = null
+    private var myClip: ClipData? = null
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -39,16 +41,24 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
         name.text = "Name: ${slot.reserved_by}"
         date.text = "${slot.date.split("/").first()} - ${slot.date.split("/")[1]}"
         number.text = "${slot.studentNumber}"
-        studentId.text = "${slot.studentId}"
-        slotTiming.text = "Time Slot: ${slot.begins_At + ("-").toString() + slot.stop_At}"
+        studentId.text = slot.studentId
+        slotTiming.text = slot.begins_At + ("-").toString() + slot.stop_At
         call.setOnClickListener(View.OnClickListener {
-            Toast.makeText(mCtx, "CAll Button Cicked", Toast.LENGTH_LONG).show()
-            var intent = Intent(Intent.ACTION_CALL)
-            intent.data = Uri.parse("tel:0377778888")
-            mCtx.startActivity(intent)
+            Toast.makeText(mCtx, "${slot.studentNumber}", Toast.LENGTH_LONG).show()
+            // copyText(view,"${slot.studentNumber}")
+
+
 
         })
         return view
     }
+    /*fun copyText(view: View, s: String) {
+
+        myClip = ClipData.newPlainText("text", s)
+        myClipboard?.primaryClip = myClip
+
+        Toast.makeText(mCtx, "Text Copied", Toast.LENGTH_SHORT).show()
+    }*/
+
 }
 
