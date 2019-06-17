@@ -13,7 +13,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class customAdapterc(val mCtx: Context, val layoutId: Int, val slotList: List<slotsData>) :
+class customAdapter(val mCtx: Context, val layoutId: Int, val slotList: List<slotsData>) :
     ArrayAdapter<slotsData>(mCtx, layoutId, slotList) {
     val currentUser = FirebaseAuth.getInstance().currentUser
     val ref = FirebaseDatabase.getInstance().getReference("Slots")

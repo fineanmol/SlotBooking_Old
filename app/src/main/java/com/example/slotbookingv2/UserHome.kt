@@ -36,7 +36,7 @@ class UserHome : AppCompatActivity() {
 
                         slotList.add(employee!!)
                     }
-                    val adapter = customAdapterc(this@UserHome, R.layout.listview_custom, slotList)
+                    val adapter = customAdapter(this@UserHome, R.layout.listview_custom, slotList)
                     listview.adapter = adapter
                 }
             }

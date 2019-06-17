@@ -89,6 +89,7 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         if (id == R.id.action_three) {
             Toast.makeText(this, "Item Three Clicked", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, AppointmentList2::class.java))
             return true
         }
         if (id == R.id.contactUs) {
@@ -109,6 +110,7 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
             }
             R.id.show_appointment -> {
+                startActivity(Intent(this, AppointmentList2::class.java))
                 Toast.makeText(this, "Work in Progress", Toast.LENGTH_LONG).show()
             }
 

@@ -5,10 +5,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MentorSlotList">
-    <TextView
-            android:text="TextView"
-            android:layout_width="411dp"
-            android:layout_height="730dp" tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="-1dp"
-            android:id="@+id/textView"/>
+
+    <ListView
+            android:layout_width="395dp"
+            android:layout_height="715dp" tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp" android:id="@+id/mentorlistview"/>
 </android.support.constraint.ConstraintLayout>
