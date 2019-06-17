@@ -31,11 +31,11 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
 
         val slot = slotList[position]
 
-        name.text = slot.reserved_by
-        date.text = slot.date.split("/").first().toString()
-        number.text = slot.studentNumber
-        studentId.text = slot.studentId
-        slotTiming.text = (slot.begins_At + ("-").toString() + slot.stop_At)
+        name.text = "Name: ${slot.reserved_by}"
+        date.text = "${slot.date.split("/").first()} - ${slot.date.split("/")[1]}"
+        number.text = "Number: ${slot.studentNumber}"
+        studentId.text = "Student id: ${slot.studentId}"
+        slotTiming.text = "Time Slot: ${slot.begins_At + ("-").toString() + slot.stop_At}"
 
         return view
     }

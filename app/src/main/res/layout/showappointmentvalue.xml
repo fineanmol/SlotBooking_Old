@@ -8,51 +8,54 @@
                 android:orientation="vertical">
     <TextView
             android:id="@+id/student_Name"
-            android:layout_width="195dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/dateslot"
-            android:layout_toRightOf="@+id/dateslot"
+            android:layout_width="384dp"
+            android:layout_height="35dp"
             android:paddingBottom="10dp"
+
             android:text="Student Name"
             android:textAlignment="center"
             android:textSize="12dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:clickable="true" android:gravity="center"/>
 
     <TextView
             android:id="@+id/dateslot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
             android:textSize="20dp"
             android:gravity="center"
-            android:text="22"/>
+            android:text="22"
+            android:layout_below="@+id/student_Name"
+    />
 
     <TextView
             android:id="@+id/slot_timing"
-            android:layout_width="193dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/student_Name"
-            android:layout_toEndOf="@+id/dateslot"
-            android:layout_toRightOf="@+id/dateslot"
+            android:layout_width="320dp"
+            android:layout_height="30dp"
             android:paddingTop="10dp"
             android:text="Slot Timing"
             android:textAlignment="center"
             android:textSize="10dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_toEndOf="@+id/dateslot" android:layout_marginStart="1dp"
+            android:layout_toRightOf="@+id/dateslot" android:layout_marginLeft="1dp"
+            android:layout_below="@+id/student_Name"/>
     <TextView
             android:text="number"
-            android:layout_width="157dp"
-            android:layout_centerHorizontal="true"
-            android:layout_height="29dp" android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" android:layout_alignParentTop="true" android:layout_marginEnd="0dp"
-            android:id="@+id/studentno" android:layout_marginRight="0dp"/>
+            android:layout_width="385dp"
+            android:layout_height="30dp"
+            android:id="@+id/studentno"
+            android:layout_below="@+id/dateslot"/>
     <TextView
             android:text="student id"
-            android:layout_width="138dp"
-            android:layout_height="wrap_content" android:layout_alignParentRight="false"
-            android:layout_alignParentEnd="true" android:layout_alignParentTop="false"
-            android:id="@+id/studentid" android:layout_marginTop="33dp" android:layout_marginRight="0dp"
-            android:layout_marginEnd="18dp"/>
+            android:layout_width="396dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="200dp"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/studentid"
+            android:layout_marginEnd="0dp"
+            android:layout_below="@+id/studentno"/>
 
 
 </RelativeLayout>
