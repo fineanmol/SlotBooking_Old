@@ -27,8 +27,8 @@ class local_slot_adapter(val mCtx: Context, val layoutId: Int, var local_slotLis
 
 
         val slot = local_slotList[position]
-        date.text = slot.split("$").last().toString()
-        stime.text = slot.split("$").first().split("-").first().toString()
+        date.text = slot.split("$").last().toString().split("]").first().toString()
+        stime.text = slot.split("$").first().split("-").first().toString().split("[").last().toString()
         etime.text = slot.split("$").first().split("-").last().toString()
 
         delete.setOnClickListener {

@@ -14,12 +14,13 @@
             android:theme="@style/AppTheme">
 
 
-        <activity android:name=".AppointmentList2">
-            android:label="Appointment List"
+        <activity android:name=".AppointmentList2"
+                  android:label="Appointment List">
+
         </activity>
 
-        <activity android:name=".AboutDeveloper">
-            android:label="About Developer"
+        <activity android:name=".AboutDeveloper" android:label="About Developer">
+
         </activity>
         <activity
                 android:name=".mentorhomev2"
@@ -28,8 +29,9 @@
         </activity>
         <activity android:name=".MentorSlotList">
         </activity>
-        <activity android:name=".addSlotActivity">
-            android:label="Add Slots"
+        <activity android:name=".addSlotActivity"
+                  android:label="Add Slots">
+
         </activity>
 
         <activity android:name=".studentHomeActivity">

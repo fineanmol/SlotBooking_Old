@@ -46,7 +46,7 @@ class addSlotActivity : AppCompatActivity() {
 
             var Stime = slotSTime.text.toString()
             var Etime = slotETime.text.toString()
-            val slotDuration = slotDuration.text.toString()
+            val slotDurations = slotDuration.text.toString()
             val interval = setBreak.text.toString()
             val sdate = slotDate.text.toString()
             if (Stime == "Select Start Time *" || Stime.isNullOrEmpty()) {
@@ -54,7 +54,17 @@ class addSlotActivity : AppCompatActivity() {
                 slotSTime.requestFocus()
                 Toast.makeText(this, "Start Time Required !!", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
+            } else if (Etime == "Select Slot End Time *" || Etime.isNullOrEmpty()) {
+                slotETime.error = "End Time Required"
+                slotETime.requestFocus()
+                Toast.makeText(this, "End Time Required !!", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            } else if (slotDurations == "Enter Slot Duration(in m)" || slotDurations.isNullOrEmpty()) {
+                slotDuration.error = "End Time Required"
+                slotDuration.requestFocus()
+                return@setOnClickListener
             }
+
 
             var StimeHH = Stime.split(":").first().toString()
             var StimeMM = Stime.split(":").last().split(" ").first().toString()
@@ -71,11 +81,12 @@ class addSlotActivity : AppCompatActivity() {
                 timeFlagE = 1
             }
 
-            displayTimeSlots(StimeHH, StimeMM, EtimeHH, EtimeMM, EtimeHour, sdate, slotDuration, interval)
+            displayTimeSlots(StimeHH, StimeMM, EtimeHH, EtimeMM, EtimeHour, sdate, slotDurations, interval)
 
 
         }
     }
+
 
     private fun handleDateButton() {
         val calendar = Calendar.getInstance()
