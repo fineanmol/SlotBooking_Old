@@ -49,6 +49,12 @@ class addSlotActivity : AppCompatActivity() {
             val slotDuration = slotDuration.text.toString()
             val interval = setBreak.text.toString()
             val sdate = slotDate.text.toString()
+            if (Stime == "Select Start Time *" || Stime.isNullOrEmpty()) {
+                slotSTime.error = "Start Time Required"
+                slotSTime.requestFocus()
+                Toast.makeText(this, "Start Time Required !!", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             var StimeHH = Stime.split(":").first().toString()
             var StimeMM = Stime.split(":").last().split(" ").first().toString()
