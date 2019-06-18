@@ -43,28 +43,44 @@ class addSlotActivity : AppCompatActivity() {
         setETime.setOnClickListener(View.OnClickListener { handleETimeButton() })
 
         generateSlot.setOnClickListener {
-
+            val sdate = slotDate.text.toString()
             var Stime = slotSTime.text.toString()
             var Etime = slotETime.text.toString()
             val slotDurations = slotDuration.text.toString()
-            var interval: String?
-            interval = setBreak.text.toString()
-            val sdate = slotDate.text.toString()
+            var interval = setBreak.text.toString()
+
+
+            if (sdate == ("Select Date*") || sdate.isNullOrEmpty()) {
+                slotDate.error = "Choose Date First !!"
+                slotDate.requestFocus()
+                Toast.makeText(this, "Date is Mandatory to Generate Slots !!", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            slotDate.error = null
+
             if (Stime == "Select Start Time *" || Stime.isNullOrEmpty()) {
                 slotSTime.error = "Start Time Required"
                 slotSTime.requestFocus()
                 Toast.makeText(this, "Start Time Required !!", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            } else if (Etime == "Select Slot End Time *" || Etime.isNullOrEmpty()) {
+            }
+            slotSTime.error = null
+            if (Etime == "Select Slot End Time *" || Etime.isNullOrEmpty()) {
                 slotETime.error = "End Time Required"
                 slotETime.requestFocus()
                 Toast.makeText(this, "End Time Required !!", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            } else if (slotDurations == "Enter Slot Duration(in m)" || slotDurations.isNullOrEmpty()) {
+            }
+            slotETime.error = null
+            if (slotDurations == "Enter Slot Duration(in m)" || slotDurations.isNullOrEmpty()) {
                 slotDuration.error = "End Time Required"
                 slotDuration.requestFocus()
                 return@setOnClickListener
             }
+            if (interval == "" || interval.isNullOrEmpty()) {
+                interval = "0"
+            }
+
 
 
             var StimeHH = Stime.split(":").first().toString()
@@ -238,6 +254,8 @@ class addSlotActivity : AppCompatActivity() {
             intent.putExtra("slotLists", slotList)
             startActivity(intent)
         } catch (ex: ParseException) {
+            var intent = Intent(this, addSlotActivity::class.java)
+            startActivity(intent)
             ex.printStackTrace()
 
         }
