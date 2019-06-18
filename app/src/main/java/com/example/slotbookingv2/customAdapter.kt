@@ -58,7 +58,7 @@ class customAdapter(val mCtx: Context, val layoutId: Int, val slotList: List<slo
                                 query.addValueEventListener(object : ValueEventListener {
                                     override fun onDataChange(p0: DataSnapshot) {
                                         if (p0.exists()) {
-                                            Toast.makeText(mCtx, "You have alraedy booked a slot", Toast.LENGTH_LONG)
+                                            Toast.makeText(mCtx, "You have already booked a slot", Toast.LENGTH_LONG)
                                                 .show()
                                         } else {
                                             //userref.child(studentkey!!).child("status").setValue("B")
@@ -71,7 +71,7 @@ class customAdapter(val mCtx: Context, val layoutId: Int, val slotList: List<slo
                                             ref.child(slot.generated_by).child(id).child("status").setValue("B")
                                             Toast.makeText(
                                                 mCtx,
-                                                "$studentName You Booked! an appointment for: ${time.text}",
+                                                "$studentName Appointment Booked! \n at: ${time.text}",
                                                 Toast.LENGTH_LONG
                                             ).show()
                                         }

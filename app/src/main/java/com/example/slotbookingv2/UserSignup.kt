@@ -24,20 +24,21 @@ class UserSignup : AppCompatActivity() {
         u_register.setOnClickListener {
             val email = u_r_email.text.toString().trim()
             val password = u_r_pass.text.toString().trim()
-            val name= numberupdate.text.toString().trim()
+            val namef = name.text.toString().trim()
             val number =mobile.text.toString().trim()
-            val studentid = mentorid.text.toString().trim()
+            val studentidf = studentid.text.toString().trim()
             val status = ("NB")
             val user_type = ("S")
             //val flag2 = (" ").toString().trim()
 
-            if (email.isEmpty()) {
-                u_r_email.error = "Email Required"
-                u_r_email.requestFocus()
+
+            if (namef.isEmpty()) {
+                name.error = "Name Required"
+                name.requestFocus()
                 return@setOnClickListener
             }
-            if (name.isEmpty()) {
-                u_r_email.error = "Name Required"
+            if (email.isEmpty()) {
+                u_r_email.error = "Email Required"
                 u_r_email.requestFocus()
                 return@setOnClickListener
             }
@@ -46,9 +47,9 @@ class UserSignup : AppCompatActivity() {
                 mobile.requestFocus()
                 return@setOnClickListener
             }
-            if (studentid.isEmpty()) {
-                u_r_email.error = "Student-Id Required"
-                u_r_email.requestFocus()
+            if (studentidf.isEmpty()) {
+                studentid.error = "Student-Id Required"
+                studentid.requestFocus()
                 return@setOnClickListener
             }
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -56,14 +57,18 @@ class UserSignup : AppCompatActivity() {
                 u_r_email.requestFocus()
                 return@setOnClickListener
             }
-
+            if (!Patterns.PHONE.matcher(number).matches() || number.length > 10 || number.length < 9) {
+                mobile.error = "Valid Phone Number Required"
+                mobile.requestFocus()
+                return@setOnClickListener
+            }
             if (password.isEmpty() || password.length < 6) {
                 u_r_pass.error = "6 char password required"
                 u_r_pass.requestFocus()
                 return@setOnClickListener
             }
 
-            registerUser(email, password, name, number, studentid, status, user_type)
+            registerUser(email, password, namef, number, studentidf, status, user_type)
 
         }
 

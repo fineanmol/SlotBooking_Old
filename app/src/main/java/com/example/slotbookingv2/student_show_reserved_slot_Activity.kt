@@ -29,7 +29,7 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
                     if (!dataSnapshot.exists()) {
                         Toast.makeText(
                             this@student_show_reserved_slot_Activity,
-                            "User details not found",
+                            "User Already Registered",
                             Toast.LENGTH_LONG
                         ).show()
                     } else {
