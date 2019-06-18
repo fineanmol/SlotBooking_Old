@@ -2,12 +2,14 @@ package com.example.slotbookingv2
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import java.util.*
+
 
 class AppointmentList2 : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
@@ -61,22 +63,39 @@ class AppointmentList2 : AppCompatActivity() {
                                     val targetDate = targetCalendar.get(Calendar.DATE)
                                     if (status == "B") {
                                         if (position == 0) {
+                                            Log.d("TAGDD", targetDate.toString() + "--" + Date)
                                             if (targetDate == Date) {
                                                 slotList.add(employee)
+
                                             }
                                         }
                                         if (position == 1) {
-                                            Date = Date + 1
-                                            if (targetDate == Date) {
+                                            Toast.makeText(
+                                                this@AppointmentList2,
+                                                targetDate.toString() + "--" + Date,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            if (targetDate == (Date + 1)) {
                                                 slotList.add(employee)
                                             }
                                         }
                                         if (position == 2) {
+                                            Toast.makeText(
+                                                this@AppointmentList2,
+                                                targetWeek.toString() + "--" + Week,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+
                                             if (targetWeek == Week) {
                                                 slotList.add(employee)
                                             }
                                         }
                                         if (position == 3) {
+                                            Toast.makeText(
+                                                this@AppointmentList2,
+                                                targetMonth.toString() + "--" + month,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                             if (targetMonth == month) {
                                                 slotList.add(employee)
                                             }
@@ -92,6 +111,7 @@ class AppointmentList2 : AppCompatActivity() {
                         override fun onCancelled(p0: DatabaseError) {
                         }
                     })
+                    //slotList.clear()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
