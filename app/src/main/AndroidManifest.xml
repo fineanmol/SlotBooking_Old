@@ -15,13 +15,9 @@
 
         <activity android:name=".student_show_reserved_slot_Activity">
         </activity>
-        <activity android:name=".AppointmentList2">
-        </activity>
+
         <activity android:name=".AppointmentList2"
                   android:label="Appointment List">
-
-
-
         </activity>
 
         <activity android:name=".AboutDeveloper" android:label="About Developer">

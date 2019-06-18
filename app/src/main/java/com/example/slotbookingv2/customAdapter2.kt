@@ -57,4 +57,3 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
 }
 
 
-}
