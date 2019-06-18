@@ -37,7 +37,7 @@ class AppointmentList2 : AppCompatActivity() {
             val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, filter)
             spinner.adapter = arrayAdapter
             slotList = mutableListOf()
-            listview = this.findViewById(R.id.appointmentList)
+            listview = findViewById(R.id.appointmentList)
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                     Toast.makeText(this@AppointmentList2, filter[position], Toast.LENGTH_SHORT).show()

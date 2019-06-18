@@ -19,7 +19,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.content_mentorhomev2.*
 
 
 class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +34,71 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mentorhomev2)
+
+
+        new_session_btn.setOnClickListener {
+            val builder = AlertDialog.Builder(this@mentorhomev2)
+
+            // Set the alert dialog title
+            builder.setTitle("Slots Reset Confirmation")
+
+            // Display a message on alert dialog
+            builder.setMessage("Are you sure to reset session?")
+
+            // Set a positive button and its click listener on alert dialog
+            builder.setPositiveButton("YES") { dialog, which ->
+                // Do something when user press the positive button
+                val userNameRef = userref.orderByChild("user_type").equalTo("S")
+                val eventListener = object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (!dataSnapshot.exists()) {
+                            //create new user
+                            Toast.makeText(this@mentorhomev2, "User details not found", Toast.LENGTH_LONG).show()
+                        } else {
+                            for (e in dataSnapshot.children) {
+                                val employee = e.getValue(Data::class.java)
+                                var studentkey = employee?.id
+                                userref.child(studentkey!!).child("status").setValue("NB")
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Ok, we change created new Session.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                    }
+                }
+                userNameRef.addListenerForSingleValueEvent(eventListener)
+                // Change the app background color
+            }
+
+
+            // Display a negative button on alert dialog
+            builder.setNegativeButton("No") { dialog, which ->
+                Toast.makeText(applicationContext, "You are not agree.", Toast.LENGTH_SHORT).show()
+            }
+
+
+            // Display a neutral button on alert dialog
+            builder.setNeutralButton("Cancel") { _, _ ->
+                Toast.makeText(applicationContext, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+            }
+
+            // Finally, make the alert dialog using builder
+            val dialog: AlertDialog = builder.create()
+
+            // Display the alert dialog on app interface
+            dialog.show()
+        }
+
+
+        existing_session_btn.setOnClickListener {
+
+        }
 
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
