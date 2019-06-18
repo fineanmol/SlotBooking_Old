@@ -13,6 +13,7 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
     lateinit var listview: ListView
     private val currentUser = FirebaseAuth.getInstance().currentUser
     var studentName = ""
+    var studentId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +37,11 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
                         for (e in dataSnapshot.children) {
                             val employee = e.getValue(Data::class.java)!!
                             studentName = employee.name
+                            studentId = employee.studentId
+
 
                         }
-                        var query = ref.child("Nikhil Nishad").orderByChild("reserved_by").equalTo(studentName)
+                        var query = ref.child("Nikhil Nishad").orderByChild("studentId").equalTo(studentId)
                         query.addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(p0: DataSnapshot) {
                                 if (p0.exists()) {

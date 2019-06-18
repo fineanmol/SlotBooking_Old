@@ -43,4 +43,8 @@
     <string name="DEBUG_TAG">LearningPushNotification</string>
     <string name="title_activity_user_home_v2">UserHomeV2</string>
 
+
+    <string name="selected_item">Selected item:</string>
+
+
 </resources>

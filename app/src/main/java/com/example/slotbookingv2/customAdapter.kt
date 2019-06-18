@@ -54,14 +54,14 @@ class customAdapter(val mCtx: Context, val layoutId: Int, val slotList: List<slo
                                 var studentName = employee?.name
                                 var phone = employee?.number
                                 var studentkey = employee?.id
-                                var query = ref.child("Nikhil Nishad").orderByChild("reserved_by").equalTo(studentName)
+                                var query = ref.child("Nikhil Nishad").orderByChild("studentId").equalTo(studentId)
                                 query.addValueEventListener(object : ValueEventListener {
                                     override fun onDataChange(p0: DataSnapshot) {
                                         if (p0.exists()) {
                                             Toast.makeText(mCtx, "You have already booked a slot", Toast.LENGTH_LONG)
                                                 .show()
                                         } else {
-                                            //userref.child(studentkey!!).child("status").setValue("B")
+                                            userref.child(studentkey!!).child("status").setValue("B")
                                             ref.child(slot.generated_by).child(id).child("studentNumber")
                                                 .setValue(phone)
                                             ref.child(slot.generated_by).child(id).child("reserved_by")
