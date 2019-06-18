@@ -22,14 +22,14 @@ class studentHomeActivity : AppCompatActivity() {
 
             }
         )
-        show_showreserved_slot_btn.setOnClickListener(View.OnClickListener {
+        showslotbtn.setOnClickListener(View.OnClickListener {
             var Intent = Intent(this, UserHome::class.java)
             startActivity(Intent)
         })
 
         show_showreserved_slot_btn.setOnClickListener {
             Toast.makeText(this@studentHomeActivity, "Clicked!", Toast.LENGTH_SHORT).show()
-            var Intent = Intent(this, AppointmentList2::class.java)
+            var Intent = Intent(this, student_show_reserved_slot_Activity::class.java)
             startActivity(Intent)
 
         }

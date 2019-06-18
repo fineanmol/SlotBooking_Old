@@ -54,28 +54,32 @@ class customAdapter(val mCtx: Context, val layoutId: Int, val slotList: List<slo
                                 var studentName = employee?.name
                                 var phone = employee?.number
                                 var studentkey = employee?.id
-                                var studentstatus = employee?.status
+                                var query = ref.child("Nikhil Nishad").orderByChild("reserved_by").equalTo(studentName)
+                                query.addValueEventListener(object : ValueEventListener {
+                                    override fun onDataChange(p0: DataSnapshot) {
+                                        if (p0.exists()) {
+                                            Toast.makeText(mCtx, "You have alraedy booked a slot", Toast.LENGTH_LONG)
+                                                .show()
+                                        } else {
+                                            //userref.child(studentkey!!).child("status").setValue("B")
+                                            ref.child(slot.generated_by).child(id).child("studentNumber")
+                                                .setValue(phone)
+                                            ref.child(slot.generated_by).child(id).child("reserved_by")
+                                                .setValue(studentName)
+                                            ref.child(slot.generated_by).child(id).child("studentId")
+                                                .setValue(studentId)
+                                            ref.child(slot.generated_by).child(id).child("status").setValue("B")
+                                            Toast.makeText(
+                                                mCtx,
+                                                "$studentName You Booked! an appointment for: ${time.text}",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                        }
+                                    }
 
-                                if (studentstatus == "NB") {
-                                    userref.child(studentkey!!).child("status").setValue("B")
-                                    ref.child(slot.generated_by).child(id).child("studentNumber").setValue(phone)
-                                    ref.child(slot.generated_by).child(id).child("reserved_by").setValue(studentName)
-                                    ref.child(slot.generated_by).child(id).child("studentId").setValue(studentId)
-                                    ref.child(slot.generated_by).child(id).child("status").setValue("B")
-                                    Toast.makeText(
-                                        mCtx,
-                                         "$studentName You Booked! an appointment for: ${time.text}" ,
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                                if (studentstatus == "B")
-                                {
-                                    Toast.makeText(
-                                        mCtx,
-                                        "$studentName You have already booked an appointment already",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
+                                    override fun onCancelled(p0: DatabaseError) {
+                                    }
+                                })
 
                             }
                         }
