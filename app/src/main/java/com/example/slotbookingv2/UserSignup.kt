@@ -42,8 +42,8 @@ class UserSignup : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (number.isEmpty()) {
-                u_r_email.error = "Number Required"
-                u_r_email.requestFocus()
+                mobile.error = "Number Required"
+                mobile.requestFocus()
                 return@setOnClickListener
             }
             if (studentid.isEmpty()) {

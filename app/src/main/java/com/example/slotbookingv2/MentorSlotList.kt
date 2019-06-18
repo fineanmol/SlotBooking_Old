@@ -52,6 +52,7 @@ class MentorSlotList : AppCompatActivity() {
             //Toast.makeText(this,qty,Toast.LENGTH_LONG).show()
             var parts1 = qty.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toMutableList()
 
+
                 for (x in parts1) {
                     Log.d("TAG1", x)
                     date= x.split("$").last().toString().trim().replace("]]","")
@@ -60,6 +61,8 @@ class MentorSlotList : AppCompatActivity() {
                     addSlot(stime, etime,date)
                     //Toast.makeText(this, stime+"-"+etime+" "+date, Toast.LENGTH_LONG).show()
                 }
+
+          
         }
     }
     var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -79,8 +82,8 @@ class MentorSlotList : AppCompatActivity() {
     private fun addSlot(begin: String, end: String, date: String) {
         val reserved_by = ""
         var generated = "Nikhil Nishad"
-        var studentId = "234567"
-        var studentNumber = "8765345674"
+        var studentId = ""
+        var studentNumber = ""
         var status = "NB"
         val sId = (ref.push().key).toString()
         val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)

@@ -70,11 +70,11 @@
             android:gravity="center" android:layout_below="@+id/dateslot" android:layout_marginTop="1dp"/>
     <TextView
             android:layout_width="wrap_content"
+            android:background="@drawable/ic_call_black_24dp"
             android:layout_height="wrap_content"
             android:id="@+id/callbtn" android:layout_below="@+id/dateslot"
             android:gravity="center" android:layout_alignStart="@+id/slot_timing" android:layout_marginTop="18dp"
-            android:layout_marginStart="-82dp" android:layout_alignLeft="@+id/slot_timing"
-            android:layout_marginLeft="-82dp"/>
+            android:layout_marginStart="-82dp"/>
     <TextView
             android:text="Student Id:"
             android:layout_width="78dp"

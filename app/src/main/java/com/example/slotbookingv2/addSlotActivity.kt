@@ -31,10 +31,12 @@ class addSlotActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_slot)
+
         mAuth = FirebaseAuth.getInstance()
         ref = FirebaseDatabase.getInstance().getReference("Slots")
         var timeFlagS = 0
         var timeFlagE = 0
+
 
         setDate.setOnClickListener(View.OnClickListener { handleDateButton() })
         setSTime.setOnClickListener(View.OnClickListener { handleSTimeButton() })
@@ -44,9 +46,25 @@ class addSlotActivity : AppCompatActivity() {
 
             var Stime = slotSTime.text.toString()
             var Etime = slotETime.text.toString()
-            val slotDuration = slotDuration.text.toString()
+            val slotDurations = slotDuration.text.toString()
             val interval = setBreak.text.toString()
             val sdate = slotDate.text.toString()
+            if (Stime == "Select Start Time *" || Stime.isNullOrEmpty()) {
+                slotSTime.error = "Start Time Required"
+                slotSTime.requestFocus()
+                Toast.makeText(this, "Start Time Required !!", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            } else if (Etime == "Select Slot End Time *" || Etime.isNullOrEmpty()) {
+                slotETime.error = "End Time Required"
+                slotETime.requestFocus()
+                Toast.makeText(this, "End Time Required !!", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            } else if (slotDurations == "Enter Slot Duration(in m)" || slotDurations.isNullOrEmpty()) {
+                slotDuration.error = "End Time Required"
+                slotDuration.requestFocus()
+                return@setOnClickListener
+            }
+
 
             var StimeHH = Stime.split(":").first().toString()
             var StimeMM = Stime.split(":").last().split(" ").first().toString()
@@ -63,11 +81,12 @@ class addSlotActivity : AppCompatActivity() {
                 timeFlagE = 1
             }
 
-            displayTimeSlots(StimeHH, StimeMM, EtimeHH, EtimeMM, EtimeHour, sdate, slotDuration, interval)
+            displayTimeSlots(StimeHH, StimeMM, EtimeHH, EtimeMM, EtimeHour, sdate, slotDurations, interval)
 
 
         }
     }
+
 
     private fun handleDateButton() {
         val calendar = Calendar.getInstance()
@@ -108,7 +127,10 @@ class addSlotActivity : AppCompatActivity() {
             val dateText = DateFormat.format("h:mm a", calendar1).toString()
             slotSTime.text = dateText
             handleETimeButton()
+
         }, HOUR, MINUTE, is24HourFormat)
+
+
 
         timePickerDialog.show()
     }
@@ -133,8 +155,8 @@ class addSlotActivity : AppCompatActivity() {
     private fun addSlot(begin: String, end: String, date: String): Boolean {
         val reserved_by = ""
         var generated = "Nikhil Nishad"
-        var studentId = "234567"
-        var studentNumber = "8765345674"
+        var studentId = ""
+        var studentNumber = ""
         var status = "NB"
         val sId = (ref.push().key).toString()
 

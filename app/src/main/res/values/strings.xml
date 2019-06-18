@@ -13,7 +13,12 @@
     <string name="action_done">Done</string>
     <string name="start_time">Start time</string>
     <string name="end_time">End time</string>
-    <string name="title_activity_mentorhomev2">mentorhomev2</string>
+    <string name="title_activity_mentorhomev2">Mentor Home</string>
+    <string name="title_activity_userhome">User Home</string>
+    <string name="title_activity_addslot">Add Slot</string>
+    <string name="title_activity_showappointment">Mentor Home</string>
+    <string name="title_activity_appointmentList">Appointment List</string>
+    <string name="title_activity_bookSlot">Book Slot</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -29,4 +34,10 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="title_section7">About Us</string>
+    <string name="default_notification_channel_id">Notification Channel ID</string>
+    <string name="NEWS_CHANNEL_ID">news</string>
+    <string name="CHANNEL_NEWS">News</string>
+    <string name="CHANNEL_DESCRIPTION">Get informed with new updates</string>
+    <string name="DEBUG_TAG">LearningPushNotification</string>
+
 </resources>
