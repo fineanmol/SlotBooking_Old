@@ -18,7 +18,7 @@ class AppointmentList2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_appointment_list2)
         slotList = mutableListOf()
-        listview = findViewById(R.id.appointmentList)
+        listview = this.findViewById(R.id.appointmentList)
         ref = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {

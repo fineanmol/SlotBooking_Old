@@ -52,13 +52,9 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
         })
         return view
     }
-    /*fun copyText(view: View, s: String) {
-
-        myClip = ClipData.newPlainText("text", s)
-        myClipboard?.primaryClip = myClip
-
-        Toast.makeText(mCtx, "Text Copied", Toast.LENGTH_SHORT).show()
-    }*/
+  
 
 }
 
+
+}

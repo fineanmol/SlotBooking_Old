@@ -110,7 +110,7 @@
                 android:inputType="number" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
 
         <TextView
-                android:labelFor="@id/studentid"
+                android:labelFor="@id/mentorid"
                 android:text="Student Id"
                 android:fontFamily="sans-serif-light"
                 android:layout_width="wrap_content"
@@ -119,7 +119,7 @@
         <EditText
                 android:drawablePadding="10dp"
 
-                android:id="@+id/studentid"
+                android:id="@+id/mentorid"
                 android:drawableLeft="@drawable/ic_college_id_24dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

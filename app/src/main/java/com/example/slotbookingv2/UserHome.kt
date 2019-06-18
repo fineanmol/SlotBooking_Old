@@ -26,8 +26,9 @@ class UserHome : AppCompatActivity() {
         slotList = mutableListOf()
         listview = findViewById(R.id.listview)
         ref = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
+        var query = ref.orderByChild("status").equalTo("NB")
 
-        ref.addValueEventListener(object : ValueEventListener {
+        query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 if (p0.exists()) {
                     slotList.clear()

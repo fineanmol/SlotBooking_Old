@@ -52,14 +52,17 @@ class MentorSlotList : AppCompatActivity() {
             //Toast.makeText(this,qty,Toast.LENGTH_LONG).show()
             var parts1 = qty.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toMutableList()
 
-            for (x in parts1) {
-                Log.d("TAG1", x)
-                date = x.split("$").last().toString().trim().replace("]]", "")
-                stime = x.split("$").first().split("-").first().toString().trim().replace("[[", "")
-                etime = x.split("$").first().split("-").last().toString().trim()
-                addSlot(stime, etime, date)
-                //Toast.makeText(this, stime+"-"+etime+" "+date, Toast.LENGTH_LONG).show()
-            }
+
+                for (x in parts1) {
+                    Log.d("TAG1", x)
+                    date= x.split("$").last().toString().trim().replace("]]","")
+                    stime= x.split("$").first().split("-").first().toString().trim().replace("[[","")
+                    etime= x.split("$").first().split("-").last().toString().trim()
+                    addSlot(stime, etime,date)
+                    //Toast.makeText(this, stime+"-"+etime+" "+date, Toast.LENGTH_LONG).show()
+                }
+
+          
         }
     }
     var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -83,10 +86,7 @@ class MentorSlotList : AppCompatActivity() {
         var studentNumber = ""
         var status = "NB"
         val sId = (ref.push().key).toString()
-
         val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
-
-
         ref.child(generated).child(sId).setValue(addSlot)
         Toast.makeText(this, begin+"-"+end+" "+date, Toast.LENGTH_LONG).show()
     }

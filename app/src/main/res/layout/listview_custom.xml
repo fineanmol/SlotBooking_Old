@@ -8,7 +8,7 @@
                 android:orientation="vertical">
 
     <TextView
-            android:id="@+id/student_Name"
+            android:id="@+id/mentor_Name"
             android:layout_width="195dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -32,7 +32,7 @@
             android:id="@+id/slot_timing"
             android:layout_width="193dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/student_Name"
+            android:layout_below="@+id/mentor_Name"
             android:layout_toEndOf="@+id/dateslot"
             android:layout_toRightOf="@+id/dateslot"
             android:paddingTop="10dp"
