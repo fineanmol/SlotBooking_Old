@@ -12,6 +12,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".UserHomeV2"
+                android:label="@string/title_activity_user_home_v2"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".MentorRegistration">
         </activity>
         <activity android:name=".student_show_reserved_slot_Activity">
@@ -35,18 +40,22 @@
                 android:name=".addSlotActivity"
                 android:label="@string/title__addslot">
         </activity>
-        <activity android:name=".studentHomeActivity" android:label="@string/title_userhome">
+        <activity
+                android:name=".studentHomeActivity"
+                android:label="@string/title_userhome">
         </activity>
         <activity android:name=".UserHome">
         </activity>
         <activity
                 android:name=".UserSignup"
-                android:label="@string/title_activity_user_signup"
-        >
+                android:label="@string/title_activity_user_signup">
         </activity>
-        <activity android:name=".MainActivity" android:label="@string/title_login">
+        <activity
+                android:name=".MainActivity"
+                android:label="@string/title_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>

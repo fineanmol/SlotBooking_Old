@@ -1,7 +1,9 @@
 package com.example.slotbookingv2
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.support.v7.app.AlertDialog
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -23,7 +25,7 @@ fun Context.login() {
                     val employee = e.getValue(Data::class.java)
                     if (employee != null) {
                         val u_type = employee.user_type
-                        if (u_type == "S") startActivity(Intent(this@login, studentHomeActivity::class.java))
+                        if (u_type == "S") startActivity(Intent(this@login, UserHomeV2::class.java))
                         else if (u_type == "M") startActivity(Intent(this@login, mentorhomev2::class.java))
 
                     }
@@ -44,9 +46,21 @@ fun Context.login() {
 
 
 fun Context.logout() {
-    FirebaseAuth.getInstance().signOut()
-    val intent = Intent(this, MainActivity::class.java).apply {
-        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-    }
-    startActivity(intent)
+    val alertbox = AlertDialog.Builder(this)
+        .setMessage("Do you want to Logout?")
+        .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+            // do something when the button is clicked
+            FirebaseAuth.getInstance().signOut()
+            Toast.makeText(this, "You have been logout Successfully", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+
+
+        })
+        .setNegativeButton("No", // do something when the button is clicked
+            DialogInterface.OnClickListener { arg0, arg1 -> })
+        .show()
+
 }

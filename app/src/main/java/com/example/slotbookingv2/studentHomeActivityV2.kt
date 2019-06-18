@@ -1,6 +1,6 @@
 package com.example.slotbookingv2
 
-import android.R.id.message
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,40 +10,28 @@ import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 
 
-class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    val userref = FirebaseDatabase.getInstance().getReference("users")
-    val currentUser = FirebaseAuth.getInstance().currentUser
+class UserHomeV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mentorhomev2)
-
-
+        setContentView(R.layout.activity_user_home_v2)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Email your suggestion", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            val intent = Intent(
-                Intent.ACTION_SENDTO, Uri.fromParts(
-                    "mailto", "agarwal.anmol2004@gmail.com", null
-                )
-            )
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
-            intent.putExtra(Intent.EXTRA_TEXT, message)
-            startActivity(Intent.createChooser(intent, "Choose an Email client :"))
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -54,26 +42,6 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-
-
-        /*Firebase Messaging*/
-        /* FirebaseInstanceId.getInstance().instanceId
-             .addOnCompleteListener(OnCompleteListener { task ->
-                 if (!task.isSuccessful) {
-                     Log.w(TAG, "getInstanceId failed", task.exception)
-                     return@OnCompleteListener
-                 }
-
-                 // Get new Instance ID token
-                 val token = task.result?.token
-
-                 // Log and toast
-                 val msg = getString(R.string.msg_token_fmt, token)
-                 Log.d(TAG, msg)
-                 Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-             })*/
-        /*Firebase Messaging Ends*/
-
     }
 
     override fun onBackPressed() {
@@ -87,7 +55,7 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.mentorhomev2, menu)
+        menuInflater.inflate(R.menu.user_home_v2, menu)
         return true
     }
 
@@ -97,12 +65,8 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
 
-        if (id == R.id.action_one) {
-            startActivity(Intent(this, addSlotActivity::class.java))
-            Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
-            return true
-        }
-        if (id == R.id.action_two) {
+
+        if (id == R.id.action_logout) {
 
             logout()
 
@@ -110,7 +74,7 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         if (id == R.id.action_three) {
             Toast.makeText(this, "Item Three Clicked", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, AppointmentList2::class.java))
+
             return true
         }
         if (id == R.id.contactUs) {
@@ -125,17 +89,16 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_addslot -> {
+            R.id.nav_showslots -> {
                 // Handle the camera action
-                startActivity(Intent(this, addSlotActivity::class.java))
-                Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
+                var intent = Intent(this, student_show_reserved_slot_Activity::class.java)
+                startActivity(intent)
             }
-            R.id.show_appointment -> {
-                startActivity(Intent(this, AppointmentList2::class.java))
-                Toast.makeText(this, "Work in Progress", Toast.LENGTH_LONG).show()
+            R.id.nav_bookslots -> {
+                var intent = Intent(this, UserHome::class.java)
+                startActivity(intent)
             }
-
-            R.id.nav_tools -> {
+            R.id.nav_slideshow -> {
 
             }
             R.id.nav_share -> {
@@ -151,50 +114,55 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(Intent.createChooser(sharingIntent, "Share via"))
 
             }
-            R.id.nav_reportbug -> {
+            R.id.nav_logout -> {
+                logout()
+            }
+            R.id.nav_ContactUs -> {
                 val intent = Intent(
                     Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto", "agarwal.anmol2004@gmail.com", null
                     )
                 )
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
-                intent.putExtra(Intent.EXTRA_TEXT, message)
+                intent.putExtra(Intent.EXTRA_TEXT, android.R.id.message)
                 startActivity(Intent.createChooser(intent, "Choose an Email client :"))
 
+
             }
+            R.id.nav_AboutDeveloper -> {
+                Toast.makeText(this, "You click contact us", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, AboutDeveloper::class.java))
+            }
+
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        /*  user value display at drawer*/
-        /* var namedrawer = findViewById<TextView>(R.id.namedrawer)
-         var emaildrawer = findViewById<TextView>(R.id.emaildrawer)
-         currentUser?.let { user ->
-             // Toast.makeText(mCtx, user.email, Toast.LENGTH_LONG).show()
-             val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
-             val eventListener = object : ValueEventListener {
-                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                     if (!dataSnapshot.exists()) {
-                         //create new user
-                         Toast.makeText(this@mentorhomev2, "User details not found", Toast.LENGTH_LONG).show()
-                     } else {
-                         for (e in dataSnapshot.children) {
-                             val employee = e.getValue(Data::class.java)
-                             var studentName = employee?.name
-                             var studentemail = employee?.email
-                             namedrawer.text= studentName!!.trim()
-                             emaildrawer.text= studentemail!!.trim()
-
-                         }
-                     }
-                 }
-
-                 override fun onCancelled(databaseError: DatabaseError) {
-                 }
-             }
-             userNameRef?.addListenerForSingleValueEvent(eventListener)
-
-         }*/
-// end of method
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitByBackKey()
+
+            //moveTaskToBack(false);
+
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    protected fun exitByBackKey() {
+
+        val alertbox = AlertDialog.Builder(this)
+            .setMessage("Do you want to exit application?")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                // do something when the button is clicked
+                finish()
+
+            })
+            .setNegativeButton("No", // do something when the button is clicked
+                DialogInterface.OnClickListener { arg0, arg1 -> })
+            .show()
+
     }
 }

@@ -87,6 +87,7 @@ class UserSignup : AppCompatActivity() {
         user_type: String
     ) {
 
+
         progressbar.visibility = View.VISIBLE
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->

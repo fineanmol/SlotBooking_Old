@@ -41,5 +41,6 @@
     <string name="CHANNEL_NEWS">News</string>
     <string name="CHANNEL_DESCRIPTION">Get informed with new updates</string>
     <string name="DEBUG_TAG">LearningPushNotification</string>
+    <string name="title_activity_user_home_v2">UserHomeV2</string>
 
 </resources>
