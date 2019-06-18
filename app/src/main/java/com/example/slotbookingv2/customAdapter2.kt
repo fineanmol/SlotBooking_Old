@@ -42,7 +42,7 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
         date.text = "${slot.date.split("/").first()} - ${slot.date.split("/")[1]}"
         number.text = "${slot.studentNumber}"
         studentId.text = slot.studentId
-        slotTiming.text = slot.begins_At + ("-").toString() + slot.stop_At
+        slotTiming.text = slot.begins_At.split("[").last().toString() + ("-").toString() + slot.stop_At
         call.setOnClickListener(View.OnClickListener {
             Toast.makeText(mCtx, "${slot.studentNumber}", Toast.LENGTH_LONG).show()
             // copyText(view,"${slot.studentNumber}")

@@ -157,7 +157,7 @@ class UserHomeV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
             .setMessage("Do you want to exit application?")
             .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
                 // do something when the button is clicked
-                finish()
+                finishAffinity()
 
             })
             .setNegativeButton("No", // do something when the button is clicked

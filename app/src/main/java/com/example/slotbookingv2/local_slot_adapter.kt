@@ -26,7 +26,9 @@ class local_slot_adapter(val mCtx: Context, val layoutId: Int, var local_slotLis
         val delete = view.findViewById<TextView>(R.id.delete)
 
 
-        val slot = local_slotList[position]
+        val slotss = local_slotList[position]
+        var slots = slotss.split("[").last().toString()
+        var slot = slots.split("]").first().toString()
         date.text = slot.split("$").last().toString().split("]").first().toString()
         stime.text = slot.split("$").first().split("-").first().toString().split("[").last().toString()
         etime.text = slot.split("$").first().split("-").last().toString()

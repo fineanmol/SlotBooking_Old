@@ -47,7 +47,8 @@ class addSlotActivity : AppCompatActivity() {
             var Stime = slotSTime.text.toString()
             var Etime = slotETime.text.toString()
             val slotDurations = slotDuration.text.toString()
-            val interval = setBreak.text.toString()
+            var interval: String?
+            interval = setBreak.text.toString()
             val sdate = slotDate.text.toString()
             if (Stime == "Select Start Time *" || Stime.isNullOrEmpty()) {
                 slotSTime.error = "Start Time Required"

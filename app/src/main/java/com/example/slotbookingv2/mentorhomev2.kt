@@ -1,6 +1,7 @@
 package com.example.slotbookingv2
 
 import android.R.id.message
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,8 +11,10 @@ import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -99,7 +102,7 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if (id == R.id.action_one) {
             startActivity(Intent(this, addSlotActivity::class.java))
-            Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
             return true
         }
         if (id == R.id.action_two) {
@@ -196,5 +199,31 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 // end of method
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitByBackKey()
+
+            //moveTaskToBack(false);
+
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    protected fun exitByBackKey() {
+
+        val alertbox = AlertDialog.Builder(this)
+            .setMessage("Do you want to exit application?")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                // do something when the button is clicked
+
+                finishAffinity()
+            })
+            .setNegativeButton("No", // do something when the button is clicked
+                DialogInterface.OnClickListener { arg0, arg1 -> })
+            .show()
+
     }
 }
