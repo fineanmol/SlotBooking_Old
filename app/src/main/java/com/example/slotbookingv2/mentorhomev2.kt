@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -36,32 +35,34 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mentorhomev2)
         /*  user value display at drawer*/
-        var namedrawer = findViewById<TextView>(R.id.namedrawer)
-        var emaildrawer = findViewById<TextView>(R.id.emaildrawer)
-        /* currentUser?.let { user ->
-             // Toast.makeText(mCtx, user.email, Toast.LENGTH_LONG).show()
-             val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
-             val eventListener = object : ValueEventListener {
-                 override fun onDataChange(dataSnapshot: DataSnapshot) = if (!dataSnapshot.exists()) {
-                     //create new user
-                     Toast.makeText(this@mentorhomev2, "User details not found", Toast.LENGTH_LONG).show()
-                 } else {
-                     for (e in dataSnapshot.children) {
-                         val employee = e.getValue(Data::class.java)
-                         var studentName = employee?.name
-                         var studentemail = employee?.email
-                         namedrawer.text= studentName!!.trim()
-                         emaildrawer.text= studentemail!!.trim()
+        /* var namedrawer = findViewById<TextView>(R.id.namedrawer)
+         var emaildrawer = findViewById<TextView>(R.id.emaildrawer)
+         // namedrawer.text = currentUser!!.displayName
+         // emaildrawer.text="anmol"
+          currentUser?.let { user ->
+              // Toast.makeText(mCtx, user.email, Toast.LENGTH_LONG).show()
+              val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
+              val eventListener = object : ValueEventListener {
+                  override fun onDataChange(dataSnapshot: DataSnapshot) = if (!dataSnapshot.exists()) {
+                      //create new user
+                      Toast.makeText(this@mentorhomev2, "User details not found", Toast.LENGTH_LONG).show()
+                  } else {
+                      for (e in dataSnapshot.children) {
+                          val employee = e.getValue(Data::class.java)
+                          var studentName = employee?.name
+                          var studentemail = employee?.email
+                          namedrawer.text= studentName!!.trim()
+                          emaildrawer.text= studentemail!!.trim()
 
-                     }
-                 }
+                      }
+                  }
 
-                 override fun onCancelled(databaseError: DatabaseError) {
-                 }
-             }
-             userNameRef?.addListenerForSingleValueEvent(eventListener)
+                  override fun onCancelled(databaseError: DatabaseError) {
+                  }
+              }
+              userNameRef?.addListenerForSingleValueEvent(eventListener)
 
-         }*/
+          }*/
 // end of method
 
         new_session_btn.setOnClickListener {
