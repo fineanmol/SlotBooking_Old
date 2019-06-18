@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                 android:padding="15dp"
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:background="#2196F3"
                 android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-            android:layout_width="397dp"
-            android:layout_height="264dp"
-            android:layout_marginBottom="233dp">
+            android:layout_width="318dp"
+            android:layout_height="266dp"
+            android:layout_marginBottom="233dp" app:cardBackgroundColor="#F9FAFB" app:cardCornerRadius="5dp"
+            app:cardElevation="5dp">
         <TextView
                 android:id="@+id/mentor_Name"
-                android:layout_width="355dp"
-                android:layout_height="167dp"
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#FF5722"
                 android:paddingBottom="10dp"
                 android:text="Mentor Name"
                 android:textAlignment="center"
@@ -23,41 +26,60 @@
                 android:textStyle="bold"
 
 
-                android:layout_marginTop="28dp"/>
+                android:layout_marginTop="18dp"/>
+        <TextView
+                android:text="Mentor's Name:"
+                android:layout_width="282dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="30dp"
+                android:textSize="30dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/textView4"/>
+
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="318dp"
             android:layout_marginTop="320dp"
-            android:layout_height="300dp">
+            android:layout_height="270dp" app:cardBackgroundColor="#FCFBFC" app:cardElevation="5dp"
+            app:cardCornerRadius="5dp">
         <TextView
                 android:id="@+id/dateslot"
-                android:layout_width="228dp"
-                android:layout_height="71dp"
+                android:layout_width="219dp"
+                android:layout_height="76dp"
                 android:textSize="30sp"
                 android:gravity="center"
                 android:text="Tue,22"
-
-                android:layout_marginLeft="257dp" android:layout_marginStart="69dp"
                 android:layout_marginBottom="150dp"/>
         <TextView
+                android:textAlignment="viewStart"
                 android:id="@+id/monthslot"
-                android:layout_width="118dp"
-                android:layout_height="68dp"
+                android:layout_width="189dp"
+                android:layout_height="79dp"
+                android:layout_gravity="center"
                 android:textSize="30dp"
-
+                android:layout_marginStart="120dp"
                 android:text="June,2019"
-
-        />
+                android:layout_marginTop="-77dp"
+                tools:ignore="RtlCompat"/>
         <TextView
                 android:id="@+id/reserved_slot_timing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="Slot Timing"
+                android:textColor="#0B0B0B"
                 android:textAlignment="center"
+                android:layout_gravity="center"
                 android:textSize="30dp"
                 android:textStyle="bold"
-                android:layout_marginTop="100dp"/>
+                android:layout_marginTop="20dp"/>
+        <TextView
+                android:layout_marginTop="110dp"
+                android:textSize="20dp"
+                android:text="Your Booking at :"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView5"/>
     </android.support.v7.widget.CardView>
 
 
