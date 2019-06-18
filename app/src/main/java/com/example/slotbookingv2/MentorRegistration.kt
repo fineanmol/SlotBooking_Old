@@ -8,15 +8,15 @@ import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import kotlinx.android.synthetic.main.activity_about_developer.*
 
-class AboutDeveloper : AppCompatActivity() {
-    private val url = "https://fineanmol.github.io/AboutDeveloper/Team.html"
-    /*"https://mobirise.com/bootstrap-template/about-us-page-template/"*/
+class MentorRegistration : AppCompatActivity() {
+    private val url =
+        "https://docs.google.com/forms/d/e/1FAIpQLScDynoThrL9UdhpUr0uoVhVmrwd50caxiivtjpVk5yWH-5ZOQ/viewform?usp=sf_link"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about_developer)
-
+        setContentView(R.layout.activity_mentor_registration)
+        var webview = findViewById<WebView>(R.id.mentorSignup)
         // Get the web view settings instance
         val settings = webview.settings
 
@@ -94,6 +94,7 @@ class AboutDeveloper : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        var webview = findViewById<WebView>(R.id.mentorSignup)
         if (webview.canGoBack())
             webview.goBack()
         else

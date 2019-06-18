@@ -1,5 +1,4 @@
 package com.example.slotbookingv2
-
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,22 +6,27 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
+
     private lateinit var mAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
     lateinit var Loginbtn: Button
+    private var mFirebaseAnalytics: FirebaseAnalytics? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
         mAuth = FirebaseAuth.getInstance()
 
         loginbtn.setOnClickListener {
             val email = username.text.toString().trim()
-            val password = password.text.toString().trim()
+            val passwords = password.text.toString().trim()
 
             if (email.isEmpty()) {
                 username.error = "Email Required"
@@ -36,15 +40,15 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (password.isEmpty() || password.length < 6) {
-                /*  password.error = "6 char password required"
-                  password.requestFocus()*/
+            if (passwords.isEmpty() || passwords.length < 6) {
+                password.error = "6 char password required"
+                password.requestFocus()
                 return@setOnClickListener
             }
-            loginUser(email, password)
+            loginUser(email, passwords)
 
 
-            //Toast.makeText( this, "Button Works here", Toast.LENGTH_SHORT ).show();
+
         }
         register.setOnClickListener(
             View.OnClickListener {
@@ -52,7 +56,14 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent)
             }
         )
+        mentorregister.setOnClickListener(
+            View.OnClickListener {
+                var Intent = Intent(this, MentorRegistration::class.java)
+                startActivity(Intent)
+            }
+        )
     }
+
 
     private fun loginUser(email: String, password: String) {
         loading.visibility = View.VISIBLE

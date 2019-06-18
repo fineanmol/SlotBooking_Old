@@ -12,16 +12,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
+        <activity android:name=".MentorRegistration">
+        </activity>
         <activity android:name=".student_show_reserved_slot_Activity">
         </activity>
-
-        <activity android:name=".AppointmentList2"
-                  android:label="Appointment List">
+        <activity
+                android:name=".AppointmentList2"
+                android:label="@string/title_appointmentList">
         </activity>
-
-        <activity android:name=".AboutDeveloper" android:label="About Developer">
-
+        <activity
+                android:name=".AboutDeveloper"
+                android:label="@string/title_aboutdeveloper">
         </activity>
         <activity
                 android:name=".mentorhomev2"
@@ -30,27 +31,29 @@
         </activity>
         <activity android:name=".MentorSlotList">
         </activity>
-        <activity android:name=".addSlotActivity"
-                  android:label="Add Slots">
-
+        <activity
+                android:name=".addSlotActivity"
+                android:label="@string/title__addslot">
         </activity>
-
-        <activity android:name=".studentHomeActivity">
+        <activity android:name=".studentHomeActivity" android:label="@string/title_userhome">
         </activity>
         <activity android:name=".UserHome">
         </activity>
         <activity
                 android:name=".UserSignup"
                 android:label="@string/title_activity_user_signup"
-                android:theme="@style/AppTheme.NoActionBar">
+        >
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:label="@string/title_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <meta-data
+                android:name="io.fabric.ApiKey"
+                android:value="083f6fb393aa269d22adb689b652fa6ca6797187"/>
     </application>
 
 </manifest>
