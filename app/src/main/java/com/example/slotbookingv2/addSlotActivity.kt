@@ -3,8 +3,10 @@ package com.example.slotbookingv2
 //import jdk.nashorn.internal.objects.NativeDate.getTime
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import android.util.Log
@@ -261,5 +263,20 @@ class addSlotActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        // super.onBackPressed();
+        // Not calling **super**, disables back button in current screen.
+        val alertbox = AlertDialog.Builder(this)
+            .setMessage("Do you want to leave the page?")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                // do something when the button is clicked
+                var intent = Intent(this, mentorhomev2::class.java)
+                startActivity(intent)
+
+            })
+            .setNegativeButton("No", // do something when the button is clicked
+                DialogInterface.OnClickListener { arg0, arg1 -> })
+            .show()
+    }
 
 }

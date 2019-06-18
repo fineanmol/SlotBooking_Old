@@ -104,6 +104,21 @@ class MentorSlotList : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        // super.onBackPressed();
+        // Not calling **super**, disables back button in current screen.
+        val alertbox = AlertDialog.Builder(this)
+            .setMessage("Do you want to leave the page?")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                // do something when the button is clicked
+                var intent = Intent(this, addSlotActivity::class.java)
+                startActivity(intent)
+
+            })
+            .setNegativeButton("No", // do something when the button is clicked
+                DialogInterface.OnClickListener { arg0, arg1 -> })
+            .show()
+    }
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(receiver)
