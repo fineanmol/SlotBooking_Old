@@ -14,8 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".userVerifyPhoneActivity">
-        </activity>
+
         <activity android:name=".mentorShowSlotActivity">
         </activity>
         <activity
