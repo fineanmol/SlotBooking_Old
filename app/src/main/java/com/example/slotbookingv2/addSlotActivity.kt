@@ -240,26 +240,38 @@ class addSlotActivity : AppCompatActivity() {
             Log.d("TAG", "Date Start: $dateObj1")
             Log.d("TAG", "Date End: $dateObj2")
             var dif = dateObj1.time
-            while (dif < dateObj2.time) {
-                val slot1 = Date(dif)
-                dif += slotDuration.toInt() * 60 * 1000
-                val slot2 = Date(dif)
-                dif += interval.toInt() * 60 * 1000
-                val sdf1 = SimpleDateFormat("hh:mm a")
-                val sdf2 = SimpleDateFormat("hh:mm a, dd/MM/yy")
-                Log.d("TAG", "Hour slot = " + sdf1.format(slot1) + " - " + sdf2.format(slot2))
-                val Fdate = sdf2.format(slot2).split(",").last()
-                //addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
-                var listvalue = sdf1.format(slot1) + "-" + sdf2.format(slot2).split(",").first() + "$" + Fdate
-                slotList.add(listvalue)
+            if (dif < dateObj2.time) {
 
 
+                while (dif < dateObj2.time) {
+                    val slot1 = Date(dif)
+                    dif += slotDuration.toInt() * 60 * 1000
+                    val slot2 = Date(dif)
+                    dif += interval.toInt() * 60 * 1000
+                    val sdf1 = SimpleDateFormat("hh:mm a")
+                    val sdf2 = SimpleDateFormat("hh:mm a, dd/MM/yy")
+                    Log.d("TAG", "Hour slot = " + sdf1.format(slot1) + " - " + sdf2.format(slot2))
+                    val Fdate = sdf2.format(slot2).split(",").last()
+                    //addSlot(sdf1.format(slot1), sdf2.format(slot2).split(",").first(), Fdate)
+                    var listvalue = sdf1.format(slot1) + "-" + sdf2.format(slot2).split(",").first() + "$" + Fdate
+                    slotList.add(listvalue)
+
+
+                }
+
+                var intent = Intent(this, MentorSlotList::class.java)
+                intent.putExtra("slotList", slotList.toString())
+                intent.putExtra("slotLists", slotList)
+                startActivity(intent)
+            } else {
+                Toast.makeText(
+                    this,
+                    "Slot Start Time can't be greater than End Time \n Check Again !!",
+                    Toast.LENGTH_LONG
+                ).show()
+                slotSTime.error = ""
+                slotETime.error = ""
             }
-
-            var intent = Intent(this, MentorSlotList::class.java)
-            intent.putExtra("slotList", slotList.toString())
-            intent.putExtra("slotLists", slotList)
-            startActivity(intent)
         } catch (ex: ParseException) {
             var intent = Intent(this, addSlotActivity::class.java)
             startActivity(intent)
