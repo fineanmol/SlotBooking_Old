@@ -126,7 +126,7 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         existing_session_btn.setOnClickListener {
-
+            startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
         }
 
 
