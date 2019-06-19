@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SlotBooking</string>
+    <string name="app_name">Slot Booking</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -20,7 +20,7 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
-    <string name="title_activity_user_home_v2">UserHomeV2</string>
+    <string name="title_activity_user_home_v2">Home</string>
 
 
     <string name="slot_status">Booked</string>
