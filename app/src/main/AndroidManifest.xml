@@ -12,6 +12,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".mentorShowSlotActivity">
+        </activity>
         <activity
                 android:name=".UserHomeV2"
                 android:label="@string/title_activity_user_home_v2"
@@ -40,10 +42,7 @@
                 android:name=".addSlotActivity"
                 android:label="@string/title__addslot">
         </activity>
-        <activity
-                android:name=".studentHomeActivity"
-                android:label="@string/title_userhome">
-        </activity>
+
         <activity android:name=".UserHome">
         </activity>
         <activity
