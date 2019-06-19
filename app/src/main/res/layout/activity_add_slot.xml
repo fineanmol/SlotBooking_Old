@@ -29,8 +29,9 @@
             app:layout_constraintTop_toTopOf="parent"/>
     <Button
             android:text="Select Date"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/roundedbutton"
             android:id="@+id/setDate" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.946" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/slotDate"/>
@@ -38,6 +39,7 @@
             android:text="Select Start Time *"
             android:inputType="time"
             android:ems="10"
+
             android:layout_width="200dp"
             android:layout_height="56dp"
             android:id="@+id/slotSTime" android:layout_marginTop="20dp"
@@ -48,6 +50,7 @@
             android:text="Set Start Time"
             android:layout_width="152dp"
             android:layout_height="46dp"
+            android:background="@drawable/roundedbutton"
             android:id="@+id/setSTime" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="1.0" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/slotSTime" android:layout_marginTop="8dp"/>
@@ -62,10 +65,13 @@
             app:layout_constraintTop_toBottomOf="@+id/setSTime" android:layout_marginTop="24dp"/>
     <Button
             android:text="Set End Time"
-            android:layout_width="wrap_content"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
-            android:id="@+id/setETime" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.945" app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/roundedbutton"
+            android:id="@+id/setETime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.945"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/slotETime"/>
     <EditText
             android:layout_width="300dp"
@@ -88,8 +94,9 @@
             app:layout_constraintHorizontal_bias="0.375"/>
     <Button
             android:text="Generate Slots"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/roundedbutton"
             android:id="@+id/generateSlot" app:layout_constraintStart_toStartOf="@+id/setBreak"
             app:layout_constraintHorizontal_bias="1.0" app:layout_constraintEnd_toEndOf="@+id/setBreak"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@+id/setBreak"
