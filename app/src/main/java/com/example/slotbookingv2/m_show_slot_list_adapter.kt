@@ -3,12 +3,12 @@ package com.example.slotbookingv2
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -28,34 +28,33 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
 
         val name = view.findViewById<TextView>(R.id.student_Name)
         val date = view.findViewById<TextView>(R.id.dateslot)
-        val number = view.findViewById<TextView>(R.id.studentno)
-        val studentId = view.findViewById<TextView>(R.id.studentid)
+        val TimeslotTextView = view.findViewById<TextView>(R.id.textView)
+
         val slotTiming = view.findViewById<TextView>(R.id.slot_timing)
         val status = view.findViewById<TextView>(R.id.status)
-        val call = view.findViewById<TextView>(R.id.callbtn)
 
-        //val book = view.findViewById<TextView>(R.id.bookbtn)
-        //val deleteBtn = view.findViewById<TextView>(R.id.delete)
 
         val slot = slotList[position]
 
-        name.text = "Name: ${slot.reserved_by}"
+
         date.text = "${slot.date.split("/").first()} - ${slot.date.split("/")[1]}"
-        number.text = "${slot.studentNumber}"
-        studentId.text = slot.studentId
+
         slotTiming.text = slot.begins_At.split("[").last().toString() + ("-").toString() + slot.stop_At
         if (slot.status == "B") {
-            status.text = "Booked"
-        } else {
-            status.text = "Not Booked"
+            status.setTextColor(Color.GREEN)
+            name.setTextColor(Color.RED)
+            status.text = context.getString(R.string.slot_status)
+            name.text = "By: ${slot.reserved_by}"
+
+        }
+        if (slot.status != "B") {
+            status.setTextColor(Color.LTGRAY)
+
+
+            status.text = "Not Booked Yet"
         }
 
-        call.setOnClickListener(View.OnClickListener {
-            Toast.makeText(mCtx, "${slot.studentNumber}", Toast.LENGTH_LONG).show()
-            // copyText(view,"${slot.studentNumber}")
 
-
-        })
         return view
     }
 

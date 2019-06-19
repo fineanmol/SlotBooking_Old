@@ -45,6 +45,7 @@
 
 
     <string name="selected_item">Selected item:</string>
+    <string name="slot_status">Booked</string>
 
 
 </resources>

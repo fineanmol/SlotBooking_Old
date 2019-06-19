@@ -53,7 +53,7 @@
         <TextView
                 android:textAlignment="viewStart"
                 android:id="@+id/monthslot"
-                android:layout_width="189dp"
+                android:layout_width="158dp"
                 android:layout_height="79dp"
                 android:layout_gravity="center"
                 android:textSize="30dp"
