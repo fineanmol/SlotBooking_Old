@@ -36,7 +36,7 @@
 
             android:background="@drawable/roundedbutton"
             android:id="@+id/setDate" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.946" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.916" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/slotDate"/>
     <TextView
             android:text="Select Start Time *"
@@ -69,12 +69,12 @@
             app:layout_constraintTop_toBottomOf="@+id/setSTime" android:layout_marginTop="24dp"/>
     <Button
             android:text="Set End Time"
-            android:layout_width="115dp"
+            android:layout_width="152dp"
             android:layout_height="wrap_content"
             android:background="@drawable/roundedbutton"
             android:id="@+id/setETime"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.945"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/slotETime"/>
     <EditText
