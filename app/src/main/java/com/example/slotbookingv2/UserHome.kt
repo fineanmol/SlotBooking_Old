@@ -1,16 +1,15 @@
 package com.example.slotbookingv2
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.ListView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_user_home.*
 import java.util.*
 
 
@@ -79,31 +78,32 @@ class UserHome : AppCompatActivity() {
             }
         })
 
-        logoutbtn.setOnClickListener(
-            View.OnClickListener {
-                FirebaseAuth.getInstance().signOut()
-                logout()
-
-            }
-        )
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.logoutbtn) {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.generatedslotmenu, menu)
+        return true
+    }
 
-            AlertDialog.Builder(this).apply {
-                setTitle("Are you sure?")
-                setPositiveButton("Yes") { _, _ ->
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        val id = item.itemId
 
-                    FirebaseAuth.getInstance().signOut()
-                    logout()
 
-                }
-                setNegativeButton("Cancel") { _, _ ->
-                }
-            }.create().show()
+        if (id == R.id.action_logout) {
 
+            logout()
+
+            return true
+
+        }
+        if (id == R.id.contactUs) {
+            startActivity(Intent(this, AboutDeveloper::class.java))
+            return true
         }
         return super.onOptionsItemSelected(item)
     }
