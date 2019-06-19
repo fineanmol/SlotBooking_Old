@@ -10,6 +10,8 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -87,20 +89,22 @@ class addSlotActivity : AppCompatActivity() {
 
             var StimeHH = Stime.split(":").first().toString()
             var StimeMM = Stime.split(":").last().split(" ").first().toString()
-            val StimeHour = Stime.split(":").last().split(" ").last()
-            if (StimeHour == "PM") {
-                StimeHH = StimeHH + 12
+            var StimeHour = Stime.split(":").last().split(" ").last()
+            if (StimeHour == "PM" || StimeHour.toLowerCase() == "pm") {
+                // StimeHH = StimeHH + 12
+                StimeHour = "PM"
                 timeFlagS = 1
             }
             var EtimeHH = Etime.split(":").first().toString()
             val EtimeMM = Etime.split(":").last().split(" ").first().toString()
-            val EtimeHour = Etime.split(":").last().split(" ").last()
-            if (EtimeHour == "PM") {
+            var EtimeHour = Etime.split(":").last().split(" ").last()
+            if (EtimeHour == "PM" || EtimeHour.toLowerCase() == "pm") {
                 // EtimeHH = EtimeHH + 12
+                EtimeHour = "PM"
                 timeFlagE = 1
             }
 
-            displayTimeSlots(StimeHH, StimeMM, EtimeHH, EtimeMM, EtimeHour, sdate, slotDurations, interval)
+            displayTimeSlots(StimeHH, StimeMM, EtimeHH, EtimeMM, EtimeHour, sdate, slotDurations, interval, StimeHour)
 
 
         }
@@ -200,9 +204,10 @@ class addSlotActivity : AppCompatActivity() {
         EtimeHour: String,
         sdate: String,
         slotDuration: String,
-        interval: String
+        interval: String,
+        stimeHour: String
     ) {
-        var sdateL = sdate.split(" ").last().toString().trim()
+        val sdateL = sdate.split(" ").last().toString().trim()
         var sdateF = sdate.split(" ").first().toString().trim()
         var sdateM = sdateF.split(",").last()
         var sdateD = sdateL.split(",").first()
@@ -214,7 +219,7 @@ class addSlotActivity : AppCompatActivity() {
 
         var hours = StimeHH
         var minutes = StimeMM
-
+        var ampm = stimeHour
 
         val amOrPm: String
         if (Integer.parseInt(hours) < 12) {
@@ -223,7 +228,7 @@ class addSlotActivity : AppCompatActivity() {
             amOrPm = "PM"
             hours = getHoursValue(Integer.parseInt(hours)).toString()
         }
-        val time1 = "$hours:$minutes $amOrPm"
+        val time1 = "$hours:$minutes $ampm"
         val time2 = EtimeHH + ":" + EtimeMM + " " + EtimeHour + " "
         val format = "yyyy-MM-dd hh:mm a"
 
@@ -262,6 +267,82 @@ class addSlotActivity : AppCompatActivity() {
 
         }
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menulogout, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        val id = item.itemId
+
+
+        if (id == R.id.action_logout) {
+
+            logout()
+
+            return true
+        }
+
+        if (id == R.id.contactUs) {
+            startActivity(Intent(this, AboutDeveloper::class.java))
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    /* override fun onNavigationItemSelected(item: MenuItem): Boolean {
+         // Handle navigation view item clicks here.
+         when (item.itemId) {
+             R.id.nav_addslot -> {
+                 // Handle the camera action
+                 startActivity(Intent(this, addSlotActivity::class.java))
+                 Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
+             }
+             R.id.show_appointment -> {
+                 startActivity(Intent(this, AppointmentList2::class.java))
+                 Toast.makeText(this, "Work in Progress", Toast.LENGTH_LONG).show()
+             }
+
+             R.id.nav_tools -> {
+
+             }
+             R.id.nav_share -> {
+                 val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
+                 sharingIntent.type = "text/plain"
+                 val shareBody =
+                     "Hey \n Slot Booking Application is a fast,simple and secure app that I use to book my slot with Mentor and Manage all the data.\n\n Get it for free at\n App link "
+                 sharingIntent.putExtra(
+                     android.content.Intent.EXTRA_SUBJECT,
+                     "Slot Booking Management : Android Application"
+                 )
+                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
+                 startActivity(Intent.createChooser(sharingIntent, "Share via"))
+
+             }
+             R.id.nav_reportbug -> {
+                 val intent = Intent(
+                     Intent.ACTION_SENDTO, Uri.fromParts(
+                         "mailto", "agarwal.anmol2004@gmail.com", null
+                     )
+                 )
+                 intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
+                 intent.putExtra(Intent.EXTRA_TEXT, android.R.id.message)
+                 startActivity(Intent.createChooser(intent, "Choose an Email client :"))
+
+             }
+         }
+         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+
+         drawerLayout.closeDrawer(GravityCompat.START)
+         return true
+     }*/
 
     override fun onBackPressed() {
         // super.onBackPressed();

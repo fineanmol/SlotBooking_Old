@@ -2,8 +2,8 @@ package com.example.slotbookingv2
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -45,7 +45,7 @@ class mentorShowSlotActivity : AppCompatActivity() {
             listview = findViewById(R.id.show_allslots_list)
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                    Toast.makeText(this@mentorShowSlotActivity, filter[position], Toast.LENGTH_SHORT).show()
+                    //  Toast.makeText(this@mentorShowSlotActivity, filter[position], Toast.LENGTH_SHORT).show()
                     ref = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
                     ref.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(p0: DataSnapshot) {
@@ -66,54 +66,78 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                     val targetYear = targetCalendar.get(Calendar.YEAR)
                                     val targetMonth = targetCalendar.get(Calendar.MONTH)
                                     val targetDate = targetCalendar.get(Calendar.DATE)
-                                    if (true) {
-                                        if (position == 0) {
-                                            Log.d("TAGDD", targetDate.toString() + "--" + Date)
-                                            if (targetDate == Date) {
-                                                slotList.add(employee)
+                                    if (position == 0) {
+                                        //    Log.d("TAGDD", targetDate.toString() + "--" + Date)
+                                        if (targetDate == Date) {
+                                            slotList.add(employee)
 
-                                            }
                                         }
-                                        if (position == 1) {
-                                            Toast.makeText(
-                                                this@mentorShowSlotActivity,
-                                                targetDate.toString() + "--" + Date,
-                                                Toast.LENGTH_SHORT
+                                        if (targetDate != Date) {
+                                            Snackbar.make(
+                                                view, // Parent view
+                                                "No Appointments on $targetDate are booked yet", // Message to show
+                                                Snackbar.LENGTH_SHORT // How long to display the message.
                                             ).show()
-                                            if (targetDate == (Date + 1)) {
-                                                slotList.add(employee)
-                                            }
                                         }
-                                        if (position == 2) {
-                                            Toast.makeText(
-                                                this@mentorShowSlotActivity,
-                                                targetWeek.toString() + "--" + Week,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                    }
+                                    if (position == 1) {
 
-                                            if (targetWeek == Week) {
-                                                slotList.add(employee)
-                                            }
+                                        if (targetDate == (Date + 1)) {
+                                            slotList.add(employee)
                                         }
-                                        if (position == 3) {
-                                            Toast.makeText(
-                                                this@mentorShowSlotActivity,
-                                                targetMonth.toString() + "--" + month,
-                                                Toast.LENGTH_SHORT
+                                        if (targetDate != (Date + 1)) {
+                                            Snackbar.make(
+                                                view, // Parent view
+                                                "No Appointments!! You can take a day off ", // Message to show
+                                                Snackbar.LENGTH_SHORT // How long to display the message.
                                             ).show()
-                                            if (targetMonth == month) {
-                                                slotList.add(employee)
-                                            }
+                                        }
+                                    }
+                                    if (position == 2) {
+                                        if (targetWeek == Week) {
+                                            slotList.add(employee)
+                                        }
+                                        if (targetWeek != Week) {
+                                            Snackbar.make(
+                                                view, // Parent view
+                                                "No Appointments for whole week!! You can take a week off ", // Message to show
+                                                Snackbar.LENGTH_SHORT // How long to display the message.
+                                            ).show()
+                                        }
+                                    }
+                                    if (position == 3) {
+                                        /* Toast.makeText(
+                                             this@mentorShowSlotActivity,
+                                             targetMonth.toString() + "--" + month,
+                                             Toast.LENGTH_SHORT
+                                         ).show()*/
+                                        if (targetMonth == month) {
+                                            slotList.add(employee)
+                                        }
+                                        if (targetMonth != month) {
+                                            Snackbar.make(
+                                                view, // Parent view
+                                                "No Appointments for whole month!! You can go for Vacation ", // Message to show
+                                                Snackbar.LENGTH_SHORT // How long to display the message.
+                                            ).show()
                                         }
                                     }
                                 }
                                 val adapter =
+
                                     m_show_slot_list_adapter(
                                         this@mentorShowSlotActivity,
                                         R.layout.show_slot_adapter_layout,
                                         slotList
                                     )
                                 listview.adapter = adapter
+                            }
+                            if (!p0.exists()) {
+                                Snackbar.make(
+                                    view, // Parent view
+                                    "You didn't Created any Slot yet!! \n Click Add Slot or Start New Session ", // Message to show
+                                    Snackbar.LENGTH_LONG // How long to display the message.
+                                ).show()
                             }
                         }
 

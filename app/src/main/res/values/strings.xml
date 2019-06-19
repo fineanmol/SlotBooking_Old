@@ -3,49 +3,39 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Login</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
     <string name="title_activity_user_signup">New Registration</string>
-    <string name="action_done">Done</string>
-    <string name="start_time">Start time</string>
-    <string name="end_time">End time</string>
     <string name="title_activity_mentorhomev2">Mentor Home</string>
-    <string name="title_userhome">User Home</string>
     <string name="title_login">Slot Booking</string>
     <string name="title__addslot">Add Slot</string>
-    <string name="title_showappointment">Mentor Home</string>
     <string name="title_appointmentList">Appointment List</string>
-    <string name="title_bookSlot">Book Slot</string>
     <string name="title_aboutdeveloper">About Developer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
-    <string name="title_section7">About Us</string>
-    <string name="default_notification_channel_id">Notification Channel ID</string>
-    <string name="NEWS_CHANNEL_ID">news</string>
-    <string name="CHANNEL_NEWS">News</string>
-    <string name="CHANNEL_DESCRIPTION">Get informed with new updates</string>
-    <string name="DEBUG_TAG">LearningPushNotification</string>
     <string name="title_activity_user_home_v2">UserHomeV2</string>
 
 
-    <string name="selected_item">Selected item:</string>
     <string name="slot_status">Booked</string>
+    <string name="wants_to_create_new_slots_n_click_on_start_new_session">Wants to Create new Slots \n
+        <b>
+            <i>Click on Start New
+                Session
+            </i>
+        </b>
+    </string>
+    <string name="existing_session_value">Already Created solts, now add more slots \n
+        <i>
+            <b>click on Manage Exiting Session</b>
+        </i>
+    </string>
 
 
 </resources>

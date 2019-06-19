@@ -69,10 +69,10 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val builder = AlertDialog.Builder(this@mentorhomev2)
 
             // Set the alert dialog title
-            builder.setTitle("Slots Reset Confirmation")
+            builder.setTitle("New Session Confirmation")
 
             // Display a message on alert dialog
-            builder.setMessage("Are you sure to reset session?")
+            builder.setMessage("Are you sure to restart session? \n Now Users can book slots !!")
 
             // Set a positive button and its click listener on alert dialog
             builder.setPositiveButton("YES") { dialog, which ->
@@ -82,7 +82,7 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         if (!dataSnapshot.exists()) {
                             //create new user
-                            Toast.makeText(this@mentorhomev2, "User details not found", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@mentorhomev2, "Slots are ready for booking", Toast.LENGTH_LONG).show()
                         } else {
                             for (e in dataSnapshot.children) {
                                 val employee = e.getValue(Data::class.java)
@@ -90,17 +90,20 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                                 userref.child(studentkey!!).child("status").setValue("NB")
                                 Toast.makeText(
                                     applicationContext,
-                                    "Ok, we change created new Session.",
-                                    Toast.LENGTH_SHORT
+                                    "Ok, Things are Ready!!  Generate Slots.",
+                                    Toast.LENGTH_LONG
                                 ).show()
 
                             }
+
                         }
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
                     }
                 }
+                var addintent = Intent(this, addSlotActivity::class.java)
+                startActivity(addintent)
                 userNameRef.addListenerForSingleValueEvent(eventListener)
                 // Change the app background color
             }
@@ -108,13 +111,13 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             // Display a negative button on alert dialog
             builder.setNegativeButton("No") { dialog, which ->
-                Toast.makeText(applicationContext, "Not excited for Create New Session?", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Not excited to Create New Session ?", Toast.LENGTH_SHORT).show()
             }
 
 
             // Display a neutral button on alert dialog
             builder.setNeutralButton("Cancel") { _, _ ->
-                Toast.makeText(applicationContext, "You cancelled the Prompt.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "You cancelled the Prompt", Toast.LENGTH_SHORT).show()
             }
 
             // Finally, make the alert dialog using builder
@@ -188,7 +191,7 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.mentorhomev2, menu)
+        menuInflater.inflate(R.menu.menulogout, menu)
         return true
     }
 
@@ -198,22 +201,14 @@ class mentorhomev2 : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
 
-        if (id == R.id.action_one) {
-            startActivity(Intent(this, addSlotActivity::class.java))
-            //Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
-            return true
-        }
-        if (id == R.id.action_two) {
+
+        if (id == R.id.action_logout) {
 
             logout()
 
             return true
         }
-        if (id == R.id.action_three) {
-            Toast.makeText(this, "Item Three Clicked", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, AppointmentList2::class.java))
-            return true
-        }
+
         if (id == R.id.contactUs) {
             Toast.makeText(this, "You click contact us", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, AboutDeveloper::class.java))
