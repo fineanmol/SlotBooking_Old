@@ -41,20 +41,20 @@
             android:textStyle="bold"
 
             android:layout_toRightOf="@+id/dateslot"
-            android:layout_below="@+id/student_Name" android:layout_marginLeft="122dp"
+            android:layout_below="@+id/student_Name" android:layout_marginLeft="142dp"
             android:layout_marginTop="-4dp"
     />
     <TextView
             android:text="number"
-            android:layout_width="263dp"
-            android:layout_height="24dp"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
             android:id="@+id/studentno"
             android:gravity="center"
             android:textAlignment="viewStart"
             android:foregroundGravity="center"
             android:layout_below="@+id/dateslot"
             android:layout_alignStart="@+id/student_Name"
-            android:layout_marginStart="190dp"
+            android:layout_marginStart="215dp"
             android:layout_marginTop="20dp" tools:ignore="RtlCompat"/>
     <TextView
             android:text="student id"
@@ -73,8 +73,8 @@
             android:background="@drawable/ic_call_black_24dp"
             android:layout_height="wrap_content"
             android:id="@+id/callbtn" android:layout_below="@+id/dateslot"
-            android:gravity="center" android:layout_alignStart="@+id/slot_timing" android:layout_marginTop="18dp"
-            android:layout_marginStart="-82dp"/>
+            android:gravity="center" android:layout_alignStart="@+id/slot_timing" android:layout_marginTop="19dp"
+            android:layout_marginStart="-59dp"/>
     <TextView
             android:text="Student Id:"
             android:layout_width="78dp"

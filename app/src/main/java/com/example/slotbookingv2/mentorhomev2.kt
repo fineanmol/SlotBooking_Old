@@ -281,7 +281,7 @@ class mentorhomev2 : AppCompatActivity() {
                 PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
+                            startActivity(Intent(this@mentorhomev2, AppointmentList2::class.java))
                             return false
                         }
                     }).withIcon(
