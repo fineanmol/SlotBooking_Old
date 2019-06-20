@@ -1,9 +1,14 @@
 package com.example.slotbookingv2
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -18,8 +23,12 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_show_reserved_slot)
+        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar);
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbar)
         slotList = mutableListOf()
-        listview = this.findViewById(R.id.reserved_slot_view)
+        listview = this.findViewById<ListView>(R.id.reserved_slot_view)
         ref = FirebaseDatabase.getInstance().getReference("Slots")
 
         currentUser?.let { user ->
@@ -81,6 +90,39 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
 
         Toast.makeText(this, studentName, Toast.LENGTH_LONG).show()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.user_home_v2, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        val id = item.itemId
+
+        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        {
+            finish();
+        }
+
+        if (id == R.id.action_logout) {
+
+            logout()
+
+            return true
+        }
+
+
+        if (id == R.id.contactUs) {
+            startActivity(Intent(this, AboutDeveloper::class.java))
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
 
