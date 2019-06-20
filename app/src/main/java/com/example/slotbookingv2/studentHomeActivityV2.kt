@@ -20,6 +20,11 @@ import com.example.slotbookingv2.drawerItems.CustomPrimaryDrawerItem
 import com.example.slotbookingv2.drawerItems.CustomUrlPrimaryDrawerItem
 import com.example.slotbookingv2.drawerItems.OverflowMenuDrawerItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.mikepenz.iconics.IconicsColor
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.IconicsSize
@@ -34,6 +39,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IProfile
 
 class UserHomeV2 : AppCompatActivity() {
+    val userref = FirebaseDatabase.getInstance().getReference("users")
+    val currentUser = FirebaseAuth.getInstance().currentUser
     private lateinit var headerResult: AccountHeader
     private lateinit var result: Drawer
 
@@ -42,17 +49,12 @@ class UserHomeV2 : AppCompatActivity() {
     private lateinit var profile3: IProfile<*>
     private lateinit var profile4: IProfile<*>
     private lateinit var profile5: IProfile<*>
-    private var Name: String = "Anmol"
-    private var Email: String = "test@gmail.com"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home_v2)
-
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
-
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
@@ -66,11 +68,41 @@ class UserHomeV2 : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_TEXT, "Hi\n I would like to inform you that")
             startActivity(Intent.createChooser(intent, "Choose an Email client :"))
         }
-        var Names = Name
+        currentUser?.let { user ->
+
+            val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
+            val eventListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) = if (!dataSnapshot.exists()) {
+                    //create new user
+                    Toast.makeText(this@UserHomeV2, "User details not found", Toast.LENGTH_LONG).show()
+                } else {
+                    for (e in dataSnapshot.children) {
+                        val employee = e.getValue(Data::class.java)
+                        var Name = employee!!.name
+                        var Email = employee.email
+                        Log.d("TAGDDD", Name + Email)
+                        createNavBar(Name, Email, savedInstanceState)
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                }
+            }
+            userNameRef?.addListenerForSingleValueEvent(eventListener)
+
+        }
+
+
+    }
+
+    private fun createNavBar(name: String, email: String, savedInstanceState: Bundle?) {
+        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
+        Log.d("TAGDDD", name + email)
 
         // Create a few sample profile
         profile =
-            ProfileDrawerItem().withName(Name).withEmail(Email).withIcon(resources.getDrawable(R.drawable.profile))
+            ProfileDrawerItem().withName(name).withEmail(email).withIcon(resources.getDrawable(R.drawable.profile))
 
 
         // Create the AccountHeader
@@ -215,9 +247,7 @@ true
             .withSavedInstance(savedInstanceState)
             .build()
 
-
     }
-
     private fun buildHeader(compact: Boolean, savedInstanceState: Bundle?) {
         // Create the AccountHeader
         headerResult = AccountHeaderBuilder()
