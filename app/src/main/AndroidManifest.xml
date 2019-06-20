@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.example.slotbookingv2">
+          package="com.sibmentor.appointmentbooking">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
@@ -15,45 +15,45 @@
             android:theme="@style/MaterialDrawerTheme.TranslucentStatus"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".mentorShowSlotActivity"
+        <activity android:name="com.sibmentor.appointmentbooking.mentorShowSlotActivity"
                   android:theme="@style/CustomTheme">
         </activity>
         <activity
-                android:name=".UserHomeV2"
+                android:name="com.sibmentor.appointmentbooking.UserHomeV2"
                 android:label="@string/title_activity_user_home_v2"
                 android:theme="@style/CustomTheme">
         </activity>
-        <activity android:name=".MentorRegistration">
+        <activity android:name="com.sibmentor.appointmentbooking.MentorRegistration">
         </activity>
-        <activity android:name=".student_show_reserved_slot_Activity">
+        <activity android:name="com.sibmentor.appointmentbooking.student_show_reserved_slot_Activity">
         </activity>
         <activity
-                android:name=".AppointmentList2"
+                android:name="com.sibmentor.appointmentbooking.AppointmentList2"
                 android:label="@string/title_appointmentList">
         </activity>
         <activity
-                android:name=".AboutDeveloper"
+                android:name="com.sibmentor.appointmentbooking.AboutDeveloper"
                 android:label="@string/title_aboutdeveloper">
         </activity>
         <activity
-                android:name=".mentorhomev2"
+                android:name="com.sibmentor.appointmentbooking.mentorhomev2"
                 android:label="@string/title_activity_mentorhomev2"
                 android:theme="@style/CustomTheme">
         </activity>
-        <activity android:name=".MentorSlotList">
+        <activity android:name="com.sibmentor.appointmentbooking.MentorSlotList">
         </activity>
         <activity
-                android:name=".addSlotActivity"
+                android:name="com.sibmentor.appointmentbooking.addSlotActivity"
                 android:label="@string/title__addslot">
         </activity>
-        <activity android:name=".UserHome" android:label="Book Slots">
+        <activity android:name="com.sibmentor.appointmentbooking.UserHome" android:label="Book Slots">
         </activity>
         <activity
-                android:name=".UserSignup"
+                android:name="com.sibmentor.appointmentbooking.UserSignup"
                 android:label="@string/title_activity_user_signup">
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name="com.sibmentor.appointmentbooking.MainActivity"
                 android:label="@string/title_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
