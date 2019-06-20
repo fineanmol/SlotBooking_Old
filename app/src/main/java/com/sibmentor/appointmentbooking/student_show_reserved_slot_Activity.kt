@@ -71,7 +71,7 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
                                 } else {
                                     Toast.makeText(
                                         this@student_show_reserved_slot_Activity,
-                                        "user not found",
+                                        "Go!! Book an Appointment First",
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }

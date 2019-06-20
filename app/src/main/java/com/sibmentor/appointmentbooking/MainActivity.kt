@@ -73,8 +73,9 @@ class MainActivity : AppCompatActivity() {
                     task ->
 
                 if (task.isSuccessful) {
-                    login()
                     loading.visibility = View.GONE
+                    login()
+
                 } else if (task.isCanceled) {
                     task.exception?.message?.let {
                         toast(it)

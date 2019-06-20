@@ -121,12 +121,13 @@ class addSlotActivity : AppCompatActivity() {
                 calendar1.set(Calendar.YEAR, year)
                 calendar1.set(Calendar.MONTH, month)
                 calendar1.set(Calendar.DATE, date)
+
                 val dateText = DateFormat.format("EEEE,MM d,yyyy", calendar1).toString()
                 slotDate.text = dateText
                 handleSTimeButton()
             }, YEAR, MONTH, DATE
         )
-
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
         datePickerDialog.show()
 
 
