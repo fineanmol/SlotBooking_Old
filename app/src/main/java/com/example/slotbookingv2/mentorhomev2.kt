@@ -273,9 +273,14 @@ class mentorhomev2 : AppCompatActivity() {
                             return false
                         }
                     }),
-                SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(
-                    false
-                )
+                SecondaryDrawerItem().withName("About Us").withIcon(FontAwesome.Icon.faw_question).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            startActivity(Intent(this@mentorhomev2, AboutDeveloper::class.java))
+                            Log.d("TAGDDD", "clicked")
+                            return false
+                        }
+                    })
             ) // add the items we want to use with our Drawer
             .withOnDrawerNavigationListener(object : Drawer.OnDrawerNavigationListener {
                 override fun onNavigationClickListener(clickedView: View): Boolean {
