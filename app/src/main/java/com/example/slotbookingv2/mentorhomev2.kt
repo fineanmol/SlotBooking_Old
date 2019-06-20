@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import com.example.slotbookingv2.drawerItems.CustomPrimaryDrawerItem
 import com.example.slotbookingv2.drawerItems.CustomUrlPrimaryDrawerItem
 import com.example.slotbookingv2.drawerItems.OverflowMenuDrawerItem
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -52,7 +53,18 @@ class mentorhomev2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mentorhomev2)
 
+        val fab: FloatingActionButton = findViewById(R.id.fab)
+        fab.setOnClickListener { view ->
 
+            val intent = Intent(
+                Intent.ACTION_SENDTO, Uri.fromParts(
+                    "mailto", "agarwal.anmol2004@gmail.com", null
+                )
+            )
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
+            intent.putExtra(Intent.EXTRA_TEXT, "Hi\n I would like to inform you that")
+            startActivity(Intent.createChooser(intent, "Choose an Email client :"))
+        }
         /** Current User Values*/
         currentUser?.let { user ->
 

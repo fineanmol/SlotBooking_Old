@@ -71,10 +71,10 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener(this) {
 
                     task ->
-                loading.visibility = View.GONE
+
                 if (task.isSuccessful) {
                     login()
-
+                    loading.visibility = View.GONE
                 } else if (task.isCanceled) {
                     task.exception?.message?.let {
                         toast(it)

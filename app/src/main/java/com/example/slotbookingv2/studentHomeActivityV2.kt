@@ -144,7 +144,7 @@ class UserHomeV2 : AppCompatActivity() {
                     false
                 ),
                 SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                SecondaryDrawerItem().withName("Share").withIcon(FontAwesome.Icon.faw_share_alt_square).withOnDrawerItemClickListener(
+                SecondaryDrawerItem().withName("Share").withIcon(FontAwesome.Icon.faw_share_alt).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                             val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
