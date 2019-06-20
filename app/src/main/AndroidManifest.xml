@@ -46,7 +46,7 @@
                 android:name=".addSlotActivity"
                 android:label="@string/title__addslot">
         </activity>
-        <activity android:name=".UserHome">
+        <activity android:name=".UserHome" android:label="Book Slots">
         </activity>
         <activity
                 android:name=".UserSignup"

@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -27,9 +29,10 @@ class MentorSlotList : AppCompatActivity() {
     lateinit var ref: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         ref = FirebaseDatabase.getInstance().getReference("Slots")
         setContentView(R.layout.activity_mentor_slot_list)
+        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
         listView = this.findViewById(R.id.listview)
         val bundle: Bundle? = intent.extras
         var list: String? = bundle?.getString("slotList")
