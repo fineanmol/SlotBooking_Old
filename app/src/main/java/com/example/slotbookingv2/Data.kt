@@ -13,7 +13,3 @@ class Data(
     constructor() : this("", "", "", "", "", "", "", "")
 
 }
-/*
-class Data(val id: String, val email: String, val pass: String){
-    constructor() : this("", "", "")
-}*/

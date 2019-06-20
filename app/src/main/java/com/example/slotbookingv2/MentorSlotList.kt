@@ -9,11 +9,14 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
 class MentorSlotList : AppCompatActivity() {
+    val currentUser = FirebaseAuth.getInstance().currentUser
+    val userref = FirebaseDatabase.getInstance().getReference("users")
     lateinit var parts: MutableList<String>
     lateinit var listView: ListView
     var receiver: BroadcastReceiver? = null
@@ -47,54 +50,7 @@ class MentorSlotList : AppCompatActivity() {
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this)
             .registerReceiver(mMessageReceiver, IntentFilter("custom-message"))
 
-        /* save.setOnClickListener {
-             val alertbox1 = AlertDialog.Builder(this)
-                 .setMessage("Do you want to Submit?")
-                 .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
-                     // do something when the button is clicked
 
-                     var parts1 = qty.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toMutableList()
-
-
-                     for (x in parts1) {
-                         Log.d("TAG1", x)
-                         date = x.split("$").last().toString().trim().replace("]]", "")
-                         stime = x.split("$").first().split("-").first().toString().trim().replace("[[", "")
-                         etime = x.split("$").first().split("-").last().toString().trim()
-                         addSlot(stime, etime, date)
-                         //Toast.makeText(this, stime+"-"+etime+" "+date, Toast.LENGTH_LONG).show()
-                     }
-
-                     *//*Alert Box*//*
-                    val alertbox = AlertDialog.Builder(this)
-                        .setMessage("Do you want to Add More Slots?")
-                        .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
-                            // do something when the button is clicked
-                            val intent = Intent(this, addSlotActivity::class.java)
-                            startActivity(intent)
-
-
-                        })
-                        .setNegativeButton("No", // do something when the button is clicked
-
-                            DialogInterface.OnClickListener { arg0, arg1 ->
-                                val intent = Intent(this, mentorhomev2::class.java)
-                                startActivity(intent)
-                            })
-                        .show()
-                    *//*Alert Box*//*
-
-                })
-                .setNegativeButton("No", // do something when the button is clicked
-
-                    DialogInterface.OnClickListener { arg0, arg1 ->
-
-                    })
-                .show()
-
-
-          
-        }*/
     }
 
     var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -102,7 +58,7 @@ class MentorSlotList : AppCompatActivity() {
             // Get extra data included in the Intent
             val ItemName = intent.getStringExtra("item")
             qty = intent.getStringExtra("quantity")
-            //Toast.makeText(this@MentorSlotList, "$ItemName $qty", Toast.LENGTH_SHORT).show()
+
         }
     }
 
@@ -128,6 +84,8 @@ class MentorSlotList : AppCompatActivity() {
     }
 
     private fun addSlot(begin: String, end: String, date: String) {
+
+
         val reserved_by = ""
         var generated = "Nikhil Nishad"
         var studentId = ""

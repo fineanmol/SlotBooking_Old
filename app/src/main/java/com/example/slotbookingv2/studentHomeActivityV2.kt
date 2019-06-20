@@ -44,11 +44,6 @@ class UserHomeV2 : AppCompatActivity() {
     private lateinit var result: Drawer
 
     private lateinit var profile: IProfile<*>
-    private lateinit var profile2: IProfile<*>
-    private lateinit var profile3: IProfile<*>
-    private lateinit var profile4: IProfile<*>
-    private lateinit var profile5: IProfile<*>
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

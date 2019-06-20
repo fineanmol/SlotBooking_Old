@@ -309,52 +309,7 @@ class addSlotActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    /* override fun onNavigationItemSelected(item: MenuItem): Boolean {
-         // Handle navigation view item clicks here.
-         when (item.itemId) {
-             R.id.nav_addslot -> {
-                 // Handle the camera action
-                 startActivity(Intent(this, addSlotActivity::class.java))
-                 Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
-             }
-             R.id.show_appointment -> {
-                 startActivity(Intent(this, AppointmentList2::class.java))
-                 Toast.makeText(this, "Work in Progress", Toast.LENGTH_LONG).show()
-             }
 
-             R.id.nav_tools -> {
-
-             }
-             R.id.nav_share -> {
-                 val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
-                 sharingIntent.type = "text/plain"
-                 val shareBody =
-                     "Hey \n Slot Booking Application is a fast,simple and secure app that I use to book my slot with Mentor and Manage all the data.\n\n Get it for free at\n App link "
-                 sharingIntent.putExtra(
-                     android.content.Intent.EXTRA_SUBJECT,
-                     "Slot Booking Management : Android Application"
-                 )
-                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
-                 startActivity(Intent.createChooser(sharingIntent, "Share via"))
-
-             }
-             R.id.nav_reportbug -> {
-                 val intent = Intent(
-                     Intent.ACTION_SENDTO, Uri.fromParts(
-                         "mailto", "agarwal.anmol2004@gmail.com", null
-                     )
-                 )
-                 intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
-                 intent.putExtra(Intent.EXTRA_TEXT, android.R.id.message)
-                 startActivity(Intent.createChooser(intent, "Choose an Email client :"))
-
-             }
-         }
-         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-
-         drawerLayout.closeDrawer(GravityCompat.START)
-         return true
-     }*/
 
     override fun onBackPressed() {
         // super.onBackPressed();
