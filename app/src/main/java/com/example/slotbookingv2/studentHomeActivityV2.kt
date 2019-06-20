@@ -14,12 +14,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.slotbookingv2.drawerItems.CustomPrimaryDrawerItem
 import com.example.slotbookingv2.drawerItems.CustomUrlPrimaryDrawerItem
-import com.example.slotbookingv2.drawerItems.OverflowMenuDrawerItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -124,86 +122,32 @@ class UserHomeV2 : AppCompatActivity() {
                     }),
                 //here we use a customPrimaryDrawerItem we defined in our sample app
                 //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
-                OverflowMenuDrawerItem().withName("Book Appointments").withDescription("Book Scheduled Slots").withOnDrawerItemClickListener(
-                    object : Drawer.OnDrawerItemClickListener {
+
+                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Book Appointment").withDescription("Book Scheduled Slots")
+                    .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                             startActivity(Intent(this@UserHomeV2, UserHome::class.java))
                             return false
                         }
-                    }).withMenu(
-                    R.menu.fragment_menu
-                ).withOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-
-                    if (item.itemId == R.id.newSession) {
-                        val builder = AlertDialog.Builder(this@UserHomeV2)
-
-                        // Set the alert dialog title
-                        builder.setTitle("New Session Confirmation")
-
-                        // Display a message on alert dialog
-                        builder.setMessage("Are you sure to restart session? \n Now Users can book slots !!")
-
-                        // Set a positive button and its click listener on alert dialog
-                        builder.setPositiveButton("YES") { dialog, which ->
-                            // Do something when user press the positive button
-                        }
-
-                        // Display a negative button on alert dialog
-                        builder.setNegativeButton("No") { dialog, which ->
-                            Toast.makeText(
-                                applicationContext,
-                                "Not excited to Create New Session ?",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
-
-                        // Display a neutral button on alert dialog
-                        builder.setNeutralButton("Cancel") { _, _ ->
-                            Toast.makeText(applicationContext, "You cancelled the Prompt", Toast.LENGTH_SHORT).show()
-                        }
-
-                        // Finally, make the alert dialog using builder
-                        val dialog: AlertDialog = builder.create()
-
-                        // Display the alert dialog on app interface
-                        dialog.show()
-                    }
-                    if (item.itemId == R.id.oldSession) {
-                        startActivity(Intent(this@UserHomeV2, mentorShowSlotActivity::class.java))
-                    }
-                    false
-                }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus),
-                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Show Appointment")
-                    .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
-                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            startActivity(Intent(this@UserHomeV2, student_show_reserved_slot_Activity::class.java))
-                            return false
-                        }
                     }).withIcon(
-                        FontAwesome.Icon.faw_registered1
+                        GoogleMaterial.Icon.gmd_filter_center_focus
                     )
               ,
-                PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withOnDrawerItemClickListener(
+                PrimaryDrawerItem().withName("Show Appointments").withDescription("Check your Appointment").withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                             Log.d("TAGDDD", "clicked")
-                            startActivity(Intent(this@UserHomeV2, mentorShowSlotActivity::class.java))
+                            startActivity(Intent(this@UserHomeV2, student_show_reserved_slot_Activity::class.java))
                             return false
                         }
                     }).withIcon(
                     FontAwesome.Icon.faw_eye
                 ),
-                CustomUrlPrimaryDrawerItem().withName(R.string.drawer_item_fragment_drawer).withDescription(R.string.drawer_item_fragment_drawer_desc).withIcon(
-                    "https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"
-                )/*.withOnDrawerItemClickListener(Drawer.OnDrawerItemClickListener{
-                     fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                         var intent= Intent(this,addSlotActivity::class.java)
-                         startActivity(intent)
-                         return true
-                     }
-true
-                })*/,
+                CustomUrlPrimaryDrawerItem().withName("New Things Coming Up").withDescription("Be Connected").withIcon(
+                    FontAwesome.Icon.faw_grin
+                ).withEnabled(
+                    false
+                ),
                 SectionDrawerItem().withName(R.string.drawer_item_section_header),
                 SecondaryDrawerItem().withName("Share").withIcon(FontAwesome.Icon.faw_share_alt_square).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
