@@ -127,7 +127,7 @@ class UserHomeV2 : AppCompatActivity() {
                 OverflowMenuDrawerItem().withName("Book Appointments").withDescription("Book Scheduled Slots").withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            Log.d("TAGDDD", "clicked")
+                            startActivity(Intent(this@UserHomeV2, UserHome::class.java))
                             return false
                         }
                     }).withMenu(
@@ -174,22 +174,16 @@ class UserHomeV2 : AppCompatActivity() {
                     }
                     false
                 }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus),
-                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("About Developer")
+                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Show Appointment")
                     .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            startActivity(Intent(this@UserHomeV2, AboutDeveloper::class.java))
+                            startActivity(Intent(this@UserHomeV2, student_show_reserved_slot_Activity::class.java))
                             return false
                         }
                     }).withIcon(
-                        FontAwesome.Icon.faw_gamepad
+                        FontAwesome.Icon.faw_registered1
                     )
-                /*.withOnDrawerItemClickListener(
-            Drawer.OnDrawerItemClickListener({
-                startActivity(Intent(this,AboutDeveloper::class.java))
-            })
-
-
-                )*/,
+              ,
                 PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
