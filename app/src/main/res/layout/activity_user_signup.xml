@@ -145,16 +145,6 @@
                 android:drawableLeft="@drawable/ic_pass_black_24dp"
                 android:hint="Password"
                 android:inputType="textPassword" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
-        <TextView
-                android:text="OTP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/editOTP" android:hint="Enter OTP"/>
         <Button
                 android:id="@+id/u_register"
                 android:layout_width="fill_parent"

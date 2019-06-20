@@ -19,6 +19,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_user_signup.*
+import kotlinx.android.synthetic.main.dialog_otp_verification.*
 import java.util.concurrent.TimeUnit
 
 
