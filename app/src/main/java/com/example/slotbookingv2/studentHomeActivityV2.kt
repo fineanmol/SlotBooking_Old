@@ -1,5 +1,6 @@
 package com.example.slotbookingv2
 
+import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
@@ -13,12 +14,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.example.slotbookingv2.drawerItems.CustomPrimaryDrawerItem
 import com.example.slotbookingv2.drawerItems.CustomUrlPrimaryDrawerItem
-import com.example.slotbookingv2.drawerItems.OverflowMenuDrawerItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -117,105 +116,76 @@ class UserHomeV2 : AppCompatActivity() {
                 PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            startActivity(Intent(this@UserHomeV2, mentorhomev2::class.java))
-                            Log.d("TAGDDD", "clicked")
+                            startActivity(Intent(this@UserHomeV2, UserHomeV2::class.java))
                             return false
                         }
                     }),
                 //here we use a customPrimaryDrawerItem we defined in our sample app
                 //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
-                OverflowMenuDrawerItem().withName(R.string.drawer_item_menu_drawer_item).withDescription(R.string.drawer_item_menu_drawer_item_desc).withOnDrawerItemClickListener(
-                    object : Drawer.OnDrawerItemClickListener {
-                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            Log.d("TAGDDD", "clicked")
-                            return false
-                        }
-                    }).withMenu(
-                    R.menu.fragment_menu
-                ).withOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
 
-                    if (item.itemId == R.id.newSession) {
-                        val builder = AlertDialog.Builder(this@UserHomeV2)
-
-                        // Set the alert dialog title
-                        builder.setTitle("New Session Confirmation")
-
-                        // Display a message on alert dialog
-                        builder.setMessage("Are you sure to restart session? \n Now Users can book slots !!")
-
-                        // Set a positive button and its click listener on alert dialog
-                        builder.setPositiveButton("YES") { dialog, which ->
-                            // Do something when user press the positive button
-                        }
-
-                        // Display a negative button on alert dialog
-                        builder.setNegativeButton("No") { dialog, which ->
-                            Toast.makeText(
-                                applicationContext,
-                                "Not excited to Create New Session ?",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
-
-                        // Display a neutral button on alert dialog
-                        builder.setNeutralButton("Cancel") { _, _ ->
-                            Toast.makeText(applicationContext, "You cancelled the Prompt", Toast.LENGTH_SHORT).show()
-                        }
-
-                        // Finally, make the alert dialog using builder
-                        val dialog: AlertDialog = builder.create()
-
-                        // Display the alert dialog on app interface
-                        dialog.show()
-                    }
-                    if (item.itemId == R.id.oldSession) {
-                        startActivity(Intent(this@UserHomeV2, mentorShowSlotActivity::class.java))
-                    }
-                    false
-                }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus),
-                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("About Developer")
+                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Book Appointment").withDescription("Book Scheduled Slots")
                     .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            startActivity(Intent(this@UserHomeV2, AboutDeveloper::class.java))
+                            startActivity(Intent(this@UserHomeV2, UserHome::class.java))
                             return false
                         }
                     }).withIcon(
-                        FontAwesome.Icon.faw_gamepad
+                        GoogleMaterial.Icon.gmd_filter_center_focus
                     )
-                /*.withOnDrawerItemClickListener(
-            Drawer.OnDrawerItemClickListener({
-                startActivity(Intent(this,AboutDeveloper::class.java))
-            })
-
-
-                )*/,
-                PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withOnDrawerItemClickListener(
+              ,
+                PrimaryDrawerItem().withName("Show Appointments").withDescription("Check your Appointment").withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                             Log.d("TAGDDD", "clicked")
-                            startActivity(Intent(this@UserHomeV2, mentorShowSlotActivity::class.java))
+                            startActivity(Intent(this@UserHomeV2, student_show_reserved_slot_Activity::class.java))
                             return false
                         }
                     }).withIcon(
                     FontAwesome.Icon.faw_eye
                 ),
-                CustomUrlPrimaryDrawerItem().withName(R.string.drawer_item_fragment_drawer).withDescription(R.string.drawer_item_fragment_drawer_desc).withIcon(
-                    "https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"
-                )/*.withOnDrawerItemClickListener(Drawer.OnDrawerItemClickListener{
-                     fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                         var intent= Intent(this,addSlotActivity::class.java)
-                         startActivity(intent)
-                         return true
-                     }
-true
-                })*/,
-                SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
-                SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_database).withEnabled(
+                CustomUrlPrimaryDrawerItem().withName("New Things Coming Up").withDescription("Be Connected").withIcon(
+                    FontAwesome.Icon.faw_grin
+                ).withEnabled(
                     false
                 ),
-                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
+                SectionDrawerItem().withName(R.string.drawer_item_section_header),
+                SecondaryDrawerItem().withName("Share").withIcon(FontAwesome.Icon.faw_share_alt_square).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
+                            sharingIntent.type = "text/plain"
+                            val shareBody =
+                                "Hey \n Slot Booking Application is a fast,simple and secure app that I use to book my slot with Mentor and Manage all the data.\n\n Get it for free at\n App link "
+                            sharingIntent.putExtra(
+                                android.content.Intent.EXTRA_SUBJECT,
+                                "Slot Booking Management : Android Application"
+                            )
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
+                            startActivity(Intent.createChooser(sharingIntent, "Share via"))
+
+                            return false
+                        }
+                    }),
+                SecondaryDrawerItem().withName("Buy me a Coffee").withIcon(FontAwesome.Icon.faw_coffee).withEnabled(
+                    false
+                ).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri = Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+                            return false
+                        }
+                    }),
+                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri = Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+                            return false
+                        }
+                    }),
                 SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(
                     true
                 ).withIcon(
@@ -224,10 +194,30 @@ true
                             R.color.material_drawer_dark_primary_text
                         )
                     )
-                ).withTag("Bullhorn"),
-                SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(
-                    false
-                )
+                ).withTag("Bullhorn").withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val intent = Intent(
+                                Intent.ACTION_SENDTO, Uri.fromParts(
+                                    "mailto", "agarwal.anmol2004@gmail.com", null
+                                )
+                            )
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
+                            intent.putExtra(Intent.EXTRA_TEXT, android.R.id.message)
+                            startActivity(Intent.createChooser(intent, "Choose an Email client :"))
+
+                            return false
+                        }
+                    }),
+                SecondaryDrawerItem().withName("Developer").withIcon(FontAwesome.Icon.faw_question).withEnabled(
+                    enabled = true
+                ).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            startActivity(Intent(this@UserHomeV2, AboutDeveloper::class.java))
+                            return false
+                        }
+                    })
             ) // add the items we want to use with our Drawer
             .withOnDrawerNavigationListener(object : Drawer.OnDrawerNavigationListener {
                 override fun onNavigationClickListener(clickedView: View): Boolean {
@@ -239,14 +229,35 @@ true
                 }
             })
             .addStickyDrawerItems(
-                SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(
+                SecondaryDrawerItem().withName("Help & Feedback").withIcon(FontAwesome.Icon.faw_hire_a_helper).withIdentifier(
                     10
-                ),
-                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github)
+                ).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val intent = Intent(
+                                Intent.ACTION_SENDTO, Uri.fromParts(
+                                    "mailto", "agarwal.anmol2004@gmail.com", null
+                                )
+                            )
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
+                            intent.putExtra(Intent.EXTRA_TEXT, android.R.id.message)
+                            startActivity(Intent.createChooser(intent, "Choose an Email client :"))
+
+                            return false
+                        }
+                    }),
+                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri = Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+                            return false
+                        }
+                    })
             )
             .withSavedInstance(savedInstanceState)
             .build()
-
     }
     private fun buildHeader(compact: Boolean, savedInstanceState: Bundle?) {
         // Create the AccountHeader
@@ -256,32 +267,42 @@ true
             .withCompactStyle(compact)
             .addProfiles(
                 profile,
-                ProfileSettingDrawerItem().withName("Logout"),
-                ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
+                ProfileSettingDrawerItem().withName("Rate on Playstore").withIcon(FontAwesome.Icon.faw_star1).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                           // Toast.makeText(this@UserHomeV2,this@UserHomeV2.packageName,Toast.LENGTH_LONG).show()
+                            val uri = Uri.parse("market://details?id=" + this@UserHomeV2.packageName)
+                            val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+                            // To count with Play market backstack, After pressing back button,
+                            // to taken back to our application, we need to add following flags to intent.
+                            goToMarket.addFlags(
+                                Intent.FLAG_ACTIVITY_NO_HISTORY or
+                                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                            )
+                            try {
+                                startActivity(goToMarket)
+                            } catch (e: ActivityNotFoundException) {
+                                startActivity(
+                                    Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("http://play.google.com/store/apps/details?id=" + this@UserHomeV2.packageName)
+                                    )
+                                )
+                            }
+
+                            return false
+                        }
+                    }),
+                ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings),ProfileSettingDrawerItem().withName("Logout").withIcon(FontAwesome.Icon.faw_sign_out_alt).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            logout()
+                            return true
+                        }
+                    })
             )
             .withTextColor(ContextCompat.getColor(this, R.color.material_drawer_dark_primary_text))
-            .withOnAccountHeaderListener(object : AccountHeader.OnAccountHeaderListener {
-                override fun onProfileChanged(view: View?, profile: IProfile<*>, current: Boolean): Boolean {
-                    //sample usage of the onProfileChanged listener
-                    //if the clicked item has the identifier 1 add a new profile ;)
-                    if (profile is IDrawerItem<*> && (profile as IDrawerItem<*>).identifier == UserHomeV2.PROFILE_SETTING.toLong()) {
-                        val newProfile =
-                            ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com")
-                                .withIcon(resources.getDrawable(R.drawable.profile5))
-
-                        val profiles = headerResult.profiles
-                        if (profiles != null) {
-                            //we know that there are 2 setting elements. set the new profile above them ;)
-                            headerResult.addProfile(newProfile, profiles.size - 2)
-                        } else {
-                            headerResult.addProfiles(newProfile)
-                        }
-                    }
-
-                    //false if you have not consumed the event and it should close the drawer
-                    return false
-                }
-            })
             .withSavedInstance(savedInstanceState)
             .build()
     }

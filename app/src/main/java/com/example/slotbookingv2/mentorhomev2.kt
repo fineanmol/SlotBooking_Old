@@ -1,5 +1,6 @@
 package com.example.slotbookingv2
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -44,23 +45,15 @@ class mentorhomev2 : AppCompatActivity() {
 
     private lateinit var headerResult: AccountHeader
     private lateinit var result: Drawer
-
     private lateinit var profile: IProfile<*>
-    private lateinit var profile2: IProfile<*>
-    private lateinit var profile3: IProfile<*>
-    private lateinit var profile4: IProfile<*>
-    private lateinit var profile5: IProfile<*>
-    private var Name: String = "Anmol"
-    private var Email: String = "test@gmail.com"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mentorhomev2)
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
 
 
+        /** Current User Values*/
         currentUser?.let { user ->
 
             val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
@@ -68,11 +61,13 @@ class mentorhomev2 : AppCompatActivity() {
                 override fun onDataChange(dataSnapshot: DataSnapshot) = if (!dataSnapshot.exists()) {
                     //create new user
                     Toast.makeText(this@mentorhomev2, "User details not found", Toast.LENGTH_LONG).show()
+                    logout()
                 } else {
                     for (e in dataSnapshot.children) {
                         val employee = e.getValue(Data::class.java)
-                        val Username = employee!!.name
-                        val Email = employee.email
+                        var Name = employee!!.name
+                        var Email = employee.email
+                        createNavBar(Name, Email, savedInstanceState)
 
 
                     }
@@ -84,14 +79,87 @@ class mentorhomev2 : AppCompatActivity() {
             userNameRef?.addListenerForSingleValueEvent(eventListener)
 
         }
-// end of method
+        /** Current User Values Method Ends*/
 
 
-        var Names = Name
+        new_session_btn.setOnClickListener {
+            val builder = AlertDialog.Builder(this@mentorhomev2)
+
+            // Set the alert dialog title
+            builder.setTitle("New Session Confirmation")
+
+            // Display a message on alert dialog
+            builder.setMessage("Are you sure to restart session? \n Now Users can book slots !!")
+
+            // Set a positive button and its click listener on alert dialog
+            builder.setPositiveButton("YES") { dialog, which ->
+                // Do something when user press the positive button
+                val userNameRef = userref.orderByChild("user_type").equalTo("S")
+                val eventListener = object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (!dataSnapshot.exists()) {
+                            //create new user
+                            Toast.makeText(this@mentorhomev2, "Slots are ready for booking", Toast.LENGTH_LONG).show()
+                        } else {
+                            for (e in dataSnapshot.children) {
+                                val employee = e.getValue(Data::class.java)
+                                var studentkey = employee?.id
+                                userref.child(studentkey!!).child("status").setValue("NB")
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Ok, Things are Ready!!  Generate Slots.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            }
+
+                        }
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                    }
+                }
+                var addintent = Intent(this, addSlotActivity::class.java)
+                startActivity(addintent)
+                userNameRef.addListenerForSingleValueEvent(eventListener)
+                // Change the app background color
+            }
+
+
+            // Display a negative button on alert dialog
+            builder.setNegativeButton("No") { dialog, which ->
+                Toast.makeText(applicationContext, "Not excited to Create New Session ?", Toast.LENGTH_SHORT).show()
+            }
+
+
+            // Display a neutral button on alert dialog
+            builder.setNeutralButton("Cancel") { _, _ ->
+                Toast.makeText(applicationContext, "You cancelled the Prompt", Toast.LENGTH_SHORT).show()
+            }
+
+            // Finally, make the alert dialog using builder
+            val dialog: AlertDialog = builder.create()
+
+            // Display the alert dialog on app interface
+            dialog.show()
+        }
+
+
+        existing_session_btn.setOnClickListener {
+            startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
+        }
+
+
+    }
+
+    /** Drawer Method*/
+    private fun createNavBar(name: String, email: String, savedInstanceState: Bundle?) {
+        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
 
         // Create a few sample profile
         profile =
-            ProfileDrawerItem().withName(Name).withEmail(Email).withIcon(resources.getDrawable(R.drawable.profile))
+            ProfileDrawerItem().withName(name).withEmail(email).withIcon(resources.getDrawable(R.drawable.profile))
 
 
         // Create the AccountHeader
@@ -113,7 +181,7 @@ class mentorhomev2 : AppCompatActivity() {
                     }),
                 //here we use a customPrimaryDrawerItem we defined in our sample app
                 //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
-                OverflowMenuDrawerItem().withName(R.string.drawer_item_menu_drawer_item).withDescription(R.string.drawer_item_menu_drawer_item_desc).withOnDrawerItemClickListener(
+                OverflowMenuDrawerItem().withName("Create new Session").withDescription(R.string.drawer_item_menu_drawer_item_desc).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                             Log.d("TAGDDD", "clicked")
@@ -198,48 +266,72 @@ class mentorhomev2 : AppCompatActivity() {
                     }
                     false
                 }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus),
-                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("About Developer")
+                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Manage Sessions").withDescription(
+                    "Manage Generated Sessions"
+                )
                     .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            startActivity(Intent(this@mentorhomev2, AboutDeveloper::class.java))
+                            startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
                             return false
                         }
                     }).withIcon(
-                    FontAwesome.Icon.faw_gamepad
-                )
-                /*.withOnDrawerItemClickListener(
-            Drawer.OnDrawerItemClickListener({
-                startActivity(Intent(this,AboutDeveloper::class.java))
-            })
-
-
-                )*/,
+                        FontAwesome.Icon.faw_check_square1
+                    )
+                ,
                 PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            Log.d("TAGDDD", "clicked")
                             startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
                             return false
                         }
                     }).withIcon(
                     FontAwesome.Icon.faw_eye
                 ),
-                CustomUrlPrimaryDrawerItem().withName(R.string.drawer_item_fragment_drawer).withDescription(R.string.drawer_item_fragment_drawer_desc).withIcon(
-                    "https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"
-                )/*.withOnDrawerItemClickListener(Drawer.OnDrawerItemClickListener{
-                     fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                         var intent= Intent(this,addSlotActivity::class.java)
-                         startActivity(intent)
-                         return true
-                     }
-true
-                })*/,
-                SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
-                SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_database).withEnabled(
+                CustomUrlPrimaryDrawerItem().withName("Something New Coming Up").withDescription("Be connected").withIcon(
+                    FontAwesome.Icon.faw_app_store
+                ).withEnabled(
                     false
                 ),
-                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
+                SectionDrawerItem().withName(R.string.drawer_item_section_header),
+                SecondaryDrawerItem().withName("Share").withIcon(FontAwesome.Icon.faw_share_square1).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
+                            sharingIntent.type = "text/plain"
+                            val shareBody =
+                                "Hey \n Slot Booking Application is a fast,simple and secure app that I use to book my slot with Mentor and Manage all the data.\n\n Get it for free at\n App link "
+                            sharingIntent.putExtra(
+                                android.content.Intent.EXTRA_SUBJECT,
+                                "Slot Booking Management : Android Application"
+                            )
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
+                            startActivity(Intent.createChooser(sharingIntent, "Share via"))
+
+                            return false
+                        }
+                    }),
+                SecondaryDrawerItem().withName("Buy me a Coffee").withIcon(FontAwesome.Icon.faw_coffee).withEnabled(
+                    false
+                ).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri =
+                                Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+                            return false
+                        }
+                    }),
+                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri =
+                                Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+                            return false
+                        }
+                    }),
                 SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(
                     true
                 ).withIcon(
@@ -248,10 +340,30 @@ true
                             R.color.material_drawer_dark_primary_text
                         )
                     )
-                ).withTag("Bullhorn"),
-                SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(
-                    false
-                )
+                ).withTag("Bullhorn").withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val intent = Intent(
+                                Intent.ACTION_SENDTO, Uri.fromParts(
+                                    "mailto", "agarwal.anmol2004@gmail.com", null
+                                )
+                            )
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
+                            intent.putExtra(Intent.EXTRA_TEXT, android.R.id.message)
+                            startActivity(Intent.createChooser(intent, "Choose an Email client :"))
+
+                            return false
+                        }
+                    }),
+                SecondaryDrawerItem().withName("Developer").withIcon(FontAwesome.Icon.faw_question).withEnabled(
+                    enabled = true
+                ).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            startActivity(Intent(this@mentorhomev2, AboutDeveloper::class.java))
+                            return false
+                        }
+                    })
             ) // add the items we want to use with our Drawer
             .withOnDrawerNavigationListener(object : Drawer.OnDrawerNavigationListener {
                 override fun onNavigationClickListener(clickedView: View): Boolean {
@@ -263,114 +375,40 @@ true
                 }
             })
             .addStickyDrawerItems(
-                SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(
+                SecondaryDrawerItem().withName("Help & Feedback").withIcon(FontAwesome.Icon.faw_hire_a_helper).withIdentifier(
                     10
-                ),
-                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github)
+                ).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val intent = Intent(
+                                Intent.ACTION_SENDTO, Uri.fromParts(
+                                    "mailto", "agarwal.anmol2004@gmail.com", null
+                                )
+                            )
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
+                            intent.putExtra(Intent.EXTRA_TEXT, android.R.id.message)
+                            startActivity(Intent.createChooser(intent, "Choose an Email client :"))
+
+                            return false
+                        }
+                    }),
+                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri =
+                                Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+                            return false
+                        }
+                    })
             )
             .withSavedInstance(savedInstanceState)
             .build()
-        /*   *//*  user value display at drawer*//*
-
-
-         // emaildrawer.text="anmol"
-          currentUser?.let { user ->
-              // Toast.makeText(mCtx, user.email, Toast.LENGTH_LONG).show()
-              val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
-              val eventListener = object : ValueEventListener {
-                  override fun onDataChange(dataSnapshot: DataSnapshot) = if (!dataSnapshot.exists()) {
-                      //create new user
-                      Toast.makeText(this@mentorhomev2, "User details not found", Toast.LENGTH_LONG).show()
-                  } else {
-                      for (e in dataSnapshot.children) {
-                          val employee = e.getValue(Data::class.java)
-                          var studentName = employee?.name
-
-                          var studentemail = employee?.email
-
-
-
-                      }
-                  }
-
-                  override fun onCancelled(databaseError: DatabaseError) {
-                  }
-              }
-              userNameRef?.addListenerForSingleValueEvent(eventListener)
-
-          }
-// end of method*/
-
-        new_session_btn.setOnClickListener {
-            val builder = AlertDialog.Builder(this@mentorhomev2)
-
-            // Set the alert dialog title
-            builder.setTitle("New Session Confirmation")
-
-            // Display a message on alert dialog
-            builder.setMessage("Are you sure to restart session? \n Now Users can book slots !!")
-
-            // Set a positive button and its click listener on alert dialog
-            builder.setPositiveButton("YES") { dialog, which ->
-                // Do something when user press the positive button
-                val userNameRef = userref.orderByChild("user_type").equalTo("S")
-                val eventListener = object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if (!dataSnapshot.exists()) {
-                            //create new user
-                            Toast.makeText(this@mentorhomev2, "Slots are ready for booking", Toast.LENGTH_LONG).show()
-                        } else {
-                            for (e in dataSnapshot.children) {
-                                val employee = e.getValue(Data::class.java)
-                                var studentkey = employee?.id
-                                userref.child(studentkey!!).child("status").setValue("NB")
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Ok, Things are Ready!!  Generate Slots.",
-                                    Toast.LENGTH_LONG
-                                ).show()
-
-                            }
-
-                        }
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {
-                    }
-                }
-                var addintent = Intent(this, addSlotActivity::class.java)
-                startActivity(addintent)
-                userNameRef.addListenerForSingleValueEvent(eventListener)
-                // Change the app background color
-            }
-
-
-            // Display a negative button on alert dialog
-            builder.setNegativeButton("No") { dialog, which ->
-                Toast.makeText(applicationContext, "Not excited to Create New Session ?", Toast.LENGTH_SHORT).show()
-            }
-
-
-            // Display a neutral button on alert dialog
-            builder.setNeutralButton("Cancel") { _, _ ->
-                Toast.makeText(applicationContext, "You cancelled the Prompt", Toast.LENGTH_SHORT).show()
-            }
-
-            // Finally, make the alert dialog using builder
-            val dialog: AlertDialog = builder.create()
-
-            // Display the alert dialog on app interface
-            dialog.show()
-        }
-
-
-        existing_session_btn.setOnClickListener {
-            startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
-        }
-
 
     }
 
+    /** Drawer code Ends*/
     private fun buildHeader(compact: Boolean, savedInstanceState: Bundle?) {
         // Create the AccountHeader
         headerResult = AccountHeaderBuilder()
@@ -379,32 +417,41 @@ true
             .withCompactStyle(compact)
             .addProfiles(
                 profile,
-                ProfileSettingDrawerItem().withName("Logout"),
-                ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
+                ProfileSettingDrawerItem().withName("Rate on Playstore").withIcon(FontAwesome.Icon.faw_star1).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri = Uri.parse("market://details?id=" + this@mentorhomev2.packageName)
+                            val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+                            // To count with Play market backstack, After pressing back button,
+                            // to taken back to our application, we need to add following flags to intent.
+                            goToMarket.addFlags(
+                                Intent.FLAG_ACTIVITY_NO_HISTORY or
+                                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                            )
+                            try {
+                                startActivity(goToMarket)
+                            } catch (e: ActivityNotFoundException) {
+                                startActivity(
+                                    Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("http://play.google.com/store/apps/details?id=" + this@mentorhomev2.packageName)
+                                    )
+                                )
+                            }
+
+                            return false
+                        }
+                    }),
+                ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings),ProfileSettingDrawerItem().withName("Logout").withIcon(FontAwesome.Icon.faw_sign_out_alt).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            logout()
+                            return true
+                        }
+                    })
             )
             .withTextColor(ContextCompat.getColor(this, R.color.material_drawer_dark_primary_text))
-            .withOnAccountHeaderListener(object : AccountHeader.OnAccountHeaderListener {
-                override fun onProfileChanged(view: View?, profile: IProfile<*>, current: Boolean): Boolean {
-                    //sample usage of the onProfileChanged listener
-                    //if the clicked item has the identifier 1 add a new profile ;)
-                    if (profile is IDrawerItem<*> && (profile as IDrawerItem<*>).identifier == PROFILE_SETTING.toLong()) {
-                        val newProfile =
-                            ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com")
-                                .withIcon(resources.getDrawable(R.drawable.profile5))
-
-                        val profiles = headerResult.profiles
-                        if (profiles != null) {
-                            //we know that there are 2 setting elements. set the new profile above them ;)
-                            headerResult.addProfile(newProfile, profiles.size - 2)
-                        } else {
-                            headerResult.addProfiles(newProfile)
-                        }
-                    }
-
-                    //false if you have not consumed the event and it should close the drawer
-                    return false
-                }
-            })
             .withSavedInstance(savedInstanceState)
             .build()
     }
