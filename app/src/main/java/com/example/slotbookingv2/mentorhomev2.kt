@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -45,10 +46,7 @@ class mentorhomev2 : AppCompatActivity() {
     private lateinit var result: Drawer
 
     private lateinit var profile: IProfile<*>
-    private lateinit var profile2: IProfile<*>
-    private lateinit var profile3: IProfile<*>
-    private lateinit var profile4: IProfile<*>
-    private lateinit var profile5: IProfile<*>
+
     private var Name: String = "Anmol"
     private var Email: String = "test@gmail.com"
 
@@ -102,10 +100,24 @@ class mentorhomev2 : AppCompatActivity() {
             .withToolbar(toolbar)
             .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
             .addDrawerItems(
-                PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home),
+                PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            startActivity(Intent(this@mentorhomev2, mentorhomev2::class.java))
+                            Log.d("TAGDDD", "clicked")
+                            return false
+                        }
+                    }),
                 //here we use a customPrimaryDrawerItem we defined in our sample app
                 //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
-                OverflowMenuDrawerItem().withName(R.string.drawer_item_menu_drawer_item).withDescription(R.string.drawer_item_menu_drawer_item_desc).withMenu(
+                OverflowMenuDrawerItem().withName(R.string.drawer_item_menu_drawer_item).withDescription(R.string.drawer_item_menu_drawer_item_desc).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            Log.d("TAGDDD", "clicked")
+                            startActivity(Intent(this@mentorhomev2, addSlotActivity::class.java))
+                            return false
+                        }
+                    }).withMenu(
                     R.menu.fragment_menu
                 ).withOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
 
@@ -183,35 +195,60 @@ class mentorhomev2 : AppCompatActivity() {
                     }
                     false
                 }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus),
-                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName(R.string.drawer_item_free_play).withIcon(
-                    FontAwesome.Icon.faw_gamepad
-                )
-                /*.withOnDrawerItemClickListener(
-            Drawer.OnDrawerItemClickListener({
-                startActivity(Intent(this,AboutDeveloper::class.java))
-            })
-
-
-                )*/,
-                PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withIcon(
+                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("About Developer")
+                    .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            startActivity(Intent(this@mentorhomev2, AboutDeveloper::class.java))
+                            return false
+                        }
+                    }).withIcon(
+                        FontAwesome.Icon.faw_gamepad
+                    ).withOnDrawerItemClickListener(
+                        object : Drawer.OnDrawerItemClickListener {
+                            override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                                startActivity(Intent(this@mentorhomev2, AboutDeveloper::class.java))
+                                Log.d("TAGDDD", "clicked")
+                                return false
+                            }
+                        })
+                ,
+                PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            Log.d("TAGDDD", "clicked")
+                            startActivity(Intent(this@mentorhomev2, AppointmentList2::class.java))
+                            return false
+                        }
+                    }).withIcon(
                     FontAwesome.Icon.faw_eye
                 ),
                 CustomUrlPrimaryDrawerItem().withName(R.string.drawer_item_fragment_drawer).withDescription(R.string.drawer_item_fragment_drawer_desc).withIcon(
                     "https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"
-                )/*.withOnDrawerItemClickListener(Drawer.OnDrawerItemClickListener{
-                     fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                         var intent= Intent(this,addSlotActivity::class.java)
-                         startActivity(intent)
-                         return true
-                     }
-true
-                })*/,
+                ).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
+                            Log.d("TAGDDD", "clicked")
+                            return false
+                        }
+                    }),
                 SectionDrawerItem().withName(R.string.drawer_item_section_header),
                 SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
                 SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_database).withEnabled(
                     false
                 ),
-                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
+                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri =
+                                Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+
+
+                            return false
+                        }
+                    }),
                 SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(
                     true
                 ).withIcon(
@@ -220,7 +257,22 @@ true
                             R.color.material_drawer_dark_primary_text
                         )
                     )
-                ).withTag("Bullhorn"),
+                ).withTag("Bullhorn").withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val intent = Intent(
+                                Intent.ACTION_SENDTO, Uri.fromParts(
+                                    "mailto", "agarwal.anmol2004@gmail.com", null
+                                )
+                            )
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
+                            intent.putExtra(Intent.EXTRA_TEXT, "Hi\n I would like to inform you that")
+                            startActivity(Intent.createChooser(intent, "Choose an Email client :"))
+
+
+                            return false
+                        }
+                    }),
                 SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(
                     false
                 )
@@ -238,41 +290,24 @@ true
                 SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(
                     10
                 ),
-                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github)
+                SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri =
+                                Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+
+
+                            return false
+                        }
+                    })
             )
             .withSavedInstance(savedInstanceState)
             .build()
-        /*   *//*  user value display at drawer*//*
 
-
-         // emaildrawer.text="anmol"
-          currentUser?.let { user ->
-              // Toast.makeText(mCtx, user.email, Toast.LENGTH_LONG).show()
-              val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
-              val eventListener = object : ValueEventListener {
-                  override fun onDataChange(dataSnapshot: DataSnapshot) = if (!dataSnapshot.exists()) {
-                      //create new user
-                      Toast.makeText(this@mentorhomev2, "User details not found", Toast.LENGTH_LONG).show()
-                  } else {
-                      for (e in dataSnapshot.children) {
-                          val employee = e.getValue(Data::class.java)
-                          var studentName = employee?.name
-
-                          var studentemail = employee?.email
-
-
-
-                      }
-                  }
-
-                  override fun onCancelled(databaseError: DatabaseError) {
-                  }
-              }
-              userNameRef?.addListenerForSingleValueEvent(eventListener)
-
-          }
-// end of method*/
-
+        /** drawer Ends*/
+        /** Mentor Activity Button Start*/
         new_session_btn.setOnClickListener {
             val builder = AlertDialog.Builder(this@mentorhomev2)
 

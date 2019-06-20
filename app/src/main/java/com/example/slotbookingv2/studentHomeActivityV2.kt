@@ -28,15 +28,14 @@ class UserHomeV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            /* Snackbar.make(view, "Email your suggestion", Snackbar.LENGTH_LONG)
-                 .setAction("Action", null).show()*/
+
             val intent = Intent(
                 Intent.ACTION_SENDTO, Uri.fromParts(
                     "mailto", "agarwal.anmol2004@gmail.com", null
                 )
             )
             intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
-            intent.putExtra(Intent.EXTRA_TEXT, android.R.id.message)
+            intent.putExtra(Intent.EXTRA_TEXT, "Hi\n I would like to inform you that")
             startActivity(Intent.createChooser(intent, "Choose an Email client :"))
         }
         val drawerLayout: androidx.drawerlayout.widget.DrawerLayout = findViewById(R.id.drawer_layout)
@@ -136,7 +135,7 @@ class UserHomeV2 : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
             }
             R.id.nav_AboutDeveloper -> {
-                Toast.makeText(this, "You click contact us", Toast.LENGTH_LONG).show()
+
                 startActivity(Intent(this, AboutDeveloper::class.java))
             }
 
