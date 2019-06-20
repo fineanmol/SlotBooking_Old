@@ -1,5 +1,6 @@
 package com.example.slotbookingv2
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -52,7 +53,7 @@ class mentorhomev2 : AppCompatActivity() {
         setContentView(R.layout.activity_mentorhomev2)
 
 
-/** Current User Values*/
+        /** Current User Values*/
         currentUser?.let { user ->
 
             val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
@@ -78,11 +79,7 @@ class mentorhomev2 : AppCompatActivity() {
             userNameRef?.addListenerForSingleValueEvent(eventListener)
 
         }
-/** Current User Values Method Ends*/
-
-
-
-
+        /** Current User Values Method Ends*/
 
 
         new_session_btn.setOnClickListener {
@@ -154,7 +151,8 @@ class mentorhomev2 : AppCompatActivity() {
 
 
     }
-/** Drawer Method*/
+
+    /** Drawer Method*/
     private fun createNavBar(name: String, email: String, savedInstanceState: Bundle?) {
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
@@ -268,16 +266,18 @@ class mentorhomev2 : AppCompatActivity() {
                     }
                     false
                 }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus),
-                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Manage Sessions").withDescription("Manage Generated Sessions")
+                CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Manage Sessions").withDescription(
+                    "Manage Generated Sessions"
+                )
                     .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
-                            override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                                startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
-                                return false
-                            }
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            startActivity(Intent(this@mentorhomev2, mentorShowSlotActivity::class.java))
+                            return false
+                        }
                     }).withIcon(
                         FontAwesome.Icon.faw_check_square1
                     )
-               ,
+                ,
                 PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
@@ -315,7 +315,8 @@ class mentorhomev2 : AppCompatActivity() {
                 ).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            val uri = Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
+                            val uri =
+                                Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
                             val intent = Intent(Intent.ACTION_VIEW, uri)
                             startActivity(intent)
                             return false
@@ -324,7 +325,8 @@ class mentorhomev2 : AppCompatActivity() {
                 SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            val uri = Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
+                            val uri =
+                                Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
                             val intent = Intent(Intent.ACTION_VIEW, uri)
                             startActivity(intent)
                             return false
@@ -393,7 +395,8 @@ class mentorhomev2 : AppCompatActivity() {
                 SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            val uri = Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
+                            val uri =
+                                Uri.parse("https://github.com/fineanmol/SlotBooking") // missing 'http://' will cause crashed
                             val intent = Intent(Intent.ACTION_VIEW, uri)
                             startActivity(intent)
                             return false
@@ -414,38 +417,41 @@ class mentorhomev2 : AppCompatActivity() {
             .withCompactStyle(compact)
             .addProfiles(
                 profile,
-                ProfileSettingDrawerItem().withName("Logout").withIcon(FontAwesome.Icon.faw_sign_out_alt).withOnDrawerItemClickListener(
+                ProfileSettingDrawerItem().withName("Rate on Playstore").withIcon(FontAwesome.Icon.faw_star1).withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            val uri = Uri.parse("market://details?id=" + this@mentorhomev2.packageName)
+                            val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+                            // To count with Play market backstack, After pressing back button,
+                            // to taken back to our application, we need to add following flags to intent.
+                            goToMarket.addFlags(
+                                Intent.FLAG_ACTIVITY_NO_HISTORY or
+                                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                            )
+                            try {
+                                startActivity(goToMarket)
+                            } catch (e: ActivityNotFoundException) {
+                                startActivity(
+                                    Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("http://play.google.com/store/apps/details?id=" + this@mentorhomev2.packageName)
+                                    )
+                                )
+                            }
+
+                            return false
+                        }
+                    }),
+                ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings),ProfileSettingDrawerItem().withName("Logout").withIcon(FontAwesome.Icon.faw_sign_out_alt).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                             logout()
                             return true
                         }
-                    }),
-                ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
+                    })
             )
             .withTextColor(ContextCompat.getColor(this, R.color.material_drawer_dark_primary_text))
-            .withOnAccountHeaderListener(object : AccountHeader.OnAccountHeaderListener {
-                override fun onProfileChanged(view: View?, profile: IProfile<*>, current: Boolean): Boolean {
-                    //sample usage of the onProfileChanged listener
-                    //if the clicked item has the identifier 1 add a new profile ;)
-                    if (profile is IDrawerItem<*> && (profile as IDrawerItem<*>).identifier == PROFILE_SETTING.toLong()) {
-                        val newProfile =
-                            ProfileDrawerItem().withNameShown(true).withName("Batman").withEmail("batman@gmail.com")
-                                .withIcon(resources.getDrawable(R.drawable.profile5))
-
-                        val profiles = headerResult.profiles
-                        /*if (profiles != null) {
-                            //we know that there are 2 setting elements. set the new profile above them ;)
-                            headerResult.addProfile(newProfile, profiles.size - 2)
-                        } else {
-                            headerResult.addProfiles(newProfile)
-                        }*/
-                    }
-
-                    //false if you have not consumed the event and it should close the drawer
-                    return false
-                }
-            })
             .withSavedInstance(savedInstanceState)
             .build()
     }
