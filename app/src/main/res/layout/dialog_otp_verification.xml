@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:padding="@dimen/fab_margin">
+
+    <Button
+            android:text="Get OTP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/get_otp_btn"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:inputType="textPersonName"
+            android:text="Enter OTP"
+            android:ems="10"
+            android:id="@+id/editOTP"/>
+    <Button
+            android:text="Verify &amp; Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/vregister"/>
+</LinearLayout>
