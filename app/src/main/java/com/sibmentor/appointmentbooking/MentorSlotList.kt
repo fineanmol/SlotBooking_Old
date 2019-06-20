@@ -32,6 +32,8 @@ class MentorSlotList : AppCompatActivity() {
         ref = FirebaseDatabase.getInstance().getReference("Slots")
         setContentView(R.layout.activity_mentor_slot_list)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar);
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
         setSupportActionBar(toolbar)
         listView = this.findViewById(R.id.listview)
         val bundle: Bundle? = intent.extras
@@ -111,7 +113,20 @@ class MentorSlotList : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
+        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        {
+            val alertbox = AlertDialog.Builder(this)
+                .setMessage("Do you want to leave the page?")
+                .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                    // do something when the button is clicked
+                    var intent = Intent(this, addSlotActivity::class.java)
+                    startActivity(intent)
 
+                })
+                .setNegativeButton("No", // do something when the button is clicked
+                    DialogInterface.OnClickListener { arg0, arg1 -> })
+                .show()
+        }
 
         if (id == R.id.action_logout) {
 

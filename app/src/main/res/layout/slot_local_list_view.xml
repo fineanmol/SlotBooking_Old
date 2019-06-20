@@ -44,14 +44,11 @@
     <Button
             android:layout_width="24dp"
             android:layout_height="24dp"
-
             android:id="@+id/delete"
-
             android:background="@drawable/ic_delete_gray_24dp"
             tools:ignore="MissingConstraints"
-            android:layout_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/date"
-            tools:layout_editor_absoluteY="37dp" android:layout_marginStart="16dp"/>
+            tools:layout_editor_absoluteY="37dp"
+            tools:layout_editor_absoluteX="310dp"/>
     <View
             android:id="@+id/divider"
             android:layout_width="395dp"

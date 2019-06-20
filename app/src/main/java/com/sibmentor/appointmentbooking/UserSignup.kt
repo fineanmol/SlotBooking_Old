@@ -16,8 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_user_signup.*
 import kotlinx.android.synthetic.main.dialog_otp_verification.*
 import java.util.concurrent.TimeUnit
@@ -80,8 +79,26 @@ class UserSignup : AppCompatActivity() {
                 u_r_pass.requestFocus()
                 return@setOnClickListener
             }
+            ref = FirebaseDatabase.getInstance().getReference("users")
+            val userNameRef = ref.orderByChild("number")?.equalTo(mobile.toString())
+            userNameRef?.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
 
-            showCreateCategoryDialog(email, password, namef, number, studentidf, status, user_type)
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Toast.makeText(
+                            this@UserSignup,
+                            "Phone Number Already Registered",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        showCreateCategoryDialog(email, password, namef, number, studentidf, status, user_type)
+                    }
+                }
+            })
+
 
 
 
@@ -102,8 +119,6 @@ class UserSignup : AppCompatActivity() {
         user_type: String
     ) {
 
-
-        progressbar.visibility = View.VISIBLE
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 progressbar.visibility = View.GONE
@@ -116,7 +131,6 @@ class UserSignup : AppCompatActivity() {
                     }
                 }
             }
-
     }
 
     override fun onStart() {
@@ -291,7 +305,5 @@ class UserSignup : AppCompatActivity() {
                 }
             }
     }
-
-
 
 }
