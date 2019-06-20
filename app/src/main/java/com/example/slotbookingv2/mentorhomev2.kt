@@ -193,12 +193,19 @@ class mentorhomev2 : AppCompatActivity() {
 
 
                 )*/,
-                PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("This is a description").withIcon(
+                PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Check Appointment Today onwards").withIcon(
                     FontAwesome.Icon.faw_eye
                 ),
                 CustomUrlPrimaryDrawerItem().withName(R.string.drawer_item_fragment_drawer).withDescription(R.string.drawer_item_fragment_drawer_desc).withIcon(
                     "https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"
-                ),
+                )/*.withOnDrawerItemClickListener(Drawer.OnDrawerItemClickListener{
+                     fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                         var intent= Intent(this,addSlotActivity::class.java)
+                         startActivity(intent)
+                         return true
+                     }
+true
+                })*/,
                 SectionDrawerItem().withName(R.string.drawer_item_section_header),
                 SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
                 SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_database).withEnabled(
@@ -344,7 +351,7 @@ class mentorhomev2 : AppCompatActivity() {
             .withCompactStyle(compact)
             .addProfiles(
                 profile,
-
+                ProfileSettingDrawerItem().withName("Logout"),
                 ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
             )
             .withTextColor(ContextCompat.getColor(this, R.color.material_drawer_dark_primary_text))
