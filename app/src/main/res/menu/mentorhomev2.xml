@@ -10,9 +10,7 @@
             app:showAsAction="always"
             android:title="Add Slot"/>
 
-    <item
-            android:id="@+id/action_three"
-            android:title="Item Three"/>
+
     <item
             android:id="@+id/contactUs"
 

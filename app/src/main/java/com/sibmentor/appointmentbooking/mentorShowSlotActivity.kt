@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -28,7 +32,10 @@ class mentorShowSlotActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mentor_show_slot)
-
+        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar);
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbar)
         val calendar = Calendar.getInstance()
 
         var month = calendar.get(Calendar.MONTH)
@@ -167,7 +174,10 @@ class mentorShowSlotActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
-
+        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        {
+            finish();
+        }
         if (id == R.id.action_one) {
             startActivity(Intent(this, addSlotActivity::class.java))
             //Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
@@ -179,13 +189,9 @@ class mentorShowSlotActivity : AppCompatActivity() {
 
             return true
         }
-        if (id == R.id.action_three) {
-            Toast.makeText(this, "Item Three Clicked", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, AppointmentList2::class.java))
-            return true
-        }
+
         if (id == R.id.contactUs) {
-            Toast.makeText(this, "You click contact us", Toast.LENGTH_LONG).show()
+
             startActivity(Intent(this, AboutDeveloper::class.java))
             return true
         }

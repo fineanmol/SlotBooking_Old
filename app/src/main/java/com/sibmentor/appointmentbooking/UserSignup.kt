@@ -80,12 +80,11 @@ class UserSignup : AppCompatActivity() {
                 return@setOnClickListener
             }
             ref = FirebaseDatabase.getInstance().getReference("users")
-            val userNameRef = ref.orderByChild("number")?.equalTo(mobile.toString())
+            val userNameRef = ref.orderByChild("number")?.equalTo(mobile.text.toString().trim())
             userNameRef?.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
-
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
                         Toast.makeText(
@@ -254,6 +253,12 @@ class UserSignup : AppCompatActivity() {
                 // ...
             } else if (e is FirebaseTooManyRequestsException) {
                 // The SMS quota for the project has been exceeded
+                Toast.makeText(
+                    this@UserSignup,
+                    "OTP Quota exceeded",
+                    Toast.LENGTH_LONG
+                ).show()
+
                 // ...
             }
 
