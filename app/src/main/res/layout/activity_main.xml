@@ -10,6 +10,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="30dp"
 >
 
     <EditText
@@ -108,10 +109,11 @@
             app:layout_constraintEnd_toEndOf="@+id/password"
             android:id="@+id/loginbtn"
             app:layout_constraintBottom_toBottomOf="parent"
-
+android:background="@drawable/roundedbutton2"
             app:layout_constraintHorizontal_bias="0.497"
-            android:layout_marginBottom="164dp"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/loading"
+            android:layout_marginBottom="184dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/loading"
             app:layout_constraintVertical_bias="1.0"/>
 
 
