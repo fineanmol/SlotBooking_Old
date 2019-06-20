@@ -2,14 +2,13 @@ package com.example.slotbookingv2
 
 import android.content.Context
 import android.content.Intent
-import android.support.design.widget.Snackbar
-import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.google.android.material.snackbar.Snackbar
 
 
 class local_slot_adapter(val mCtx: Context, val layoutId: Int, var local_slotList: MutableList<String>) :
@@ -49,7 +48,7 @@ class local_slot_adapter(val mCtx: Context, val layoutId: Int, var local_slotLis
         //intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
         intent.putExtra("quantity", local_slotList.toString())
         intent.putExtra("item", "Slot List")
-        LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
+        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
         return view
     }
 }

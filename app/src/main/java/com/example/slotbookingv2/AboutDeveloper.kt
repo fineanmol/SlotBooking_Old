@@ -3,11 +3,11 @@ package com.example.slotbookingv2
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_about_developer.*
 
 class AboutDeveloper : AppCompatActivity() {
