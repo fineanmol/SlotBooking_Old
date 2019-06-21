@@ -12,8 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 
 class MentorSlotList : AppCompatActivity() {
@@ -90,17 +89,41 @@ class MentorSlotList : AppCompatActivity() {
 
     private fun addSlot(begin: String, end: String, date: String) {
 
+        currentUser?.let { user ->
 
-        val reserved_by = ""
-        var generated = "Nikhil Nishad"
-        var studentId = ""
-        var studentNumber = ""
-        var status = "NB"
-        val sId = (ref.push().key).toString()
-        val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
-        ref.child(generated).child(sId).setValue(addSlot)
-        Toast.makeText(this, "Selected Slots Saved", Toast.LENGTH_LONG).show()
-    }
+            val userNameRef = ref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
+            userNameRef?.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (!dataSnapshot.exists()) {
+                        Toast.makeText(
+                            this@MentorSlotList,
+                            "User Not Registered",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        for (e in dataSnapshot.children) {
+                            val employee = e.getValue(Data::class.java)!!
+                            val reserved_by = ""
+                            var generated = employee.name
+                            var studentId = ""
+                            var studentNumber = ""
+                            var status = "NB"
+                            val sId = (ref.push().key).toString()
+                            val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+                            ref.child("Nikhil Nishad").child(sId).setValue(addSlot)
+                            Toast.makeText(this@MentorSlotList, "Selected Slots Saved", Toast.LENGTH_LONG).show()
+
+
+                        }
+
+                    }
+                }
+            })
+        }}
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

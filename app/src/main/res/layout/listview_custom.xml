@@ -15,7 +15,7 @@
             android:layout_toRightOf="@+id/dateslot"
             android:paddingBottom="10dp"
             android:text="Mentor Name"
-            android:textColor="#9C27B0"
+            android:textColor="#039BE5"
             android:textAppearance="@drawable/roundedredbutton"
             android:textAlignment="textStart"
 

@@ -62,6 +62,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent)
             }
         )
+        forget_link.setOnClickListener(View.OnClickListener {
+            var Intent = Intent(this, PasswordResetActivity::class.java)
+            startActivity(Intent)
+        })
     }
 
 
