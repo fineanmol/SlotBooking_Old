@@ -59,9 +59,6 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
 
             }
             // copyText(view,"${slot.studentNumber}")
-
-
-
         })
         return view
     }

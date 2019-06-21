@@ -4,10 +4,12 @@ package com.sibmentor.appointmentbooking
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_user_reset_password.*
 
-class userResetPasswordActivity : androidx.appcompat.app.AppCompatActivity() {
+
+class userResetPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
