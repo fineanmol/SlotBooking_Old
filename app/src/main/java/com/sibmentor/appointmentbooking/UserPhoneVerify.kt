@@ -21,6 +21,7 @@ class UserPhoneVerify : AppCompatActivity() {
     private var verificationId: String? = null
     val ref = FirebaseDatabase.getInstance().getReference("users")
     private val currentUser = FirebaseAuth.getInstance().currentUser
+    var phoneNumber = ""
 
 
 
@@ -42,7 +43,7 @@ class UserPhoneVerify : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val phoneNumber = '+' + ccp.selectedCountryCode + phone
+            phoneNumber = '+' + ccp.selectedCountryCode + phone
 
             PhoneAuthProvider.getInstance()
                 .verifyPhoneNumber(
@@ -93,10 +94,12 @@ class UserPhoneVerify : AppCompatActivity() {
     }
 
     private fun addPhoneNumber(phoneAuthCredential: PhoneAuthCredential) {
+        var i = 0
         FirebaseAuth.getInstance()
             .currentUser?.updatePhoneNumber(phoneAuthCredential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+
                     val userNameRef = ref.orderByChild("email").equalTo(currentUser?.let { user -> user.email })
                     userNameRef.addValueEventListener(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
@@ -112,9 +115,14 @@ class UserPhoneVerify : AppCompatActivity() {
                                 for (e in dataSnapshot.children) {
                                     val employee = e.getValue(Data::class.java)!!
                                     val Id = employee.id
+                                    Toast.makeText(
+                                        this@UserPhoneVerify,
+                                        (i++.toString()),
+                                        Toast.LENGTH_LONG
+                                    ).show()
 
                                     //  val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
-                                    ref.child(Id).child("number").setValue(edit_text_phone.text.toString().trim())
+                                    ref.child(Id).child("number").setValue(phoneNumber)
                                     break
                                     //  Toast.makeText(this@UserEmailUpdate, "Selected Slots Saved", Toast.LENGTH_LONG).show()
 
