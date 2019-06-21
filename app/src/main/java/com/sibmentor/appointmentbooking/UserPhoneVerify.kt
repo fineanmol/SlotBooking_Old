@@ -21,7 +21,7 @@ class UserPhoneVerify : AppCompatActivity() {
     private var verificationId: String? = null
     val ref = FirebaseDatabase.getInstance().getReference("users")
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    var phoneNumber = ""
+    var phone = ""
     var flag = true
 
 
@@ -66,7 +66,7 @@ class UserPhoneVerify : AppCompatActivity() {
 
         button_send_verification.setOnClickListener {
 
-            val phone = edit_text_phone.text.toString().trim()
+            phone = edit_text_phone.text.toString().trim()
 
             if (phone.isEmpty() || phone.length != 10) {
                 edit_text_phone.error = "Enter a valid Phone Number"
@@ -74,7 +74,7 @@ class UserPhoneVerify : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            phoneNumber = '+' + ccp.selectedCountryCode + phone
+            var phoneNumber = '+' + ccp.selectedCountryCode + phone
 
             PhoneAuthProvider.getInstance()
                 .verifyPhoneNumber(
@@ -147,7 +147,7 @@ class UserPhoneVerify : AppCompatActivity() {
                                     val employee = e.getValue(Data::class.java)!!
                                     val Id = employee.id
                                     while (flag) {
-                                        ref.child(Id).child("number").setValue(phoneNumber)
+                                        ref.child(Id).child("number").setValue(phone)
                                         flag = false
                                     }
 
@@ -165,6 +165,7 @@ class UserPhoneVerify : AppCompatActivity() {
                     startActivity(Intent(this, UserProfile::class.java))
                 } else {
                     this.toast(task.exception?.message!!)
+                    startActivity(Intent(this, UserPhoneVerify::class.java))
                 }
             }
     }
