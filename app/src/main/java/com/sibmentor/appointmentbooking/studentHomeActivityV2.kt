@@ -72,26 +72,31 @@ class UserHomeV2 : AppCompatActivity() {
             startActivity(Intent.createChooser(intent, "Choose an Email client :"))
         }
         currentUser?.let { user ->
+            if (user.displayName.isNullOrEmpty()) {
+                val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
+                val eventListener = object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) = if (!dataSnapshot.exists()) {
+                        //create new user
+                        Toast.makeText(this@UserHomeV2, "User details not found", Toast.LENGTH_LONG).show()
+                    } else {
+                        for (e in dataSnapshot.children) {
+                            val employee = e.getValue(Data::class.java)
+                            var Name = employee!!.name
+                            var Email = employee.email
+                            Log.d("TAGDDD", Name + Email)
+                            createNavBar(Name, Email, savedInstanceState)
+                        }
+                    }
 
-            val userNameRef = userref.parent?.child("users")?.orderByChild("email")?.equalTo(user.email)
-            val eventListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) = if (!dataSnapshot.exists()) {
-                    //create new user
-                    Toast.makeText(this@UserHomeV2, "User details not found", Toast.LENGTH_LONG).show()
-                } else {
-                    for (e in dataSnapshot.children) {
-                        val employee = e.getValue(Data::class.java)
-                        var Name = employee!!.name
-                        var Email = employee.email
-                        Log.d("TAGDDD", Name + Email)
-                        createNavBar(Name, Email, savedInstanceState)
+                    override fun onCancelled(databaseError: DatabaseError) {
                     }
                 }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                }
+                userNameRef?.addListenerForSingleValueEvent(eventListener)
+            } else {
+                createNavBar(user.displayName.toString(), user.email.toString(), savedInstanceState)
             }
-            userNameRef?.addListenerForSingleValueEvent(eventListener)
+
+
 
         }
 

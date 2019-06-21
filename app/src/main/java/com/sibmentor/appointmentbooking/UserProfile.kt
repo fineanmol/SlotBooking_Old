@@ -84,6 +84,7 @@ class UserProfile : AppCompatActivity() {
                     progressbar.visibility = View.INVISIBLE
                     if (task.isSuccessful) {
                         this.toast("Profile Updated")
+                        startActivity(Intent(this, UserHomeV2::class.java))
                     } else {
                         this.toast(task.exception?.message!!)
                     }
