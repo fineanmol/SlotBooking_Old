@@ -84,16 +84,12 @@
     <string name="drawer_item_contact">Contact</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-        et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-        dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-        aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-        gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
     </string>
     <string name="newooking">Need any Assistance? \n
         <b>Book an Appointment Now !!</b>
     </string>
-    <string name="already_booked_show">Ready for Appointment \n <i>Click here to</i>
+    <string name="already_booked_show">Ready for Appointment \n <i>Click below to</i>
         <b>Check details</b>
     </string>
 </resources>

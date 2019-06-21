@@ -1,5 +1,6 @@
 package com.sibmentor.appointmentbooking
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +8,6 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import kotlinx.android.synthetic.main.activity_user_update_email.button_authenticate
-import kotlinx.android.synthetic.main.activity_user_update_email.button_update
 import kotlinx.android.synthetic.main.activity_user_update_email.edit_text_password
 import kotlinx.android.synthetic.main.activity_user_update_email.layoutPassword
 import kotlinx.android.synthetic.main.activity_user_update_email.progressbar
@@ -53,11 +53,12 @@ class UserPassUpdate : AppCompatActivity() {
                             else -> this.toast(task.exception?.message!!)
                         }
                     }
+                progressbar.visibility = View.GONE
             }
 
         }
 
-        button_update.setOnClickListener {
+        button_pass_update.setOnClickListener {
 
             val password = edit_text_new_password.text.toString().trim()
 
@@ -77,9 +78,13 @@ class UserPassUpdate : AppCompatActivity() {
                 progressbar.visibility = View.VISIBLE
                 user.updatePassword(password)
                     .addOnCompleteListener { task ->
+                        progressbar.visibility = View.GONE
                         if (task.isSuccessful) {
 
                             this.toast("Password Updated")
+                            var passIntent= Intent(this,UserProfile::class.java)
+                            startActivity(passIntent)
+
                         } else {
                             this.toast(task.exception?.message!!)
                         }
