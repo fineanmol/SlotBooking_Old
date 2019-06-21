@@ -1,16 +1,22 @@
 package com.sibmentor.appointmentbooking
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_user_update_email.*
+
 
 class UserEmailUpdate : AppCompatActivity() {
     private val currentUser = FirebaseAuth.getInstance().currentUser
+    lateinit var ref: DatabaseReference
+    var pastEmail = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +61,9 @@ class UserEmailUpdate : AppCompatActivity() {
         }
 
         button_update.setOnClickListener { view ->
+            currentUser?.let { user ->
+                pastEmail = user.email.toString()
+            }
             val email = edit_text_email.text.toString().trim()
 
             if (email.isEmpty()) {
@@ -75,7 +84,38 @@ class UserEmailUpdate : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         progressbar.visibility = View.GONE
                         if (task.isSuccessful) {
+                            ref = FirebaseDatabase.getInstance().getReference("users")
+                            val userNameRef = ref.orderByChild("email").equalTo(pastEmail)
+                            userNameRef.addValueEventListener(object : ValueEventListener {
+                                override fun onCancelled(p0: DatabaseError) {
+                                }
+
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    if (!dataSnapshot.exists()) {
+                                        Toast.makeText(
+                                            this@UserEmailUpdate,
+                                            "User Not Registered",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    } else {
+                                        for (e in dataSnapshot.children) {
+                                            val employee = e.getValue(Data::class.java)!!
+                                            val email = employee.email
+                                            val sId = employee.studentId
+
+                                            //  val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+                                            ref.child(sId).setValue(email)
+
+                                            //  Toast.makeText(this@UserEmailUpdate, "Selected Slots Saved", Toast.LENGTH_LONG).show()
+
+
+                                        }
+
+                                    }
+                                }
+                            })
                             this.toast("Email Updated")
+                            startActivity(Intent(this, UserProfile::class.java))
                         } else {
                             this.toast(task.exception?.message!!)
                         }
