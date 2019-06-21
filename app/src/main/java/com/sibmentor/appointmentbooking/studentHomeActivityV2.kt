@@ -177,15 +177,13 @@ class UserHomeV2 : AppCompatActivity() {
                 ).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            val uri = Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
+                           /* val uri = Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
                             val intent = Intent(Intent.ACTION_VIEW, uri)
-                            startActivity(intent)
-                            startActivity(Intent(this@UserHomeV2, UserProfile::class.java))
+                            startActivity(intent)*/
+                            startActivity(Intent(this@UserHomeV2, BuyMeACoffee::class.java))
                             return false
                         }
-                    }).withEnabled(
-                    false
-                ),
+                    }),
                 SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
@@ -306,7 +304,7 @@ class UserHomeV2 : AppCompatActivity() {
                 ProfileSettingDrawerItem().withName("Manage Account").withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            Toast.makeText(this@UserHomeV2,this@UserHomeV2.packageName,Toast.LENGTH_LONG).show()
+                            //Toast.makeText(this@UserHomeV2,this@UserHomeV2.packageName,Toast.LENGTH_LONG).show()
                             startActivity(Intent(this@UserHomeV2, UserProfile::class.java))
                             return false
                         }

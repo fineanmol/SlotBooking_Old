@@ -27,7 +27,7 @@ class UserPhoneVerify : AppCompatActivity() {
             val phone = edit_text_phone.text.toString().trim()
 
             if (phone.isEmpty() || phone.length != 10) {
-                edit_text_phone.error = "Enter a valid phone"
+                edit_text_phone.error = "Enter a valid Phone Number"
                 edit_text_phone.requestFocus()
                 return@setOnClickListener
             }
@@ -87,7 +87,7 @@ class UserPhoneVerify : AppCompatActivity() {
             .currentUser?.updatePhoneNumber(phoneAuthCredential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    this.toast("Phone Added")
+                    this.toast("New Phone Number Added")
                 } else {
                     this.toast(task.exception?.message!!)
                 }

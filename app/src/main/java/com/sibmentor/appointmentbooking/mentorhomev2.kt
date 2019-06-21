@@ -325,14 +325,14 @@ class mentorhomev2 : AppCompatActivity() {
                         }
                     }),
                 SecondaryDrawerItem().withName("Buy me a Coffee").withIcon(FontAwesome.Icon.faw_coffee).withEnabled(
-                    false
+                    true
                 ).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            val uri =
-                                Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
-                            val intent = Intent(Intent.ACTION_VIEW, uri)
-                            startActivity(intent)
+                            /* val uri = Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
+                             val intent = Intent(Intent.ACTION_VIEW, uri)
+                             startActivity(intent)*/
+                            startActivity(Intent(this@mentorhomev2, BuyMeACoffee::class.java))
                             return false
                         }
                     }),
