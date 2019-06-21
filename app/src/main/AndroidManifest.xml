@@ -40,7 +40,7 @@
                 android:label="@string/title_activity_mentorhomev2"
                 android:theme="@style/CustomTheme">
         </activity>
-        <activity android:name="com.sibmentor.appointmentbooking.MentorSlotList">
+        <activity android:name="com.sibmentor.appointmentbooking.MentorSlotList" android:label="@string/title_activity_locallist">
         </activity>
         <activity
                 android:name="com.sibmentor.appointmentbooking.addSlotActivity"

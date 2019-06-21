@@ -138,10 +138,12 @@ class UserHomeV2 : AppCompatActivity() {
                     }).withIcon(
                     FontAwesome.Icon.faw_eye
                 ),
-                CustomUrlPrimaryDrawerItem().withName("New Things Coming Up").withDescription("Be Connected").withIcon(
-                    FontAwesome.Icon.faw_grin
-                ).withEnabled(
+                CustomUrlPrimaryDrawerItem().withEnabled(
                     false
+                ).withName("New Things Coming Up").withDescription("Be Connected").withEnabled(
+                    false
+                ).withIcon(
+                    FontAwesome.Icon.faw_grin
                 ),
                 SectionDrawerItem().withName(R.string.drawer_item_section_header),
                 SecondaryDrawerItem().withName("Share").withIcon(FontAwesome.Icon.faw_share_alt).withOnDrawerItemClickListener(
@@ -265,7 +267,7 @@ class UserHomeV2 : AppCompatActivity() {
                 ProfileSettingDrawerItem().withName("Rate on Playstore").withIcon(FontAwesome.Icon.faw_star1).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                           // Toast.makeText(this@UserHomeV2,this@UserHomeV2.packageName,Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@UserHomeV2,this@UserHomeV2.packageName,Toast.LENGTH_LONG).show()
                             val uri = Uri.parse("market://details?id=" + this@UserHomeV2.packageName)
                             val goToMarket = Intent(Intent.ACTION_VIEW, uri)
                             // To count with Play market backstack, After pressing back button,

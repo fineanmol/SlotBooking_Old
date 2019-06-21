@@ -69,9 +69,10 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
                                     )
                                     listview.adapter = adapter
                                 } else {
+
                                     Toast.makeText(
                                         this@student_show_reserved_slot_Activity,
-                                        "Go!! Book an Appointment First",
+                                        "Please !! Book an Appointment First",
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
@@ -88,7 +89,7 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
             })
         }
 
-        Toast.makeText(this, studentName, Toast.LENGTH_LONG).show()
+       // Toast.makeText(this, studentName, Toast.LENGTH_LONG).show()
 
     }
 

@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
@@ -76,6 +77,13 @@ class UserHome : AppCompatActivity() {
                     }
                     val adapter = customAdapter(this@UserHome, R.layout.listview_custom, slotList)
                     listview.adapter = adapter
+                }
+                else{
+                    Toast.makeText(
+                        this@UserHome,
+                        "No Booking Available Yet !!",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 

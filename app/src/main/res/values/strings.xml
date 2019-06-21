@@ -6,6 +6,7 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="title_activity_user_signup">New Registration</string>
     <string name="title_activity_mentorhomev2">Mentor Home</string>
+    <string name="title_activity_locallist">Generated Slots</string>
     <string name="title_login">Slot Booking</string>
     <string name="title__addslot">Add Slot</string>
     <string name="title_appointmentList">Appointment List</string>
@@ -13,7 +14,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_subtitle">Slot Booking</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_logout">Logout</string>
 
