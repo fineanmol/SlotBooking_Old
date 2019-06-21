@@ -293,7 +293,7 @@ class UserHomeV2 : AppCompatActivity() {
                 ProfileSettingDrawerItem().withName("Rate on Playstore").withIcon(FontAwesome.Icon.faw_star1).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            Toast.makeText(this@UserHomeV2,this@UserHomeV2.packageName,Toast.LENGTH_LONG).show()
+                          //  Toast.makeText(this@UserHomeV2,this@UserHomeV2.packageName,Toast.LENGTH_LONG).show()
                             val uri = Uri.parse("market://details?id=" + this@UserHomeV2.packageName)
                             val goToMarket = Intent(Intent.ACTION_VIEW, uri)
                             // To count with Play market backstack, After pressing back button,
