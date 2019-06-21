@@ -177,13 +177,15 @@ class UserHomeV2 : AppCompatActivity() {
                 ).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            //val uri = Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
-                            //val intent = Intent(Intent.ACTION_VIEW, uri)
-                            //startActivity(intent)
+                            val uri = Uri.parse("https://www.buymeacoffee.com/fineanmol") // missing 'http://' will cause crashed
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
                             startActivity(Intent(this@UserHomeV2, UserProfile::class.java))
                             return false
                         }
-                    }),
+                    }).withEnabled(
+                    false
+                ),
                 SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
@@ -301,7 +303,15 @@ class UserHomeV2 : AppCompatActivity() {
                             return false
                         }
                     }),
-                ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings),ProfileSettingDrawerItem().withName("Logout").withIcon(FontAwesome.Icon.faw_sign_out_alt).withOnDrawerItemClickListener(
+                ProfileSettingDrawerItem().withName("Manage Account").withOnDrawerItemClickListener(
+                    object : Drawer.OnDrawerItemClickListener {
+                        override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
+                            Toast.makeText(this@UserHomeV2,this@UserHomeV2.packageName,Toast.LENGTH_LONG).show()
+                            startActivity(Intent(this@UserHomeV2, UserProfile::class.java))
+                            return false
+                        }
+                    }).withIcon(GoogleMaterial.Icon.gmd_settings)
+                ,ProfileSettingDrawerItem().withName("Logout").withIcon(FontAwesome.Icon.faw_sign_out_alt).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                             logout()
