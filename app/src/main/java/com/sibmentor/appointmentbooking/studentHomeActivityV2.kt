@@ -146,7 +146,19 @@ class UserHomeV2 : AppCompatActivity() {
                 CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Book Appointment").withDescription("Book Scheduled Slots")
                     .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            startActivity(Intent(this@UserHomeV2, UserHome::class.java))
+                            currentUser?.let { user ->
+                                if (user.phoneNumber.isNullOrEmpty()) {
+                                    Toast.makeText(
+                                        this@UserHomeV2,
+                                        "Please verify your Phone Number for hustle free Appointment Booking",
+                                        Toast.LENGTH_LONG
+                                    )
+                                    startActivity(Intent(this@UserHomeV2, UserPhoneVerify::class.java))
+                                } else {
+                                    var bookintent = Intent(this@UserHomeV2, UserHome::class.java)
+                                    startActivity(bookintent)
+                                }
+                            }
                             return false
                         }
                     }).withIcon(
