@@ -101,7 +101,6 @@ class UserPhoneVerify : AppCompatActivity() {
                     userNameRef.addValueEventListener(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError) {
                         }
-
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             if (!dataSnapshot.exists()) {
                                 Toast.makeText(
@@ -112,12 +111,11 @@ class UserPhoneVerify : AppCompatActivity() {
                             } else {
                                 for (e in dataSnapshot.children) {
                                     val employee = e.getValue(Data::class.java)!!
-
                                     val Id = employee.id
 
                                     //  val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
                                     ref.child(Id).child("number").setValue(edit_text_phone.text.toString().trim())
-
+                                    break
                                     //  Toast.makeText(this@UserEmailUpdate, "Selected Slots Saved", Toast.LENGTH_LONG).show()
 
 
