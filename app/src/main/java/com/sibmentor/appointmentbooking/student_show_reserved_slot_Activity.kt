@@ -24,11 +24,11 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_show_reserved_slot)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar);
-        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setSupportActionBar(toolbar)
         slotList = mutableListOf()
-        listview = this.findViewById<ListView>(R.id.reserved_slot_view)
+        listview = this.findViewById(R.id.reserved_slot_view)
         ref = FirebaseDatabase.getInstance().getReference("Slots")
 
         currentUser?.let { user ->
@@ -105,9 +105,9 @@ class student_show_reserved_slot_Activity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
 
-        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        if (item.itemId == android.R.id.home) // Press Back Icon
         {
-            finish();
+            finish()
         }
 
         if (id == R.id.action_logout) {
