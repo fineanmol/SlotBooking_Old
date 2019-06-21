@@ -47,7 +47,6 @@ class UserHome : AppCompatActivity() {
 
 
 
-
         ref = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
         var query = ref.orderByChild("status").equalTo("NB")
 

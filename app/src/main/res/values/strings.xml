@@ -90,4 +90,6 @@
         aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
         gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
     </string>
+    <string name="newooking">   Need any Assistance? \n<b>Book an Appointment Now !!</b></string>
+    <string name="already_booked_show">Ready for Appointment \n <i> Click here to</i> <b> Check details </b></string>
 </resources>

@@ -36,6 +36,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IProfile
 import com.sibmentor.appointmentbooking.drawerItems.CustomPrimaryDrawerItem
 import com.sibmentor.appointmentbooking.drawerItems.CustomUrlPrimaryDrawerItem
+import kotlinx.android.synthetic.main.content_user_home_v2.*
 
 class UserHomeV2 : AppCompatActivity() {
     val userref = FirebaseDatabase.getInstance().getReference("users")
@@ -49,6 +50,14 @@ class UserHomeV2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home_v2)
+        new_book_btn.setOnClickListener(View.OnClickListener {
+            var bookintent= Intent(this,UserHome::class.java)
+            startActivity(bookintent)
+        })
+        show_appointment_btn.setOnClickListener(View.OnClickListener {
+            var showintent= Intent(this,student_show_reserved_slot_Activity::class.java)
+            startActivity(showintent)
+        })
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->

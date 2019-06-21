@@ -75,9 +75,9 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener(this) {
 
                     task ->
-
+                loading.visibility = View.GONE
                 if (task.isSuccessful) {
-                    loading.visibility = View.GONE
+
                     login()
 
                 } else if (task.isCanceled) {

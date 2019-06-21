@@ -57,10 +57,10 @@ class customAdapter(val mCtx: Context, val layoutId: Int, val slotList: List<slo
                                 var status = employee?.status
                                 if (status == "NB") {
                                     userref.child(studentkey!!).child("status").setValue("B")
-                                    ref.child(slot.generated_by).child(id).child("studentNumber").setValue(phone)
-                                    ref.child(slot.generated_by).child(id).child("reserved_by").setValue(studentName)
-                                    ref.child(slot.generated_by).child(id).child("studentId").setValue(studentId)
-                                    ref.child(slot.generated_by).child(id).child("status").setValue("B")
+                                    ref.child("Nikhil Nishad").child(id).child("studentNumber").setValue(phone)
+                                    ref.child("Nikhil Nishad").child(id).child("reserved_by").setValue(studentName)
+                                    ref.child("Nikhil Nishad").child(id).child("studentId").setValue(studentId)
+                                    ref.child("Nikhil Nishad").child(id).child("status").setValue("B")
                                     Toast.makeText(
                                         mCtx,
                                         "$studentName Appointment Booked! \n at: ${time.text}",

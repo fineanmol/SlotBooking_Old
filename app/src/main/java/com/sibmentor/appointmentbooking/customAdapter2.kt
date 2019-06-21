@@ -44,7 +44,20 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
         studentId.text = slot.studentId
         slotTiming.text = slot.begins_At.split("[").last().toString() + ("-").toString() + slot.stop_At
         call.setOnClickListener(View.OnClickListener {
-            Toast.makeText(mCtx, "${slot.studentNumber}", Toast.LENGTH_LONG).show()
+            Toast.makeText(mCtx, "Number is ${slot.studentNumber}", Toast.LENGTH_LONG).show()
+            try {
+          /*      val call = Intent(Intent.ACTION_CALL,Uri.parse("tel:${slot.studentNumber}"))
+
+            call.data = Uri.parse("tel:${slot.studentNumber}")
+                startActivity(mCtx,call,null)
+                val callIntent = Intent(mCtx,UserHomeV2::class.java)
+
+                startActivity(mCtx,callIntent, Bundle.EMPTY)*/
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+
+            }
             // copyText(view,"${slot.studentNumber}")
 
 

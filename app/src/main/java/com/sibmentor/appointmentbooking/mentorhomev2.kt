@@ -16,6 +16,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -197,7 +198,8 @@ class mentorhomev2 : AppCompatActivity() {
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                             Log.d("TAGDDD", "clicked")
-                            startActivity(Intent(this@mentorhomev2, addSlotActivity::class.java))
+                            val snack = view?.let { Snackbar.make(it,"Click on the three dots of that menu",Snackbar.LENGTH_LONG) }
+                            snack!!.show()
                             return false
                         }
                     }).withMenu(
