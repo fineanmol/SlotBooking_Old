@@ -9,13 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_user_update_email.*
 
 
 class UserEmailUpdate : AppCompatActivity() {
     private val currentUser = FirebaseAuth.getInstance().currentUser
-    lateinit var ref: DatabaseReference
+    val ref = FirebaseDatabase.getInstance().getReference("users")
     var pastEmail = ""
 
 
@@ -84,7 +87,6 @@ class UserEmailUpdate : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         progressbar.visibility = View.GONE
                         if (task.isSuccessful) {
-                            ref = FirebaseDatabase.getInstance().getReference("users")
                             val userNameRef = ref.orderByChild("email").equalTo(pastEmail)
                             userNameRef.addValueEventListener(object : ValueEventListener {
                                 override fun onCancelled(p0: DatabaseError) {
@@ -92,22 +94,18 @@ class UserEmailUpdate : AppCompatActivity() {
 
                                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                                     if (!dataSnapshot.exists()) {
-                                        Toast.makeText(
-                                            this@UserEmailUpdate,
-                                            "User Not Registered",
-                                            Toast.LENGTH_LONG
-                                        ).show()
+
                                     } else {
                                         for (e in dataSnapshot.children) {
                                             val employee = e.getValue(Data::class.java)!!
-                                            val email = employee.email
-                                            val sId = employee.studentId
+                                            val sId = employee.id
+                                            Toast.makeText(
+                                                this@UserEmailUpdate,
+                                                email + sId,
+                                                Toast.LENGTH_LONG
+                                            ).show()
 
-                                            //  val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
-                                            ref.child(sId).setValue(email)
-
-                                            //  Toast.makeText(this@UserEmailUpdate, "Selected Slots Saved", Toast.LENGTH_LONG).show()
-
+                                            ref.child(sId).child("email").setValue(email)
 
                                         }
 

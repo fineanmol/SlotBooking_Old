@@ -1,18 +1,28 @@
 package com.sibmentor.appointmentbooking
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_user_verify_phone.*
 import java.util.concurrent.TimeUnit
 
 class UserPhoneVerify : AppCompatActivity() {
 
     private var verificationId: String? = null
+    val ref = FirebaseDatabase.getInstance().getReference("users")
+    private val currentUser = FirebaseAuth.getInstance().currentUser
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +97,38 @@ class UserPhoneVerify : AppCompatActivity() {
             .currentUser?.updatePhoneNumber(phoneAuthCredential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    val userNameRef = ref.orderByChild("email").equalTo(currentUser?.let { user -> user.email })
+                    userNameRef.addValueEventListener(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
+                        }
+
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (!dataSnapshot.exists()) {
+                                Toast.makeText(
+                                    this@UserPhoneVerify,
+                                    "User Not Registered",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else {
+                                for (e in dataSnapshot.children) {
+                                    val employee = e.getValue(Data::class.java)!!
+
+                                    val Id = employee.id
+
+                                    //  val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+                                    ref.child(Id).child("number").setValue(edit_text_phone.text.toString().trim())
+
+                                    //  Toast.makeText(this@UserEmailUpdate, "Selected Slots Saved", Toast.LENGTH_LONG).show()
+
+
+                                }
+
+                            }
+                        }
+                    })
+
                     this.toast("New Phone Number Added")
+                    startActivity(Intent(this, UserProfile::class.java))
                 } else {
                     this.toast(task.exception?.message!!)
                 }
