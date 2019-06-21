@@ -30,8 +30,38 @@ class UserPhoneVerify : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_verify_phone)
+        Toast.makeText(this, "Please verify your Phone Number for hustle free Appointment Booking", Toast.LENGTH_LONG)
         layoutPhone.visibility = View.VISIBLE
         layoutVerification.visibility = View.GONE
+        currentUser?.let { user ->
+            val userNameRef = ref.orderByChild("email").equalTo(currentUser.let { user -> user.email })
+            userNameRef.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (!dataSnapshot.exists()) {
+                        Toast.makeText(
+                            this@UserPhoneVerify,
+                            "User Not Registered",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        for (e in dataSnapshot.children) {
+                            val employee = e.getValue(Data::class.java)!!
+                            edit_text_phone.setText(employee.number)
+
+                            //  val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+                            //  Toast.makeText(this@UserEmailUpdate, "Selected Slots Saved", Toast.LENGTH_LONG).show()
+
+
+                        }
+
+                    }
+                }
+            })
+
+        }
 
 
         button_send_verification.setOnClickListener {
