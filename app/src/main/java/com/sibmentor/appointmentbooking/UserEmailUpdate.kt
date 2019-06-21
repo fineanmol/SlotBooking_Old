@@ -122,5 +122,11 @@ class UserEmailUpdate : AppCompatActivity() {
             }
         }
     }
+    override fun onBackPressed() {
+        // super.onBackPressed();
+        // Not calling **super**, disables back button in current screen.
+        var intent= Intent(this,UserProfile::class.java)
+        startActivity(intent)
+    }
 
 }

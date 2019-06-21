@@ -1,8 +1,10 @@
 package com.sibmentor.appointmentbooking
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -114,4 +116,11 @@ class UserProfile : AppCompatActivity() {
         }
 
     }
+    override fun onBackPressed() {
+        // super.onBackPressed();
+        // Not calling **super**, disables back button in current screen.
+        var intent= Intent(this,UserHomeV2::class.java)
+        startActivity(intent)
+    }
+
 }
