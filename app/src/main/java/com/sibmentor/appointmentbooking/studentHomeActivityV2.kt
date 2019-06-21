@@ -51,8 +51,19 @@ class UserHomeV2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home_v2)
         new_book_btn.setOnClickListener(View.OnClickListener {
-            var bookintent= Intent(this,UserHome::class.java)
-            startActivity(bookintent)
+            currentUser?.let { user ->
+                if (user.phoneNumber.isNullOrEmpty()) {
+                    Toast.makeText(
+                        this,
+                        "Please verify your Phone Number for hustle free Appointment Booking",
+                        Toast.LENGTH_LONG
+                    )
+                    startActivity(Intent(this, UserPhoneVerify::class.java))
+                } else {
+                    var bookintent = Intent(this, UserHome::class.java)
+                    startActivity(bookintent)
+                }
+            }
         })
         show_appointment_btn.setOnClickListener(View.OnClickListener {
             var showintent= Intent(this,student_show_reserved_slot_Activity::class.java)
