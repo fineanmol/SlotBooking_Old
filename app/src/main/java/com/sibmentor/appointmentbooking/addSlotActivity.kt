@@ -135,7 +135,7 @@ class addSlotActivity : AppCompatActivity() {
 
     private fun handleSTimeButton() {
         val calendar = Calendar.getInstance()
-        val HOUR = calendar.get(Calendar.HOUR)
+        val HOUR = calendar.get(Calendar.HOUR_OF_DAY)
         val MINUTE = calendar.get(Calendar.MINUTE)
         val is24HourFormat = DateFormat.is24HourFormat(this)
 
@@ -143,7 +143,7 @@ class addSlotActivity : AppCompatActivity() {
             Log.i(TAG, "onTimeSet: $hour$minute")
 
             val calendar1 = Calendar.getInstance()
-            calendar1.set(Calendar.HOUR, hour)
+            calendar1.set(Calendar.HOUR_OF_DAY, hour)
             calendar1.set(Calendar.MINUTE, minute)
             val dateText = DateFormat.format("h:mm a", calendar1).toString()
             slotSTime.text = dateText
@@ -158,14 +158,14 @@ class addSlotActivity : AppCompatActivity() {
 
     private fun handleETimeButton() {
         val calendar = Calendar.getInstance()
-        val HOUR = calendar.get(Calendar.HOUR)
+        val HOUR = calendar.get(Calendar.HOUR_OF_DAY)
         val MINUTE = calendar.get(Calendar.MINUTE)
         val is24HourFormat = DateFormat.is24HourFormat(this)
 
         val timePickerDialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             Log.i(TAG, "onTimeSet: $hour$minute")
             val calendar1 = Calendar.getInstance()
-            calendar1.set(Calendar.HOUR, hour)
+            calendar1.set(Calendar.HOUR_OF_DAY, hour)
             calendar1.set(Calendar.MINUTE, minute)
             val dateText = DateFormat.format("h:mm a", calendar1).toString()
             slotETime.text = dateText

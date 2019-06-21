@@ -1,7 +1,6 @@
 package com.sibmentor.appointmentbooking
 
 import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -518,20 +517,7 @@ class mentorhomev2 : AppCompatActivity() {
         }
         super.onSaveInstanceState(outState)
     }
-    protected fun exitByBackKey() {
 
-        val alertbox = AlertDialog.Builder(this)
-            .setMessage("Do you want to exit application?")
-            .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
-                // do something when the button is clicked
-                finishAffinity()
-
-            })
-            .setNegativeButton("No", // do something when the button is clicked
-                DialogInterface.OnClickListener { arg0, arg1 -> })
-            .show()
-
-    }
     override fun onBackPressed() {
         //handle the back press :D close the drawer first and if the drawer is closed close the activity
         if (result.isDrawerOpen) {

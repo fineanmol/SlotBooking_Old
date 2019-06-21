@@ -1,6 +1,7 @@
 package com.sibmentor.appointmentbooking
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -82,7 +83,7 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                         if (targetDate != Date) {
                                             Snackbar.make(
                                                 view, // Parent view
-                                                "No Appointments on $targetDate are booked yet", // Message to show
+                                                "No Appointments of Today are booked yet", // Message to show
                                                 Snackbar.LENGTH_SHORT // How long to display the message.
                                             ).show()
                                         }
@@ -142,9 +143,19 @@ class mentorShowSlotActivity : AppCompatActivity() {
                             if (!p0.exists()) {
                                 Snackbar.make(
                                     view, // Parent view
-                                    "You didn't Created any Slot yet!! \n Click Add Slot or Start New Session ", // Message to show
-                                    Snackbar.LENGTH_LONG // How long to display the message.
+                                    "You didn't Created any Slot yet!! \n Go Back and Start New Session ", // Message to show
+                                    Snackbar.LENGTH_INDEFINITE // How long to display the message.
                                 ).show()
+                              //  startActivity(Intent(this@mentorShowSlotActivity, mentorhomev2::class.java))
+                                spinner.isEnabled=false
+                               // toolbar.setTitle("You Didn't Added any Slots")
+                                toolbar.setBackgroundColor(Color.WHITE)
+                               // toolbar.setTitleTextColor(Color.BLACK)
+                                toolbar.visibility=View.GONE
+
+
+
+
                             }
                         }
 
