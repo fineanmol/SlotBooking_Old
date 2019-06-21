@@ -26,6 +26,7 @@
             <EditText
                     android:hint="Enter Name"
                     android:textAlignment="center"
+                    android:maxLength="15"
                     android:layout_marginTop="5dp"
                     android:textColor="@android:color/white"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -81,7 +82,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:layout_gravity="top"
                     android:drawablePadding="16dp"
-                    android:drawableLeft="@drawable/common_full_open_on_phone"
+                    android:drawableLeft="@drawable/ic_phone_android_black_24dp"
                     tools:text="+917549161079"
                     android:enabled="true"
                     android:id="@+id/text_phone"
