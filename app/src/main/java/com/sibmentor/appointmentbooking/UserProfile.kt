@@ -6,17 +6,49 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_user_profile.*
 
 class UserProfile : AppCompatActivity() {
     private val currentUser = FirebaseAuth.getInstance().currentUser
 
+    val ref = FirebaseDatabase.getInstance().getReference("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
         currentUser?.let { user ->
+            val userNameRef = ref.orderByChild("email").equalTo(currentUser.let { user -> user.email })
+            userNameRef.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (!dataSnapshot.exists()) {
+                    } else {
+                        for (e in dataSnapshot.children) {
+                            val employee = e.getValue(Data::class.java)!!
+
+
+                            val name = if (user.displayName.isNullOrEmpty()) employee.name else user.displayName
+                            ref.child(employee.id).child("name").setValue(name)
+                            edit_text_name.setText(name)
+
+                            //  val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+
+                            //  Toast.makeText(this@UserEmailUpdate, "Selected Slots Saved", Toast.LENGTH_LONG).show()
+
+
+                        }
+
+                    }
+                }
+            })
+
             text_email.text = user.email
 
             text_phone.text = if (user.phoneNumber.isNullOrEmpty()) "Add Number" else user.phoneNumber
@@ -29,6 +61,7 @@ class UserProfile : AppCompatActivity() {
         }
 
         button_save.setOnClickListener {
+
 
             val name = edit_text_name.text.toString().trim()
 
