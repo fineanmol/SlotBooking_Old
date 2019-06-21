@@ -22,6 +22,7 @@ class UserPhoneVerify : AppCompatActivity() {
     val ref = FirebaseDatabase.getInstance().getReference("users")
     private val currentUser = FirebaseAuth.getInstance().currentUser
     var phoneNumber = ""
+    var flag = true
 
 
 
@@ -115,15 +116,12 @@ class UserPhoneVerify : AppCompatActivity() {
                                 for (e in dataSnapshot.children) {
                                     val employee = e.getValue(Data::class.java)!!
                                     val Id = employee.id
-                                    Toast.makeText(
-                                        this@UserPhoneVerify,
-                                        (i++.toString()),
-                                        Toast.LENGTH_LONG
-                                    ).show()
+                                    while (flag) {
+                                        ref.child(Id).child("number").setValue(phoneNumber)
+                                        flag = false
+                                    }
 
                                     //  val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
-                                    ref.child(Id).child("number").setValue(phoneNumber)
-                                    break
                                     //  Toast.makeText(this@UserEmailUpdate, "Selected Slots Saved", Toast.LENGTH_LONG).show()
 
 
