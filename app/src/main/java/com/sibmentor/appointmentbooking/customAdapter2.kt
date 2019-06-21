@@ -46,9 +46,6 @@ class customAdapter2(val mCtx: Context, val layoutId: Int, val slotList: List<sl
         call.setOnClickListener(View.OnClickListener {
             Toast.makeText(mCtx, "${slot.studentNumber}", Toast.LENGTH_LONG).show()
             // copyText(view,"${slot.studentNumber}")
-
-
-
         })
         return view
     }
