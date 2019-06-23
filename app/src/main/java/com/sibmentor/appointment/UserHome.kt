@@ -31,8 +31,8 @@ class UserHome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar);
-        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setSupportActionBar(toolbar)
         slotList = mutableListOf()
         listview = findViewById(R.id.listview)
@@ -105,9 +105,9 @@ class UserHome : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
 
-        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        if (item.itemId == android.R.id.home) // Press Back Icon
         {
-            finish();
+            finish()
         }
 
         if (id == R.id.action_logout) {
