@@ -8,18 +8,34 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:695299467683:android:09d17b5d8c628ef6",
+        "mobilesdk_app_id": "1:695299467683:android:19689d426c2328a7",
         "android_client_info": {
-          "package_name": "com.sibmentor.appointmentbooking"
+          "package_name": "com.sibmentor.appointment"
         }
       },
       "oauth_client": [
         {
-          "client_id": "695299467683-96ck9648a940idicvgu5tjav1kkl00f1.apps.googleusercontent.com",
+          "client_id": "695299467683-buqar2ctq0nl3mh0kjdpvumsbaic99cr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.sibmentor.appointmentbooking",
+            "package_name": "com.sibmentor.appointment",
+            "certificate_hash": "eccfea33e7b92f007ecbc3ae05900bdefca3220e"
+          }
+        },
+        {
+          "client_id": "695299467683-a9v49l0lggv2ngjuk1mkt8fjl34ba7j4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sibmentor.appointment",
             "certificate_hash": "bc33aa2ded7c9da604de004707b2fb447c83f5a8"
+          }
+        },
+        {
+          "client_id": "695299467683-ms6qaen47nv2kvii73st5i529ho4tiri.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sibmentor.appointment",
+            "certificate_hash": "58424372806834dae8228e459fd4dd1269a2fee2"
           }
         },
         {

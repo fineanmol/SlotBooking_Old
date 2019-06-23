@@ -63,7 +63,8 @@
                 android:text="Name"
                 android:fontFamily="sans-serif-light"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textColor="#FFFFFF"/>
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"/>
 
         <EditText
                 android:id="@+id/name"
@@ -74,14 +75,16 @@
                 android:singleLine="true"
                 android:layout_marginBottom="10dp"
                 android:hint="John Phill"
-                android:inputType="textPersonName" android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"/>
+                android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#847F7F"/>
         <TextView
                 android:labelFor="@id/u_r_email"
                 android:text="Email"
                 android:fontFamily="sans-serif-light"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:textColor="#FFFFFF"/>
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"/>
 
         <EditText
                 android:id="@+id/u_r_email"
@@ -93,7 +96,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="john@gmail.com"
                 android:inputType="textEmailAddress" android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"/>
+                android:textColorHint="#847F7F"/>
         <TextView
                 android:labelFor="@id/mobile"
                 android:text="Mobile Number"
@@ -108,7 +111,8 @@
                 android:id="@+id/mobile"
                 android:drawableLeft="@drawable/ic_phone_android_black_24dp"
                 android:hint="9876543210"
-                android:inputType="number" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+                android:inputType="number" android:textColor="#FFFFFF"
+                android:textColorHint="#847F7F"/>
 
         <TextView
                 android:labelFor="@id/studentid"
@@ -130,7 +134,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="1523101109"
                 android:inputType="textEmailAddress" android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF"/>
+                android:textColorHint="#847F7F"/>
 
         <TextView
                 android:labelFor="@id/u_r_pass"
@@ -147,7 +151,8 @@
                 android:id="@+id/u_r_pass"
                 android:drawableLeft="@drawable/ic_pass_black_24dp"
                 android:hint="Password"
-                android:inputType="textPassword" android:textColor="#FFFFFF" android:textColorHint="#FFFFFF"/>
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF" android:textColorHint="#847F7F"/>
         <Button
                 android:id="@+id/u_register"
                 android:layout_width="250dp"
