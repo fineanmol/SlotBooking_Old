@@ -51,7 +51,7 @@ class UserProfile : AppCompatActivity() {
 
             text_email.text = user.email
 
-            text_phone.text = if (user.phoneNumber.isNullOrEmpty()) "Verify Phone Number" else user.phoneNumber
+            //text_phone.text = if (user.phoneNumber.isNullOrEmpty()) "Verify Phone Number" else user.phoneNumber
 
             if (user.isEmailVerified) {
                 text_not_verified.visibility = View.INVISIBLE
@@ -102,9 +102,9 @@ class UserProfile : AppCompatActivity() {
 
         }
 
-        text_phone.setOnClickListener {
+        /*text_phone.setOnClickListener {
             //startActivity(Intent(this, UserPhoneVerify::class.java))
-        }
+        }*/
 
         text_email.setOnClickListener {
             startActivity(Intent(this, UserEmailUpdate::class.java))
