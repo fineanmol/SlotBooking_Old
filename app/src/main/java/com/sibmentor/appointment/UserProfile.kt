@@ -120,6 +120,7 @@ class UserProfile : AppCompatActivity() {
         // Not calling **super**, disables back button in current screen.
         var intent= Intent(this,UserHomeV2::class.java)
         startActivity(intent)
+
     }
 
 }
