@@ -34,8 +34,8 @@ class mentorShowSlotActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mentor_show_slot)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar);
-        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setSupportActionBar(toolbar)
         val calendar = Calendar.getInstance()
 
@@ -185,9 +185,9 @@ class mentorShowSlotActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
-        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        if (item.itemId == android.R.id.home) // Press Back Icon
         {
-            finish();
+            finish()
         }
         if (id == R.id.action_one) {
             startActivity(Intent(this, addSlotActivity::class.java))

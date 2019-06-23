@@ -29,8 +29,8 @@ class AppointmentList2 : AppCompatActivity() {
         setContentView(R.layout.activity_appointment_list2)
         val calendar = Calendar.getInstance()
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar);
-        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setSupportActionBar(toolbar)
         var month = calendar.get(Calendar.MONTH)
         var Week = calendar.get(Calendar.WEEK_OF_YEAR)
@@ -139,9 +139,9 @@ class AppointmentList2 : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
-        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        if (item.itemId == android.R.id.home) // Press Back Icon
         {
-            finish();
+            finish()
         }
 
 
