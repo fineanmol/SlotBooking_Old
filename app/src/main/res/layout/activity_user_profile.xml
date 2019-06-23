@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"/>
 
 
-            <!--<TextView
+            <TextView
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:layout_gravity="top"
                     android:drawablePadding="16dp"
@@ -89,7 +89,6 @@
                     android:layout_width="match_parent"
                     android:layout_marginBottom="20dp"
                     android:layout_height="wrap_content"/>
-                    -->
 
             <TextView
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"

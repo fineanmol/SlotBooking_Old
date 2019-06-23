@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "695299467683-uu9csnpisro7fbd1rbg2fhps0k9icskv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sibmentor.appointment",
+            "certificate_hash": "3d3a6944c6ba746da70550e0b107fa0b89382aa9"
+          }
+        },
+        {
           "client_id": "695299467683-buqar2ctq0nl3mh0kjdpvumsbaic99cr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
