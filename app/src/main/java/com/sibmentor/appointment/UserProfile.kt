@@ -103,7 +103,7 @@ class UserProfile : AppCompatActivity() {
         }
 
         text_phone.setOnClickListener {
-            //startActivity(Intent(this, UserPhoneVerify::class.java))
+            startActivity(Intent(this, UserPhoneVerify::class.java))
         }
 
         text_email.setOnClickListener {
