@@ -51,7 +51,7 @@ class UserHomeV2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_home_v2)
         new_book_btn.setOnClickListener(View.OnClickListener {
-            currentUser?.let { user ->
+            /*currentUser?.let { user ->
                 if (user.phoneNumber.isNullOrEmpty()) {
                     Toast.makeText(
                         this,
@@ -63,8 +63,9 @@ class UserHomeV2 : AppCompatActivity() {
                     var bookintent = Intent(this, UserHome::class.java)
                     startActivity(bookintent)
                 }
-            }
-
+            } */
+            var bookintent = Intent(this, UserHome::class.java)
+            startActivity(bookintent)
         })
         show_appointment_btn.setOnClickListener(View.OnClickListener {
             var showintent= Intent(this,student_show_reserved_slot_Activity::class.java)
@@ -147,7 +148,7 @@ class UserHomeV2 : AppCompatActivity() {
                 CustomPrimaryDrawerItem().withBackgroundRes(R.color.accent).withName("Book Appointment").withDescription("Book Scheduled Slots")
                     .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                            currentUser?.let { user ->
+                            /*currentUser?.let { user ->
                                 if (user.phoneNumber.isNullOrEmpty()) {
                                     Toast.makeText(
                                         this@UserHomeV2,
@@ -159,7 +160,9 @@ class UserHomeV2 : AppCompatActivity() {
                                     var bookintent = Intent(this@UserHomeV2, UserHome::class.java)
                                     startActivity(bookintent)
                                 }
-                            }
+                            }*/
+                            var bookintent = Intent(this@UserHomeV2, UserHome::class.java)
+                            startActivity(bookintent)
                             return false
                         }
                     }).withIcon(

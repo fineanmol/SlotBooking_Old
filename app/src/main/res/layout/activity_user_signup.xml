@@ -42,10 +42,9 @@
 
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="35dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -54,8 +53,8 @@
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_title2" android:layout_marginTop="112dp"
-            app:layout_constraintHorizontal_bias="0.781">
+            app:layout_constraintTop_toBottomOf="@+id/register_title2" android:layout_marginTop="92dp"
+    >
 
 
         <TextView
@@ -155,11 +154,10 @@
                 android:textColor="#FFFFFF" android:textColorHint="#847F7F"/>
         <Button
                 android:id="@+id/u_register"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="40dp"
-                android:background="@drawable/roundedbutton"
+                android:background="@color/about_libraries_primary_dark"
                 android:text="REGISTER"
                 android:textAllCaps="false"
                 android:textColor="#fff"
