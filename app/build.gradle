@@ -27,15 +27,20 @@ android {
         applicationId "com.sibmentor.appointment"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 5
-        versionName "1.0.2"
+        versionCode 9
+        versionName "1.0.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
+
         }
     }
     packagingOptions {
