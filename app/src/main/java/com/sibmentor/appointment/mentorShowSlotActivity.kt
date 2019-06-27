@@ -146,14 +146,12 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                     "You didn't Created any Slot yet!! \n Go Back and Start New Session ", // Message to show
                                     Snackbar.LENGTH_INDEFINITE // How long to display the message.
                                 ).show()
-                              //  startActivity(Intent(this@mentorShowSlotActivity, mentorhomev2::class.java))
-                                spinner.isEnabled=false
-                               // toolbar.setTitle("You Didn't Added any Slots")
+                                //  startActivity(Intent(this@mentorShowSlotActivity, mentorhomev2::class.java))
+                                spinner.isEnabled = false
+                                // toolbar.setTitle("You Didn't Added any Slots")
                                 toolbar.setBackgroundColor(Color.WHITE)
-                               // toolbar.setTitleTextColor(Color.BLACK)
-                                toolbar.visibility=View.GONE
-
-
+                                // toolbar.setTitleTextColor(Color.BLACK)
+                                toolbar.visibility = View.GONE
 
 
                             }
@@ -181,33 +179,36 @@ class mentorShowSlotActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-        if (item.itemId == android.R.id.home) // Press Back Icon
-        {
-            finish()
+
+        try {
+            val id = item.itemId
+            if (item.itemId == android.R.id.home) // Press Back Icon
+            {
+                finish()
+            }
+            if (id == R.id.action_one) {
+                startActivity(Intent(this, addSlotActivity::class.java))
+                //Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
+                return true
+            }
+            if (id == R.id.action_two) {
+
+                logout()
+
+                return true
+            }
+
+            if (id == R.id.contactUs) {
+
+                startActivity(Intent(this, AboutDeveloper::class.java))
+                return true
+            }
+
+            return super.onOptionsItemSelected(item)
+        } catch (e: Exception) {
+            e.message
+            return super.onOptionsItemSelected(item)
         }
-        if (id == R.id.action_one) {
-            startActivity(Intent(this, addSlotActivity::class.java))
-            //Toast.makeText(this, "Add Slot Clicked", Toast.LENGTH_LONG).show()
-            return true
-        }
-        if (id == R.id.action_two) {
-
-            logout()
-
-            return true
-        }
-
-        if (id == R.id.contactUs) {
-
-            startActivity(Intent(this, AboutDeveloper::class.java))
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 }
 

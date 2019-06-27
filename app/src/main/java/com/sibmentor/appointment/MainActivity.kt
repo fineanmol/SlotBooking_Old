@@ -1,4 +1,5 @@
 package com.sibmentor.appointment
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -25,34 +26,40 @@ class MainActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
 
         loginbtn.setOnClickListener {
-            val email = username.text.toString().trim()
-            val passwords = password.text.toString().trim()
+            //region LoginButtonFunctionality
+            try {
 
-            if (email.isEmpty()) {
-                username.error = "Email Required"
-                username.requestFocus()
-                return@setOnClickListener
+                val email = username.text.toString().trim()
+                val passwords = password.text.toString().trim()
+
+                if (email.isEmpty()) {
+                    username.error = "Email Required"
+                    username.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    username.error = "Valid Email Required"
+                    username.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (passwords.isEmpty() || passwords.length < 6) {
+                    password.error = "6 char password required"
+                    password.requestFocus()
+                    return@setOnClickListener
+                }
+                loginUser(email, passwords)
+
+            } catch (e: Exception) {
+                loginbtn.error = e.message
             }
-
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                username.error = "Valid Email Required"
-                username.requestFocus()
-                return@setOnClickListener
-            }
-
-            if (passwords.isEmpty() || passwords.length < 6) {
-                password.error = "6 char password required"
-                password.requestFocus()
-                return@setOnClickListener
-            }
-            loginUser(email, passwords)
-
-
+//endregion
 
         }
         register.setOnClickListener(
             View.OnClickListener {
-                var Intent= Intent(this,UserSignup::class.java)
+                var Intent = Intent(this, UserSignup::class.java)
                 startActivity(Intent)
             }
         )
