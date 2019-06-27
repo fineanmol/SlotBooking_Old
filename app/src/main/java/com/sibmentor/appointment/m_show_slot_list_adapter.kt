@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -54,11 +55,25 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
             status.text = "Not Booked Yet"
         }
 
+        /** Delete Button for Mentor*/
+       /* deletebtn.setOnClickListener {
+            deleteInfo(slot)
+        }
+        */
+
 
         return view
     }
 
-
+    /** Delete Button Functionality for Mentor*/
+    private fun deleteInfo(slots: slotsData) {
+        /** User Data Updated Function*/
+       // val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
+      //  userref.child(slots.studentId!!).child("status").setValue("B")
+        val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
+        myDatabase.child(slots.sid).removeValue()
+        Toast.makeText(mCtx, "Deleted !", Toast.LENGTH_LONG).show()
+    }
 }
 
 
