@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools" android:padding="15dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:padding="15dp"
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -15,9 +15,11 @@
             android:textAlignment="center"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:clickable="true" android:gravity="center" android:textColor="#03A9F4"
+            android:clickable="true" android:gravity="center"
+            android:textColor="#03A9F4"
             android:layout_alignBaseline="@+id/status"
-            android:layout_toEndOf="@+id/status" android:layout_marginStart="37dp"/>
+            android:layout_toEndOf="@+id/status"
+            android:layout_marginStart="20dp"/>
 
     <TextView
             android:id="@+id/dateslot"
@@ -83,8 +85,17 @@
             android:layout_height="37dp"
             android:id="@+id/textView8"
             android:layout_alignStart="@+id/dateslot"
-            android:layout_marginStart="5dp" android:layout_alignTop="@+id/student_Name"
-            android:layout_marginTop="0dp"/>
+            android:layout_marginStart="5dp"
+            android:layout_alignTop="@+id/student_Name"
+            android:layout_marginTop="3dp"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_delete"
+            android:id="@+id/deletebtn"
+            android:layout_alignStart="@+id/slot_timing"
+            android:layout_marginStart="96dp"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="13dp"/>
 
 
 </RelativeLayout>
