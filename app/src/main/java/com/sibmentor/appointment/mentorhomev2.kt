@@ -1,11 +1,13 @@
 package com.sibmentor.appointment
 
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -532,6 +534,30 @@ class mentorhomev2 : AppCompatActivity() {
 
     companion object {
         private const val PROFILE_SETTING = 1
+    }
+    protected fun exitByBackKey() {
+
+        val alertbox = AlertDialog.Builder(this)
+            .setMessage("Do you want to exit application?")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                // do something when the button is clicked
+                finishAffinity()
+
+            })
+            .setNegativeButton("No", // do something when the button is clicked
+                DialogInterface.OnClickListener { arg0, arg1 -> })
+            .show()
+
+    }
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitByBackKey()
+
+            //moveTaskToBack(false);
+
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
 
