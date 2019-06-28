@@ -86,14 +86,17 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
                     for (e in p0.children) {
                         val student = e.getValue(Data::class.java)
                         s_id = student?.id.toString()
+                        userNameRef.removeEventListener(this)
                     }
+                    userref.child(s_id).child("status").setValue("NB")
+                    val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
+                    myDatabase.child(slots.sid).removeValue()
+                    Toast.makeText(mCtx, "Deleted !", Toast.LENGTH_LONG).show()
                 }
 
+
             })
-            userref.child(s_id).child("status").setValue("NB")
-            val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
-            myDatabase.child(slots.sid).removeValue()
-            Toast.makeText(mCtx, "Deleted !", Toast.LENGTH_LONG).show()
+
         }
     }
 }

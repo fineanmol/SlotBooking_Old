@@ -86,7 +86,7 @@ class MentorSlotList : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
-        unregisterReceiver(receiver)
+        //unregisterReceiver(receiver)
     }
 
     private fun addSlot(begin: String, end: String, date: String) {
