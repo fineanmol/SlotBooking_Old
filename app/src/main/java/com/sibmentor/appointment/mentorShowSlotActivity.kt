@@ -6,13 +6,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Spinner
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -81,10 +77,10 @@ class mentorShowSlotActivity : AppCompatActivity() {
 
                                         }
                                         if (targetDate != Date) {
-                                            Snackbar.make(
-                                                view, // Parent view
+                                            Toast.makeText(
+                                                this@mentorShowSlotActivity, // Parent view
                                                 "No Appointments of Today are booked yet", // Message to show
-                                                Snackbar.LENGTH_SHORT // How long to display the message.
+                                                Toast.LENGTH_LONG // How long to display the message.
                                             ).show()
                                         }
                                     }
@@ -94,10 +90,10 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                             slotList.add(employee)
                                         }
                                         if (targetDate != (Date + 1)) {
-                                            Snackbar.make(
-                                                view, // Parent view
+                                            Toast.makeText(
+                                                this@mentorShowSlotActivity, // Parent view
                                                 "No Appointments!! You can take a day off ", // Message to show
-                                                Snackbar.LENGTH_SHORT // How long to display the message.
+                                                Toast.LENGTH_LONG // How long to display the message.
                                             ).show()
                                         }
                                     }
@@ -106,10 +102,10 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                             slotList.add(employee)
                                         }
                                         if (targetWeek != Week) {
-                                            Snackbar.make(
-                                                view, // Parent view
+                                            Toast.makeText(
+                                                this@mentorShowSlotActivity, // Parent view
                                                 "No Appointments for whole week!! You can take a week off ", // Message to show
-                                                Snackbar.LENGTH_SHORT // How long to display the message.
+                                                Toast.LENGTH_LONG // How long to display the message.
                                             ).show()
                                         }
                                     }
@@ -123,10 +119,10 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                             slotList.add(employee)
                                         }
                                         if (targetMonth != month) {
-                                            Snackbar.make(
-                                                view, // Parent view
+                                            Toast.makeText(
+                                                this@mentorShowSlotActivity, // Parent view
                                                 "No Appointments for whole month!! You can go for Vacation ", // Message to show
-                                                Snackbar.LENGTH_SHORT // How long to display the message.
+                                                Toast.LENGTH_SHORT // How long to display the message.
                                             ).show()
                                         }
                                     }
@@ -141,10 +137,10 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                 listview.adapter = adapter
                             }
                             if (!p0.exists()) {
-                                Snackbar.make(
-                                    view, // Parent view
+                                Toast.makeText(
+                                    this@mentorShowSlotActivity, // Parent view
                                     "You didn't Created any Slot yet!! \n Go Back and Start New Session ", // Message to show
-                                    Snackbar.LENGTH_INDEFINITE // How long to display the message.
+                                    Toast.LENGTH_SHORT // How long to display the message.
                                 ).show()
                                 //  startActivity(Intent(this@mentorShowSlotActivity, mentorhomev2::class.java))
                                 spinner.isEnabled = false
