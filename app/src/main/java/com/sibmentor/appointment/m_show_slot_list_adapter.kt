@@ -3,6 +3,7 @@ package com.sibmentor.appointment
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -61,7 +63,14 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
 
         /** Delete Button for Mentor*/
         delete.setOnClickListener {
-            deleteInfo(slot)
+            val alertbox = AlertDialog.Builder(mCtx)
+                .setMessage("Do you want to Book this Appointment?")
+                .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                    deleteInfo(slot)
+                })
+                .setNegativeButton("No", // do something when the button is clicked
+                    DialogInterface.OnClickListener { arg0, arg1 -> })
+                .show()
         }
 
 

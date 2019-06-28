@@ -38,7 +38,7 @@ class UserHome : AppCompatActivity() {
         listview = findViewById(R.id.listview)
 
         val calendar = Calendar.getInstance()
-
+        var DATE = calendar.get(Calendar.DATE)
         var month = calendar.get(Calendar.MONTH)
         var Week = calendar.get(Calendar.WEEK_OF_YEAR)
         var year = calendar.get(Calendar.YEAR)
@@ -67,11 +67,14 @@ class UserHome : AppCompatActivity() {
                         val targetWeek = targetCalendar.get(Calendar.WEEK_OF_YEAR)
                         val targetYear = targetCalendar.get(Calendar.YEAR)
                         val targetMonth = targetCalendar.get(Calendar.MONTH)
+                        val targetDate = targetCalendar.get(Calendar.DATE)
 
                         Log.d("TAGD", targetWeek.toString() + "/" + targetMonth.toString() + "/" + targetYear)
                         if (Week == targetWeek && year == targetYear) {
-                            slotList.add(employee!!)
-                            Log.d("TAGD", "ADDED")
+                            if (targetDate >= DATE) {
+                                slotList.add(employee!!)
+                                Log.d("TAGD", "ADDED")
+                            }
                         }
                     }
                     val adapter = customAdapter(this@UserHome, R.layout.listview_custom, slotList)
