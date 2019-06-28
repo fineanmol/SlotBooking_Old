@@ -146,11 +146,11 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                     "You didn't Created any Slot yet!! \n Go Back and Start New Session ", // Message to show
                                     Snackbar.LENGTH_INDEFINITE // How long to display the message.
                                 ).show()
-                                //  startActivity(Intent(this@mentorShowSlotActivity, mentorhomev2::class.java))
+
                                 spinner.isEnabled = false
-                                // toolbar.setTitle("You Didn't Added any Slots")
+
                                 toolbar.setBackgroundColor(Color.WHITE)
-                                // toolbar.setTitleTextColor(Color.BLACK)
+
                                 toolbar.visibility = View.GONE
 
 

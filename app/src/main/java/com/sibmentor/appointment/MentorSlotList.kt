@@ -88,6 +88,9 @@ class MentorSlotList : AppCompatActivity() {
     }
 
     private fun addSlot(begin: String, end: String, date: String) {
+        var date1 = date.split("$").last().toString().trim().replace("]", "")
+        val begin1 = begin.split("$").first().split("-").first().toString().trim().replace("[", "")
+        var  end1 = end.split("$").first().split("-").last().toString().trim()
 
         currentUser?.let { user ->
 
@@ -105,7 +108,7 @@ class MentorSlotList : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()
                     } else {
-                        for (e in dataSnapshot.children) {
+                       for (e in dataSnapshot.children) {
                             val employee = e.getValue(Data::class.java)!!
                             val reserved_by = ""
                             var generated = employee.name
@@ -113,7 +116,7 @@ class MentorSlotList : AppCompatActivity() {
                             var studentNumber = ""
                             var status = "NB"
                             val sId = (ref.push().key).toString()
-                            val addSlot = slotsData(sId, begin, end, date, generated, reserved_by, studentId, studentNumber, status)
+                            val addSlot = slotsData(sId, begin1, end1, date1, generated, reserved_by, studentId, studentNumber, status)
                             ref.child("Nikhil Nishad").child(sId).setValue(addSlot)
                             Toast.makeText(this@MentorSlotList, "Selected Slots Saved", Toast.LENGTH_LONG).show()
 
@@ -165,7 +168,7 @@ class MentorSlotList : AppCompatActivity() {
                     // do something when the button is clicked
 
                     var parts1 = qty.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toMutableList()
-                    if (parts1.size > 1) {
+                    if (parts1.size >= 1) {
 
 
                         for (x in parts1) {
@@ -197,7 +200,7 @@ class MentorSlotList : AppCompatActivity() {
                         /*Alert Box*/
 
                     }
-                    if (parts1.size <= 1) {
+                    if (parts1.size < 1) {
                         /*Alert Box*/
                         val alertbox = AlertDialog.Builder(this)
                             .setMessage("No slot present to be submit \n Generate slots again?")

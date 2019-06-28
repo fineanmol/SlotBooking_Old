@@ -11,6 +11,6 @@ class slotsData(
     val studentNumber:String,
     val status:String
 ) {
-    constructor() : this("", "", "", "", "", "", "", "", "")
+    constructor() : this("", ("").split("[").last(), "", ("").split("]").first(), "", "", "", "", "")
 
 }
