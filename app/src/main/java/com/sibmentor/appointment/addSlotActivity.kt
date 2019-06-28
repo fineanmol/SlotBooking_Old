@@ -241,7 +241,7 @@ class addSlotActivity : AppCompatActivity() {
             if (dif < dateObj2.time) {
 
 
-                while (dif < dateObj2.time) {
+                while (dif < dateObj2.time ) {
                     val slot1 = Date(dif)
                     dif += slotDuration.toInt() * 60 * 1000
                     val slot2 = Date(dif)

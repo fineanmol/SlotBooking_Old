@@ -168,7 +168,7 @@ class MentorSlotList : AppCompatActivity() {
                     // do something when the button is clicked
 
                     var parts1 = qty.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toMutableList()
-                    if (parts1.size >= 1) {
+                    if (parts1.size > 1) {
 
 
                         for (x in parts1) {
@@ -200,8 +200,8 @@ class MentorSlotList : AppCompatActivity() {
                         /*Alert Box*/
 
                     }
-                    if (parts1.size < 1) {
-                        /*Alert Box*/
+                    if (parts1.size <= 1) {
+                        /**Alert Box*/
                         val alertbox = AlertDialog.Builder(this)
                             .setMessage("No slot present to be submit \n Generate slots again?")
                             .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
