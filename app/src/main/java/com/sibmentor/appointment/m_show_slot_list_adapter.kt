@@ -11,7 +11,10 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotList: List<slotsData>) :
@@ -69,15 +72,28 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
     /** Delete Button Functionality for Mentor*/
     private fun deleteInfo(slots: slotsData) {
         /** User Data Updated Function*/
-       // val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
-      //  userref.child(slots.studentId!!).child("status").setValue("B")
+        // val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
+        //  userref.child(slots.studentId!!).child("status").setValue("B")
         if (slots.reserved_by != "" && slots.studentId != "") {
             val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
-            userref.child(slots.studentId).child("status").setValue("NB")
+            userNameRef?.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (e in p0.children) {
+                        val student = e.getValue(Data::class.java)
+                        userref.child(student?.id.toString()).child("status").setValue("NB")
+                    }
+                }
+
+                //
+            })
+            val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
+            myDatabase.child(slots.sid).removeValue()
+            Toast.makeText(mCtx, "Deleted !", Toast.LENGTH_LONG).show()
         }
-        val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
-        myDatabase.child(slots.sid).removeValue()
-        Toast.makeText(mCtx, "Deleted !", Toast.LENGTH_LONG).show()
     }
 }
 
