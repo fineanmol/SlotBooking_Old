@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -20,7 +21,7 @@ class MentorSlotList : AppCompatActivity() {
     val userref = FirebaseDatabase.getInstance().getReference("users")
     lateinit var parts: MutableList<String>
     lateinit var listView: ListView
-    var receiver: BroadcastReceiver? = null
+    lateinit var receiver: BroadcastReceiver
     lateinit var qty: String
     lateinit var date: String
     lateinit var stime: String
@@ -84,6 +85,7 @@ class MentorSlotList : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
         unregisterReceiver(receiver)
     }
 

@@ -33,6 +33,7 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
 
         val slotTiming = view.findViewById<TextView>(R.id.slot_timing)
         val status = view.findViewById<TextView>(R.id.status)
+        val delete = view.findViewById<TextView>(R.id.deletebtn)
 
 
         val slot = slotList[position]
@@ -56,10 +57,10 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
         }
 
         /** Delete Button for Mentor*/
-       /* deletebtn.setOnClickListener {
+        delete.setOnClickListener {
             deleteInfo(slot)
         }
-        */
+
 
 
         return view
@@ -70,6 +71,10 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
         /** User Data Updated Function*/
        // val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
       //  userref.child(slots.studentId!!).child("status").setValue("B")
+        if (slots.reserved_by != "" && slots.studentId != "") {
+            val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
+            userref.child(slots.studentId).child("status").setValue("NB")
+        }
         val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
         myDatabase.child(slots.sid).removeValue()
         Toast.makeText(mCtx, "Deleted !", Toast.LENGTH_LONG).show()
