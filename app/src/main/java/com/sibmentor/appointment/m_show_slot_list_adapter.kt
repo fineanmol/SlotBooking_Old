@@ -71,6 +71,7 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
 
     /** Delete Button Functionality for Mentor*/
     private fun deleteInfo(slots: slotsData) {
+        var s_id = ""
         /** User Data Updated Function*/
         // val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
         //  userref.child(slots.studentId!!).child("status").setValue("B")
@@ -84,12 +85,12 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
                 override fun onDataChange(p0: DataSnapshot) {
                     for (e in p0.children) {
                         val student = e.getValue(Data::class.java)
-                        userref.child(student?.id.toString()).child("status").setValue("NB")
+                        s_id = student?.id.toString()
                     }
                 }
 
-                //
             })
+            userref.child(s_id).child("status").setValue("NB")
             val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
             myDatabase.child(slots.sid).removeValue()
             Toast.makeText(mCtx, "Deleted !", Toast.LENGTH_LONG).show()
