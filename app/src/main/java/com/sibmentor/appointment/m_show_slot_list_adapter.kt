@@ -100,11 +100,17 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
                     userref.child(s_id).child("status").setValue("NB")
                     val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
                     myDatabase.child(slots.sid).removeValue()
-                    Toast.makeText(mCtx, "Deleted !", Toast.LENGTH_LONG).show()
+                    Toast.makeText(mCtx, "Deleted ! \n Please tell ${slots.reserved_by}  to book Again", Toast.LENGTH_LONG).show()
                 }
 
 
             })
+
+        }
+        if(slots.reserved_by == ""){
+            val myDatabase = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
+            myDatabase.child(slots.sid).removeValue()
+            Toast.makeText(mCtx, "You Deleted an Empty Slot!", Toast.LENGTH_LONG).show()
 
         }
     }

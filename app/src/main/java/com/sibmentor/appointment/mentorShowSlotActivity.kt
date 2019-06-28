@@ -77,11 +77,11 @@ class mentorShowSlotActivity : AppCompatActivity() {
 
                                         }
                                         if (targetDate != Date) {
-                                            Toast.makeText(
+                                           /* Toast.makeText(
                                                 this@mentorShowSlotActivity, // Parent view
                                                 "No Appointments of Today are booked yet", // Message to show
                                                 Toast.LENGTH_LONG // How long to display the message.
-                                            ).show()
+                                            ).show()*/
                                         }
                                     }
                                     if (position == 1) {
