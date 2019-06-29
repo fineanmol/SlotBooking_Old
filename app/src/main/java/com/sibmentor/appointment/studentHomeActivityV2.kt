@@ -190,7 +190,7 @@ class UserHomeV2 : AppCompatActivity() {
                             val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
                             sharingIntent.type = "text/plain"
                             val shareBody =
-                                "Hey \n Slot Booking Application is a fast,simple and secure app that I use to book my slot with Mentor and Manage all the data.\n\n Get it for free at\n App link "
+                                "Hey \n SIBM@Mentor's Booking Application is a fast,simple and secure app that I use to book my slot with my Mentor and Manage all the data.\n\n Get it for free from\n https://play.google.com/store/apps/details?id=com.sibmentor.appointment "
                             sharingIntent.putExtra(
                                 android.content.Intent.EXTRA_SUBJECT,
                                 "Slot Booking Management : Android Application"
@@ -202,7 +202,7 @@ class UserHomeV2 : AppCompatActivity() {
                         }
                     }),
                 SecondaryDrawerItem().withName("Buy me a Coffee").withIcon(FontAwesome.Icon.faw_coffee).withEnabled(
-                    true
+                    false
                 ).withOnDrawerItemClickListener(
                     object : Drawer.OnDrawerItemClickListener {
                         override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {

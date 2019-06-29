@@ -64,8 +64,8 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
         /** Delete Button for Mentor*/
         delete.setOnClickListener {
             val alertbox = AlertDialog.Builder(mCtx)
-                .setMessage("Do you want to Book this Appointment?")
-                .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                .setMessage("Do you want to Delete this Appointment?")
+                .setPositiveButton("Delete", DialogInterface.OnClickListener { arg0, arg1 ->
                     deleteInfo(slot)
                 })
                 .setNegativeButton("No", // do something when the button is clicked
@@ -82,8 +82,7 @@ class m_show_slot_list_adapter(val mCtx: Context, val layoutId: Int, val slotLis
     private fun deleteInfo(slots: slotsData) {
         var s_id = ""
         /** User Data Updated Function*/
-        // val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
-        //  userref.child(slots.studentId!!).child("status").setValue("B")
+
         if (slots.reserved_by != "" && slots.studentId != "") {
             val userNameRef = ref.parent?.child("users")?.orderByChild("studentId")?.equalTo(slots.studentId)
             userNameRef?.addValueEventListener(object : ValueEventListener {

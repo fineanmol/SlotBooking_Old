@@ -38,10 +38,7 @@ fun Context.login() {
         userNameRef.addListenerForSingleValueEvent(eventListener)
 
     }
-   /* val intent = Intent(this, UserHome::class.java).apply {
-        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-    }
-    startActivity(intent)*/
+
 }
 
 

@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
+
 class customAdapter(val mCtx: Context, val layoutId: Int, val slotList: List<slotsData>) :
     ArrayAdapter<slotsData>(mCtx, layoutId, slotList) {
     val currentUser = FirebaseAuth.getInstance().currentUser
@@ -42,7 +43,7 @@ class customAdapter(val mCtx: Context, val layoutId: Int, val slotList: List<slo
         book.setOnClickListener {
             val alertbox = AlertDialog.Builder(mCtx)
                 .setMessage("Do you want to Book this Appointment?")
-                .setPositiveButton("Yes", DialogInterface.OnClickListener { arg0, arg1 ->
+                .setPositiveButton("Book", DialogInterface.OnClickListener { arg0, arg1 ->
                     // do something when the button is clicked
                     //region StudentBookButtonFunction
                     var id = slot.sid
