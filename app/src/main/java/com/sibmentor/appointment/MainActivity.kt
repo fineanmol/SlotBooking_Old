@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity() {
                     password.requestFocus()
                     return@setOnClickListener
                 }
+                /*username.isEnabled=false
+                password.isEnabled=false*/
                 loginUser(email, passwords)
 
             } catch (e: Exception) {
@@ -77,6 +79,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun loginUser(email: String, password: String) {
+
         loading.visibility = View.VISIBLE
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) {

@@ -1,6 +1,6 @@
 package com.sibmentor.appointment
 
-//import jdk.nashorn.internal.objects.NativeDate.getTime
+
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
