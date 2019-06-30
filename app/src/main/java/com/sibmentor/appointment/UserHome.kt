@@ -70,11 +70,11 @@ class UserHome : AppCompatActivity() {
                         val targetDate = targetCalendar.get(Calendar.DATE)
 
                         Log.d("TAGD", targetWeek.toString() + "/" + targetMonth.toString() + "/" + targetYear)
-                        if (Week == targetWeek && year == targetYear) {
-                            if (targetDate >= DATE) {
+                        if (Week == targetWeek || year == targetYear) {
+
                                 slotList.add(employee!!)
                                 Log.d("TAGD", "ADDED")
-                            }
+
                         }
                     }
                     val adapter = customAdapter(this@UserHome, R.layout.listview_custom, slotList)
