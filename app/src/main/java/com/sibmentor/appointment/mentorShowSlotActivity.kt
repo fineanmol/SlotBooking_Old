@@ -73,41 +73,63 @@ class mentorShowSlotActivity : AppCompatActivity() {
                                     if (position == 0) {
                                         //    Log.d("TAGDD", targetDate.toString() + "--" + Date)
                                         if (targetDate == Date) {
+
                                             slotList.add(employee)
+                                            if (slotList.isEmpty()) {
+                                                Toast.makeText(
+                                                    this@mentorShowSlotActivity, // Parent view
+                                                    "No Appointments of Today are booked yet", // Message to show
+                                                    Toast.LENGTH_LONG // How long to display the message.
+                                                ).show()
+                                            }
 
                                         }
-                                        if (targetDate != Date) {
-                                           /* Toast.makeText(
+                                        /*if (targetDate != Date) {
+                                            Toast.makeText(
                                                 this@mentorShowSlotActivity, // Parent view
                                                 "No Appointments of Today are booked yet", // Message to show
                                                 Toast.LENGTH_LONG // How long to display the message.
-                                            ).show()*/
-                                        }
+                                            ).show()
+                                        }*/
                                     }
                                     if (position == 1) {
 
                                         if (targetDate == (Date + 1)) {
                                             slotList.add(employee)
+                                            if (slotList.isEmpty()) {
+                                                Toast.makeText(
+                                                    this@mentorShowSlotActivity, // Parent view
+                                                    "No Appointments!! You can take a day off", // Message to show
+                                                    Toast.LENGTH_LONG // How long to display the message.
+                                                ).show()
+                                            }
                                         }
-                                        if (targetDate != (Date + 1)) {
-                                            Toast.makeText(
-                                                this@mentorShowSlotActivity, // Parent view
-                                                "No Appointments!! You can take a day off ", // Message to show
-                                                Toast.LENGTH_LONG // How long to display the message.
-                                            ).show()
-                                        }
+                                        /* if (targetDate != (Date + 1)) {
+                                             Toast.makeText(
+                                                 this@mentorShowSlotActivity, // Parent view
+                                                 "No Appointments!! You can take a day off ", // Message to show
+                                                 Toast.LENGTH_LONG // How long to display the message.
+                                             ).show()
+                                         }*/
                                     }
                                     if (position == 2) {
                                         if (targetWeek == Week) {
                                             slotList.add(employee)
+                                            if (slotList.isEmpty()) {
+                                                Toast.makeText(
+                                                    this@mentorShowSlotActivity, // Parent view
+                                                    "No Appointments for whole week!! You can take a week off ", // Message to show
+                                                    Toast.LENGTH_LONG // How long to display the message.
+                                                ).show()
+                                            }
                                         }
-                                        if (targetWeek != Week) {
+                                        /*if (targetWeek != Week) {
                                             Toast.makeText(
                                                 this@mentorShowSlotActivity, // Parent view
                                                 "No Appointments for whole week!! You can take a week off ", // Message to show
                                                 Toast.LENGTH_LONG // How long to display the message.
                                             ).show()
-                                        }
+                                        }*/
                                     }
                                     if (position == 3) {
                                         /* Toast.makeText(

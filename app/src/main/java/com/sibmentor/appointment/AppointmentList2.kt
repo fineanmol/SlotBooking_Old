@@ -1,7 +1,6 @@
 package com.sibmentor.appointment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -46,7 +45,7 @@ class AppointmentList2 : AppCompatActivity() {
             listview = findViewById(R.id.appointmentList)
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                    Toast.makeText(this@AppointmentList2, filter[position], Toast.LENGTH_SHORT).show()
+                    /*Toast.makeText(this@AppointmentList2, filter[position], Toast.LENGTH_SHORT).show()*/
                     ref = FirebaseDatabase.getInstance().getReference("Slots").child("Nikhil Nishad")
                     ref.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(p0: DataSnapshot) {
@@ -69,39 +68,42 @@ class AppointmentList2 : AppCompatActivity() {
                                     val targetDate = targetCalendar.get(Calendar.DATE)
                                     if (status == "B") {
                                         if (position == 0) {
-                                            Log.d("TAGDD", targetDate.toString() + "--" + Date)
+                                            // Log.d("TAGDD", targetDate.toString() + "--" + Date)
                                             if (targetDate == Date) {
                                                 slotList.add(employee)
 
                                             }
                                         }
                                         if (position == 1) {
-                                            Toast.makeText(
-                                                this@AppointmentList2,
-                                                targetDate.toString() + "--" + Date,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            slotList.clear()
                                             if (targetDate == (Date + 1)) {
                                                 slotList.add(employee)
+                                                if (slotList.isEmpty()) {
+                                                    Toast.makeText(
+                                                        this@AppointmentList2,
+                                                        "Tommorow no slot present",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
                                             }
                                         }
                                         if (position == 2) {
-                                            Toast.makeText(
+                                            /*Toast.makeText(
                                                 this@AppointmentList2,
                                                 targetWeek.toString() + "--" + Week,
                                                 Toast.LENGTH_SHORT
-                                            ).show()
+                                            ).show()*/
 
                                             if (targetWeek == Week) {
                                                 slotList.add(employee)
                                             }
                                         }
                                         if (position == 3) {
-                                            Toast.makeText(
-                                                this@AppointmentList2,
-                                                targetMonth.toString() + "--" + month,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            /* Toast.makeText(
+                                                 this@AppointmentList2,
+                                                 targetMonth.toString() + "--" + month,
+                                                 Toast.LENGTH_SHORT
+                                             ).show()*/
                                             if (targetMonth == month) {
                                                 slotList.add(employee)
                                             }
