@@ -87,7 +87,7 @@ class MentorSlotList : AppCompatActivity() {
         unregisterReceiver(receiver)
     }
 
-    private fun addSlot(begin: String, end: String, date: String) {
+    private fun addSlot(begin: String, end: String, date: String, rnds: Int) {
         var date1 = date.split("$").last().toString().trim().replace("]", "")
         val begin1 = begin.split("$").first().split("-").first().toString().trim().replace("[", "")
         var  end1 = end.split("$").first().split("-").last().toString().trim()
@@ -108,16 +108,17 @@ class MentorSlotList : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()
                     } else {
+                        val namernd = (5..1000).random()
                        for (e in dataSnapshot.children) {
                             val employee = e.getValue(Data::class.java)!!
                             val reserved_by = ""
-                            var generated = employee.name
+                           var generated = employee.name + namernd
                             var studentId = ""
                             var studentNumber = ""
                             var status = "NB"
-                            val sId = (ref.push().key).toString()
+                           val sId = """${generated.split(" ").first()}${studentId}B$rnds"""
                             val addSlot = slotsData(sId, begin1, end1, date1, generated, reserved_by, studentId, studentNumber, status)
-                            ref.child("Nikhil Nishad").child(sId).setValue(addSlot)
+                           ref.child(sId).child(generated).setValue(addSlot)
                             Toast.makeText(this@MentorSlotList, "Selected Slots Saved", Toast.LENGTH_LONG).show()
 
 
@@ -169,14 +170,15 @@ class MentorSlotList : AppCompatActivity() {
 
                     var parts1 = qty.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toMutableList()
                     if (parts1.size > 1) {
-
+                        val rnds = (5..1000).random()
 
                         for (x in parts1) {
                             Log.d("TAG1", x)
                             date = x.split("$").last().toString().trim().replace("]]", "")
                             stime = x.split("$").first().split("-").first().toString().trim().replace("[[", "")
                             etime = x.split("$").first().split("-").last().toString().trim()
-                            addSlot(stime, etime, date)
+
+                            addSlot(stime, etime, date, rnds)
                             //Toast.makeText(this, stime+"-"+etime+" "+date, Toast.LENGTH_LONG).show()
                         }
 
