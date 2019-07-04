@@ -113,13 +113,14 @@ class MentorSlotList : AppCompatActivity() {
                        for (e in dataSnapshot.children) {
                             val employee = e.getValue(Data::class.java)!!
                             val reserved_by = ""
-                           var generated = employee.name + namernd
+                           var generated = employee.name
                             var studentId = ""
                             var studentNumber = ""
                             var status = "NB"
+                           var mentorcode = employee.name + namernd
                            val sId = """${generated.split(" ").first()}${studentId}B$rnds"""
                             val addSlot = slotsData(sId, begin1, end1, date1, generated, reserved_by, studentId, studentNumber, status)
-                           ref.child(sId).child(generated).setValue(addSlot)
+                           ref.child(sId).child(mentorcode).setValue(addSlot)
                            //region CopyMentorCode
                            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                            val clip = ClipData.newPlainText(
