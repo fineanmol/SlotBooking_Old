@@ -74,14 +74,15 @@ class UserHomeV2 : AppCompatActivity() {
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
 
-            val intent = Intent(
-                Intent.ACTION_SENDTO, Uri.fromParts(
-                    "mailto", "agarwal.anmol2004@gmail.com", null
-                )
-            )
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
-            intent.putExtra(Intent.EXTRA_TEXT, "Hi\n I would like to inform you that")
-            startActivity(Intent.createChooser(intent, "Choose an Email client :"))
+
+            /* val intent = Intent(
+                 Intent.ACTION_SENDTO, Uri.fromParts(
+                     "mailto", "agarwal.anmol2004@gmail.com", null
+                 )
+             )
+             intent.putExtra(Intent.EXTRA_SUBJECT, "Report of Bugs,Improvements")
+             intent.putExtra(Intent.EXTRA_TEXT, "Hi\n I would like to inform you that")
+             startActivity(Intent.createChooser(intent, "Choose an Email client :"))*/
         }
         currentUser?.let { user ->
             if (user.displayName.isNullOrEmpty()) {

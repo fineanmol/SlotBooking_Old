@@ -44,7 +44,7 @@ class userResetPasswordActivity : AppCompatActivity() {
                             .setMessage("Reset Link has been sent to your Registered Email Id\nIn case you didn't receive a mail check your spam folder or try again")
                             .setPositiveButton("OKAY", DialogInterface.OnClickListener { arg0, arg1 ->
                                 // do something when the button is clicked
-                                var intent = Intent(this, MainActivity::class.java)
+                                var intent = Intent(this, UserHomeV2::class.java)
                                 startActivity(intent)
 
                             })
