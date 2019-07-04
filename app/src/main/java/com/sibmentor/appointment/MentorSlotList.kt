@@ -109,7 +109,7 @@ class MentorSlotList : AppCompatActivity() {
                             Toast.LENGTH_LONG
                         ).show()
                     } else {
-                        val namernd = (5..1000).random()
+                        val namernd = (5..10000).random()
                        for (e in dataSnapshot.children) {
                             val employee = e.getValue(Data::class.java)!!
                             val reserved_by = ""
@@ -118,7 +118,7 @@ class MentorSlotList : AppCompatActivity() {
                             var studentNumber = ""
                             var status = "NB"
                            var mentorcode = employee.name + namernd
-                           val sId = """${generated.split(" ").first()}${studentId}B$rnds"""
+                           val sId = """${generated.split(" ").first()}${employee.studentId}B$rnds"""
                             val addSlot = slotsData(sId, begin1, end1, date1, generated, reserved_by, studentId, studentNumber, status)
                            ref.child(sId).child(mentorcode).setValue(addSlot)
                            //region CopyMentorCode
