@@ -1,6 +1,7 @@
 package com.sibmentor.appointment
 
 import android.content.*
+import android.content.ClipData
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -119,10 +120,22 @@ class MentorSlotList : AppCompatActivity() {
                            val sId = """${generated.split(" ").first()}${studentId}B$rnds"""
                             val addSlot = slotsData(sId, begin1, end1, date1, generated, reserved_by, studentId, studentNumber, status)
                            ref.child(sId).child(generated).setValue(addSlot)
-                            Toast.makeText(this@MentorSlotList, "Selected Slots Saved", Toast.LENGTH_LONG).show()
+                           //region CopyMentorCode
+                           val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                           val clip = ClipData.newPlainText(
+                               "label",
+                               "This is the unique code of your Mentor\nwhich is required to book their slots :$sId"
+                           )
+                           clipboard.primaryClip = clip
+                           //endregion
+                           Toast.makeText(
+                               this@MentorSlotList,
+                               "Unique Slot code Copied,\n Share this code to Students\n Its needed while Booking",
+                               Toast.LENGTH_LONG
+                           ).show()
 
 
-                        }
+                       }
 
                     }
                 }
