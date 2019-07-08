@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -85,17 +85,56 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener(this) {
 
                     task ->
-                loading.visibility = View.GONE
+
                 if (task.isSuccessful) {
 
-                    login()
+                    // login()
+                    //region LoginMethod
+                    val currentUser = FirebaseAuth.getInstance().currentUser
+                    currentUser?.let { user ->
+                        val rootRef = FirebaseDatabase.getInstance().reference
+                        val userNameRef = rootRef.child("users").orderByChild("email").equalTo(user.email)
+                        val eventListener = object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                for (e in dataSnapshot.children) {
+                                    val employee = e.getValue(Data::class.java)
+                                    if (employee != null) {
+                                        val u_type = employee.user_type
+                                        loading.visibility = View.GONE
+                                        if (u_type == "S") startActivity(
+                                            Intent(
+                                                this@MainActivity,
+                                                UserHomeV2::class.java
+                                            )
+                                        )
+                                        else if (u_type == "M") startActivity(
+                                            Intent(
+                                                this@MainActivity,
+                                                mentorhomev2::class.java
+                                            )
+                                        )
+
+                                    }
+                                }
+                            }
+
+                            override fun onCancelled(databaseError: DatabaseError) {
+                            }
+                        }
+                        userNameRef.addListenerForSingleValueEvent(eventListener)
+
+                    }
+                    //endregion
+
 
                 } else if (task.isCanceled) {
+                    loading.visibility = View.GONE
                     task.exception?.message?.let {
                         toast(it)
                         Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
                     }
                 } else {
+                    loading.visibility = View.GONE
                     task.exception?.message?.let {
                         toast(it)
                         //Toast.makeText( this, "Login Failed", Toast.LENGTH_SHORT ).show();
@@ -105,8 +144,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
+
         super.onStart()
         mAuth.currentUser?.let {
+            
             login()
 
         }
