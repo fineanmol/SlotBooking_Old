@@ -14,6 +14,7 @@ import com.google.firebase.database.ValueEventListener
 fun Context.toast(message: String) =
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
+/** Commented Login method*/
 fun Context.login() {
     val currentUser = FirebaseAuth.getInstance().currentUser
     currentUser?.let { user ->
