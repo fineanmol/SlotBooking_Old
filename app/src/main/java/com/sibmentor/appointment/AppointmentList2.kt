@@ -150,6 +150,3 @@ class AppointmentList2 : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-
-
-
